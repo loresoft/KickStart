@@ -1,0 +1,4 @@
+Kickoff
+=======
+
+Application initialization helper
