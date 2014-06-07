@@ -1,4 +1,4 @@
-Kickoff
+KickStart
 =======
 
 Application initialization helper
