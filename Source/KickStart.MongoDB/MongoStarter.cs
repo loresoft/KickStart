@@ -10,7 +10,7 @@ namespace KickStart.MongoDB
     /// <summary>
     /// A KickStart extension to initialize MongoDB.
     /// </summary>
-    public class MongoStarter : KickStarter
+    public class MongoStarter : IKickStarter
     {
         private readonly MongoOptions _options;
 
@@ -27,9 +27,9 @@ namespace KickStart.MongoDB
         /// Runs the application KickStart extension with specified <paramref name="context" />.
         /// </summary>
         /// <param name="context">The KickStart <see cref="Context" /> containing assemblies to scan.</param>
-        public override void Run(Context context)
+        public void Run(Context context)
         {
-            var classMaps = GetInstancesAssignableFrom<BsonClassMap>(context);
+            var classMaps = context.GetInstancesAssignableFrom<BsonClassMap>();
 
             foreach (var classMap in classMaps)
             {

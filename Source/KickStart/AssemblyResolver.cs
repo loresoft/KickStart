@@ -129,7 +129,7 @@ namespace KickStart
         /// <returns>An enumberable list of assemblies.</returns>
         public IEnumerable<Assembly> Resolve()
         {
-            // default to loaded assemblies            
+            // default to loaded assemblies
             if (_sources.Count == 0)
                 _sources.Add(() => AppDomain.CurrentDomain.GetAssemblies());
 

@@ -4,7 +4,7 @@ using Autofac.Core;
 
 namespace KickStart.Autofac
 {
-    public class AutofacStarter : KickStarter
+    public class AutofacStarter : IKickStarter
     {
         private AutofacOptions _options;
         public AutofacStarter(AutofacOptions options)
@@ -12,9 +12,9 @@ namespace KickStart.Autofac
             _options = options;
         }
 
-        public override void Run(Context context)
+        public void Run(Context context)
         {
-            var modules = GetInstancesAssignableFrom<Module>(context);
+            var modules = context.GetInstancesAssignableFrom<Module>();
 
             var builder = new ContainerBuilder();
 

@@ -7,7 +7,7 @@ namespace KickStart.StartupTask
     /// <summary>
     /// A KickStart extension to run startup tasks on application start.
     /// </summary>
-    public class StartupTaskStarter : KickStarter
+    public class StartupTaskStarter : IKickStarter
     {
         private readonly StartupTaskOptions _options;
 
@@ -24,9 +24,9 @@ namespace KickStart.StartupTask
         /// Runs the application KickStart extension with specified <paramref name="context" />.
         /// </summary>
         /// <param name="context">The KickStart <see cref="Context" /> containing assemblies to scan.</param>
-        public override void Run(Context context)
+        public void Run(Context context)
         {
-            var startupTasks = GetInstancesAssignableFrom<IStartupTask>(context, _options.UseContainer)
+            var startupTasks = context.GetInstancesAssignableFrom<IStartupTask>(_options.UseContainer)
                 .OrderBy(t => t.Priority)
                 .ToList(); ;
 

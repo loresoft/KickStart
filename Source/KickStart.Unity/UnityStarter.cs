@@ -3,7 +3,7 @@ using Microsoft.Practices.Unity;
 
 namespace KickStart.Unity
 {
-    public class UnityStarter : KickStarter
+    public class UnityStarter : IKickStarter
     {
         private readonly UnityOptions _options;
 
@@ -12,9 +12,9 @@ namespace KickStart.Unity
             _options = options;
         }
 
-        public override void Run(Context context)
+        public void Run(Context context)
         {
-            var modules = GetInstancesAssignableFrom<IUnityRegistration>(context);
+            var modules = context.GetInstancesAssignableFrom<IUnityRegistration>();
 
             var container = new UnityContainer();
 

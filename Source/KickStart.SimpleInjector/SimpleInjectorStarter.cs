@@ -3,7 +3,7 @@ using SimpleInjector;
 
 namespace KickStart.SimpleInjector
 {
-    public class SimpleInjectorStarter : KickStarter
+    public class SimpleInjectorStarter : IKickStarter
     {
         private readonly SimpleInjectorOptions _options;
 
@@ -12,9 +12,9 @@ namespace KickStart.SimpleInjector
             _options = options;
         }
 
-        public override void Run(Context context)
+        public void Run(Context context)
         {
-            var modules = GetInstancesAssignableFrom<ISimpleInjectorRegistration>(context);
+            var modules = context.GetInstancesAssignableFrom<ISimpleInjectorRegistration>();
 
             var container = new Container();
 

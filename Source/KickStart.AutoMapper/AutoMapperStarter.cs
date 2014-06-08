@@ -10,7 +10,7 @@ namespace KickStart.AutoMapper
     /// <summary>
     /// A KickStart extension to initialize AutoMapper.
     /// </summary>
-    public class AutoMapperStarter : KickStarter
+    public class AutoMapperStarter : IKickStarter
     {
         private readonly AutoMapperOptions _options;
 
@@ -27,9 +27,9 @@ namespace KickStart.AutoMapper
         /// Runs the application KickStart extension with specified <paramref name="context" />.
         /// </summary>
         /// <param name="context">The KickStart <see cref="Context" /> containing assemblies to scan.</param>
-        public override void Run(Context context)
+        public void Run(Context context)
         {
-            var profiles = GetInstancesAssignableFrom<Profile>(context);
+            var profiles = context.GetInstancesAssignableFrom<Profile>();
 
             Mapper.Initialize(config =>
             {
