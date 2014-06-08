@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Practices.Unity;
 
 namespace KickStart.Unity
 {
@@ -9,6 +10,12 @@ namespace KickStart.Unity
         public UnityBuilder(UnityOptions options)
         {
             _options = options;
+        }
+
+        public IUnityBuilder Initialize(Action<IUnityContainer> initializer)
+        {
+            _options.InitializeContainer = initializer;
+            return this;
         }
     }
 }

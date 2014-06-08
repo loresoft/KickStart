@@ -1,4 +1,5 @@
 ﻿using System;
+using SimpleInjector;
 
 namespace KickStart.SimpleInjector
 {
@@ -9,6 +10,12 @@ namespace KickStart.SimpleInjector
         public SimpleInjectorBuilder(SimpleInjectorOptions options)
         {
             _options = options;
+        }
+
+        public ISimpleInjectorBuilder Initialize(Action<Container> initializer)
+        {
+            _options.InitializeContainer = initializer;
+            return this;
         }
     }
 }

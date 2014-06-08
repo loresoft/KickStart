@@ -13,8 +13,8 @@ namespace KickStart.Autofac
 
         public ContainerBuildOptions BuildOptions { get; set; }
 
-        public Action<ContainerBuilder> Builder { get; set; }
+        public Action<ContainerBuilder> InitializeBuilder { get; set; }
 
-        public Action<IContainer> Container { get; set; }
+        public Action<IContainer> InitializeContainer { get; set; }
     }
 }

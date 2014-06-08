@@ -27,8 +27,8 @@ namespace KickStart.Autofac
                 builder.RegisterModule(module);
             }
 
-            if (_options.Builder != null)
-                _options.Builder(builder);
+            if (_options.InitializeBuilder != null)
+                _options.InitializeBuilder(builder);
 
             Logger.Verbose()
                .Message("Create Autofac Container...")
@@ -36,8 +36,8 @@ namespace KickStart.Autofac
 
             var container = builder.Build(_options.BuildOptions);
 
-            if (_options.Container != null)
-                _options.Container(container);
+            if (_options.InitializeContainer != null)
+                _options.InitializeContainer(container);
             
             var adaptor = new AutofacAdaptor(container);
             context.SetContainer(adaptor);

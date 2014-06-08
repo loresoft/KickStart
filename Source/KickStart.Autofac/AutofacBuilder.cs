@@ -23,15 +23,15 @@ namespace KickStart.Autofac
             return this;
         }
 
-        public IAutofacBuilder Builder(Action<ContainerBuilder> builder)
+        public IAutofacBuilder Initialize(Action<ContainerBuilder> initializer)
         {
-            _options.Builder = builder;
+            _options.InitializeBuilder = initializer;
             return this;
         }
 
-        public IAutofacBuilder Container(Action<global::Autofac.IContainer> container)
+        public IAutofacBuilder Initialize(Action<IContainer> initializer)
         {
-            _options.Container = container;
+            _options.InitializeContainer = initializer;
             return this;
         }
 

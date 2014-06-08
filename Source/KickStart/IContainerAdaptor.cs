@@ -13,7 +13,7 @@ namespace KickStart
         /// </summary>
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <returns>A resolved instance of <typeparamref name="TService"/>.</returns>
-        TService Resolve<TService>();
+        TService Resolve<TService>() where TService : class;
 
         /// <summary>
         /// Resolves an instance for the specified <typeparamref name="TService" /> type and <paramref name="key" />.
@@ -23,7 +23,7 @@ namespace KickStart
         /// <returns>
         /// A resolved instance of <typeparamref name="TService" />.
         /// </returns>
-        TService Resolve<TService>(string key);
+        TService Resolve<TService>(string key) where TService : class;
 
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace KickStart
         /// </summary>
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <returns>A resolved instance of <typeparamref name="TService"/>.</returns>
-        IEnumerable<TService> ResolveAll<TService>();
+        IEnumerable<TService> ResolveAll<TService>() where TService : class;
 
         /// <summary>
         /// Resolves  all instances for the specified <paramref name="serviceType" />.
@@ -61,5 +61,15 @@ namespace KickStart
         /// A resolved instance of <paramref name="serviceType" />.
         /// </returns>
         IEnumerable<object> ResolveAll(Type serviceType);
+
+
+        /// <summary>
+        /// Gets the underlying container cast to <typeparamref name="TContainer"/>. 
+        /// </summary>
+        /// <typeparam name="TContainer">The type of the container.</typeparam>
+        /// <returns>
+        /// An instance of <typeparamref name="TContainer"/>.
+        /// </returns>
+        TContainer As<TContainer>() where TContainer : class;
     }
 }

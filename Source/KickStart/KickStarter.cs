@@ -24,7 +24,8 @@ namespace KickStart
         /// <param name="context">The KickStart <see cref="Context"/> containing assemblies to scan.</param>
         /// <param name="useContainer">if set to <c>true</c>, use <see cref="Kick.Container"/> to resolve instances.</param>
         /// <returns>An enumerable list of instances of type <typeparamref name="T"/>.</returns>
-        protected virtual IEnumerable<T> GetInstancesAssignableFrom<T>(Context context, bool useContainer = false)
+        protected virtual IEnumerable<T> GetInstancesAssignableFrom<T>(Context context, bool useContainer = false) 
+            where T : class
         {
             if (useContainer && context.Container != null)
             {

@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISimpleInjectorRegistration.cs" />
+    <Compile Include="SimpleInjectorAdaptor.cs" />
     <Compile Include="SimpleInjectorOptions.cs" />
     <Compile Include="ISimpleInjectorBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

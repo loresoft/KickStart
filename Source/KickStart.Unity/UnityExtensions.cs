@@ -4,16 +4,26 @@ namespace KickStart.Unity
 {
     public static class UnityExtensions
     {
-        public static IUnityBuilder UseUnity(this IConfigurationBuilder configurationBuilder)
+        public static IConfigurationBuilder UseUnity(this IConfigurationBuilder configurationBuilder)
+        {
+            return UseUnity(configurationBuilder, null);
+        }
+
+        public static IConfigurationBuilder UseUnity(this IConfigurationBuilder configurationBuilder, Action<IUnityBuilder> configure)
         {
             var options = new UnityOptions();
             var starter = new UnityStarter(options);
-            var builder = new UnityBuilder(options);
+
+            if (configure != null)
+            {
+                var builder = new UnityBuilder(options);
+                configure(builder);
+            }
 
             configurationBuilder.ExcludeName("Microsoft.Practices");
             configurationBuilder.Use(starter);
 
-            return builder;
+            return configurationBuilder;
         }
     }
 }

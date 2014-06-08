@@ -71,17 +71,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Employee.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="IUserRepository.cs" />
     <Compile Include="SampleWorker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup\TestStartup.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserMap.cs" />
+    <Compile Include="UserModule.cs" />
     <Compile Include="UserProfile.cs" />
+    <Compile Include="UserRepository.cs" />
+    <Compile Include="UserSimpleInjectorRegistration.cs" />
+    <Compile Include="UserUnityRegistration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KickStart.Autofac\KickStart.Autofac.csproj">
+      <Project>{12cc926d-c84a-45a2-9b11-bf25aedc3c0b}</Project>
+      <Name>KickStart.Autofac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KickStart.AutoMapper\KickStart.AutoMapper.csproj">
+      <Project>{73a65aa2-757b-40b3-8dbf-ea59e924d141}</Project>
+      <Name>KickStart.AutoMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KickStart.MongoDB\KickStart.MongoDB.csproj">
+      <Project>{9434bbd2-0d28-46f5-aed2-7e46f5874968}</Project>
+      <Name>KickStart.MongoDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KickStart.SimpleInjector\KickStart.SimpleInjector.csproj">
+      <Project>{33632126-5845-4cbe-8eaf-d5296f6c324c}</Project>
+      <Name>KickStart.SimpleInjector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KickStart.Unity\KickStart.Unity.csproj">
+      <Project>{3a16834b-0c8f-4a75-97e4-0adfc4166ec7}</Project>
+      <Name>KickStart.Unity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KickStart\KickStart.csproj">
       <Project>{c0998f28-601d-4202-bedb-77f3603e17d1}</Project>
       <Name>KickStart</Name>
