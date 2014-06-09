@@ -17,11 +17,11 @@ namespace KickStart.Autofac.Tests
         [Fact]
         public void UseAutofac()
         {
-            Kick.Start(config => config
-                .IncludeAssemblyFor<UserModule>()
-                .UseAutofac()
-                .LogLevel(TraceLevel.Verbose)
-            );
+    Kick.Start(config => config
+        .IncludeAssemblyFor<UserModule>()
+        .UseAutofac()
+        .LogLevel(TraceLevel.Verbose)
+    );
 
             Kick.Container.Should().NotBeNull();
             Kick.Container.Should().BeOfType<AutofacAdaptor>();

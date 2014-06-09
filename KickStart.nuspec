@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+    <metadata>
+        <id>KickStart</id>
+        <version>1.0.0-alpha1</version>
+        <authors>LoreSoft</authors>
+        <owners>LoreSoft</owners>
+        <licenseUrl>https://raw.githubusercontent.com/loresoft/KickStart/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/loresoft/KickStart</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Application start-up helper to initialize things like an IoC container, register mapping information or run a task.</description>
+        <summary>Application start-up helper</summary>
+        <copyright>Copyright (c) 2014, LoreSoft</copyright>
+        <language>en-US</language>
+        <tags>startup bootstrap ioc container initialization</tags>
+    </metadata>
+    <files>
+        <file src="Source\KickStart\bin\Release\KickStart.dll" target="lib\net45\KickStart.dll" />
+        <file src="Source\KickStart\bin\Release\KickStart.pdb" target="lib\net45\KickStart.pdb" />
+        <file src="Source\KickStart\bin\Release\KickStart.XML" target="lib\net45\KickStart.xml" />
+        <file src="Source\KickStart\**\*.cs" target="src" />
+    </files>
+</package>
