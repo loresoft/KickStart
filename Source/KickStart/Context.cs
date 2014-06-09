@@ -63,7 +63,6 @@ namespace KickStart
         /// Gets the instances assignable from the specified <see cref="Type"/>.
         /// </summary>
         /// <typeparam name="T">The Type to scan for</typeparam>
-        /// <param name="context">The KickStart <see cref="Context"/> containing assemblies to scan.</param>
         /// <param name="useContainer">if set to <c>true</c>, use <see cref="Kick.Container"/> to resolve instances.</param>
         /// <returns>An enumerable list of instances of type <typeparamref name="T"/>.</returns>
         public virtual IEnumerable<T> GetInstancesAssignableFrom<T>(bool useContainer = false)
