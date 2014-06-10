@@ -8,8 +8,8 @@
     <licenseUrl>https://raw.githubusercontent.com/loresoft/KickStart/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/loresoft/KickStart</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Application start-up helper to initialize things like an IoC container, register mapping information or run a task.</description>
-    <summary>KicStart Extension for MongoDB</summary>
+    <description>KickStart Extension for MongoDB</description>
+    <summary>KickStart Extension for MongoDB</summary>
     <copyright>Copyright (c) 2014, LoreSoft</copyright>
     <language>en-US</language>
     <tags>startup bootstrap ioc container initialization</tags>
