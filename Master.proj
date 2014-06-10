@@ -22,25 +22,25 @@
     
     <BuildConfiguration  Condition=" '$(BuildConfiguration)' == '' ">Release</BuildConfiguration>
 
-    <Major>1</Major>
-    <Minor>0</Minor>
-    <Patch>0</Patch>
+    <Major Condition=" '$(Major)' == '' ">1</Major>
+    <Minor Condition=" '$(Minor)' == '' ">0</Minor>
+    <Patch Condition=" '$(Patch)' == '' ">0</Patch>
 
     <!-- 
       With prerelease
-      <Prerelease>-alpha</Prerelease>
+      <Prerelease>-alpha$(BuildNumber)</Prerelease>
       
       Empty for non-prerelease
       <Prerelease></Prerelease>
     -->
-    <Prerelease>-alpha$(BuildNumber)</Prerelease>
-    <Metadata></Metadata>
+    <Prerelease Condition=" '$(Prerelease)' == '' ">-alpha$(BuildNumber)</Prerelease>
+    <Metadata>+build.$(BuildNumber)</Metadata>
     
-    <!-- Semantic Versioning -->
     <AssemblyVersion>$(Major).0.0.0</AssemblyVersion>
     <AssemblyFileVersion>$(Major).$(Minor).$(Patch).$(BuildNumber)</AssemblyFileVersion>
+    <!-- Semantic Versioning -->
     <AssemblyInformationalVersion>$(Major).$(Minor).$(Patch)$(Prerelease)$(Metadata)</AssemblyInformationalVersion>
-    <PackageVersion>1.0.0$(Prerelease)$(BuildNumber)</PackageVersion>
+    <PackageVersion>$(Major).$(Minor).$(Patch)$(Prerelease)</PackageVersion>
   </PropertyGroup>
 
 

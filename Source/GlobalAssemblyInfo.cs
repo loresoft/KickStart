@@ -14,7 +14,7 @@
 [assembly: System.Reflection.AssemblyConfiguration("Release")]
 [assembly: System.Reflection.AssemblyVersion("1.0.0.0")]
 [assembly: System.Reflection.AssemblyFileVersion("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersion("1.0.0-alpha0")]
+[assembly: System.Reflection.AssemblyInformationalVersion("1.0.0-alpha0+build.0")]
 [assembly: System.Runtime.InteropServices.ComVisible(false)]
 
 
@@ -33,7 +33,7 @@ internal sealed partial class ThisAssembly {
     
     internal const string AssemblyFileVersion = "1.0.0.0";
     
-    internal const string AssemblyInformationalVersion = "1.0.0-alpha0";
+    internal const string AssemblyInformationalVersion = "1.0.0-alpha0+build.0";
     
     private ThisAssembly() {
     }
