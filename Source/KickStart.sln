@@ -31,8 +31,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickStart.SimpleInjector.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickStart.Unity.Tests", "KickStart.Unity.Tests\KickStart.Unity.Tests.csproj", "{C037951A-7AE7-4B69-B745-5A1BD7F1C0E4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{10C44CE1-FF4D-40DB-A9B7-848B8716C319}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{10C44CE1-FF4D-40DB-A9B7-848B8716C319}"
 	ProjectSection(SolutionItems) = preProject
+		..\Master.proj = ..\Master.proj
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject

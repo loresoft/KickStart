@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
-    <id>KickStart</id>
+    <id>KickStart.Autofac</id>
     <version>1.0.0</version>
     <authors>LoreSoft</authors>
     <owners>LoreSoft</owners>
@@ -9,15 +9,19 @@
     <projectUrl>https://github.com/loresoft/KickStart</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Application start-up helper to initialize things like an IoC container, register mapping information or run a task.</description>
-    <summary>Application start-up helper</summary>
+    <summary>KicStart Extension for Autofac</summary>
     <copyright>Copyright (c) 2014, LoreSoft</copyright>
     <language>en-US</language>
     <tags>startup bootstrap ioc container initialization</tags>
+    <dependencies>
+      <dependency id="KickStart" version="1.0.0" />
+      <dependency id="Autofac" version="3.4.0" />
+    </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\KickStart.dll" target="lib\net45\KickStart.dll" />
-    <file src="bin\Release\KickStart.pdb" target="lib\net45\KickStart.pdb" />
-    <file src="bin\Release\KickStart.XML" target="lib\net45\KickStart.xml" />
+    <file src="bin\Release\KickStart.Autofac.dll" target="lib\net45\KickStart.Autofac.dll" />
+    <file src="bin\Release\KickStart.Autofac.pdb" target="lib\net45\KickStart.Autofac.pdb" />
+    <file src="bin\Release\KickStart.Autofac.XML" target="lib\net45\KickStart.Autofac.xml" />
     <file src="**\*.cs" target="src" />
     <file src="..\GlobalAssemblyInfo.cs" target="src" />
   </files>

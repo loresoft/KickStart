@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
-    <id>KickStart</id>
+    <id>KickStart.MongoDB</id>
     <version>1.0.0</version>
     <authors>LoreSoft</authors>
     <owners>LoreSoft</owners>
@@ -9,15 +9,19 @@
     <projectUrl>https://github.com/loresoft/KickStart</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Application start-up helper to initialize things like an IoC container, register mapping information or run a task.</description>
-    <summary>Application start-up helper</summary>
+    <summary>KicStart Extension for MongoDB</summary>
     <copyright>Copyright (c) 2014, LoreSoft</copyright>
     <language>en-US</language>
     <tags>startup bootstrap ioc container initialization</tags>
+    <dependencies>
+      <dependency id="KickStart" version="1.0.0" />
+      <dependency id="mongocsharpdriver" version="1.9.1" />
+    </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\KickStart.dll" target="lib\net45\KickStart.dll" />
-    <file src="bin\Release\KickStart.pdb" target="lib\net45\KickStart.pdb" />
-    <file src="bin\Release\KickStart.XML" target="lib\net45\KickStart.xml" />
+    <file src="bin\Release\KickStart.MongoDB.dll" target="lib\net45\KickStart.MongoDB.dll" />
+    <file src="bin\Release\KickStart.MongoDB.pdb" target="lib\net45\KickStart.MongoDB.pdb" />
+    <file src="bin\Release\KickStart.MongoDB.XML" target="lib\net45\KickStart.MongoDB.xml" />
     <file src="**\*.cs" target="src" />
     <file src="..\GlobalAssemblyInfo.cs" target="src" />
   </files>
