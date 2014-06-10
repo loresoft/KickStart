@@ -66,6 +66,7 @@
     <Compile Include="UnityStarter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="KickStart.Unity.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
