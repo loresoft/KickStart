@@ -38,8 +38,8 @@ This example will scan the assembly containing UserModule.  Then it will find al
     Kick.Start(config => config
         .IncludeAssemblyFor<UserModule>()
         .UseAutofac()
-		.UseAutoMapper()
-		.UseStartupTask()
+        .UseAutoMapper()
+        .UseStartupTask()
         .LogLevel(TraceLevel.Verbose)
     );
 
@@ -49,6 +49,7 @@ This example will scan the assembly containing UserModule.  Then it will find al
 - Autofac - Registers all Autofac `Module` classes and creates the container
 - AutoMapper - Registers all AutoMapper `Profile` classes
 - MongoDB - Registers all `BsonClassMap` classes with MongoDB serialization.
+- Ninject - Registers all `NinjectModule` classes and creates an `IKernal`.
 - SimpleInjector - Run all `ISimpleInjectorRegistration` instances allowing container registration
 - Unity - Run all `IUnityRegistration` instances allowing container registration
 
@@ -61,7 +62,7 @@ Basic usage
 
     Kick.Start(config => config
         .IncludeAssemblyFor<UserModule>() // where to look for tasks
-		.UseStartupTask() // include startup tasks in the Kick Start        
+        .UseStartupTask() // include startup tasks in the Kick Start        
     );
 
 Use the Common Container to resolve startup tasks
@@ -69,7 +70,7 @@ Use the Common Container to resolve startup tasks
     Kick.Start(config => config
         .IncludeAssemblyFor<UserModule>()
         .UseAutofac() // init Autofac or any other IoC as container
-		.UseStartupTask(c => c.UseContainer()) // config to use the shared container
+        .UseStartupTask(c => c.UseContainer()) // config to use the shared container
     );
 
 ###Autofac
@@ -80,7 +81,7 @@ Basic usage
 
     Kick.Start(config => config
         .IncludeAssemblyFor<UserRepository>() // where to look for tasks
-		.UseAutofac() // initialize Autofac        
+        .UseAutofac() // initialize Autofac        
     );
 
 To install Autofac extension, run the following command in the Package Manager Console
@@ -95,7 +96,7 @@ Basic usage
 
     Kick.Start(config => config
         .IncludeAssemblyFor<UserRepository>() // where to look
-		.UseSimpleInjector () // initialize SimpleInjector         
+        .UseSimpleInjector () // initialize SimpleInjector         
     );
 
 To install SimpleInjector extension, run the following command in the Package Manager Console
@@ -110,7 +111,7 @@ Basic usage
 
     Kick.Start(config => config
         .IncludeAssemblyFor<UserRepository>() // where to look
-		.UseUnity () // initialize Unity         
+        .UseUnity () // initialize Unity         
     );
 
 To install Unity extension, run the following command in the Package Manager Console

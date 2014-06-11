@@ -33,7 +33,7 @@
       Empty for non-prerelease
       <Prerelease></Prerelease>
     -->
-    <Prerelease Condition=" '$(Prerelease)' == '' ">-alpha$(BuildNumber)</Prerelease>
+    <Prerelease Condition=" '$(Prerelease)' == '' ">-beta$(BuildNumber)</Prerelease>
     <Metadata>+build.$(BuildNumber)</Metadata>
     
     <AssemblyVersion>$(Major).0.0.0</AssemblyVersion>
@@ -167,7 +167,20 @@
                Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
                XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='mongocsharpdriver']/@version"
                Value="@(MongoDBVersion)" />
+    
+    <!-- Ninject -->
+    <XmlRead XmlFileName="$(SourceFolder)\KickStart.Ninject\packages.config"
+             XPath="/packages/package[@id='Ninject']/@version">
+      <Output TaskParameter="Value" ItemName="NinjectVersion" />
+    </XmlRead>
 
+    <Message Text="Ninject: @(NinjectVersion)"/>
+
+    <XmlUpdate XmlFileName="$(SourceFolder)\KickStart.Ninject\KickStart.Ninject.nuspec"
+               Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
+               XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='Ninject']/@version"
+               Value="@(NinjectVersion)" />
+    
     <!-- SimpleInjector -->
     <XmlRead XmlFileName="$(SourceFolder)\KickStart.SimpleInjector\packages.config"
              XPath="/packages/package[@id='SimpleInjector']/@version">
