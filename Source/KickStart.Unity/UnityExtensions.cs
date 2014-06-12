@@ -1,6 +1,8 @@
 using System;
+using KickStart.Unity;
 
-namespace KickStart.Unity
+// ReSharper disable once CheckNamespace
+namespace KickStart
 {
     public static class UnityExtensions
     {

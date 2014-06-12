@@ -1,6 +1,8 @@
 ﻿using System;
+using KickStart.AutoMapper;
 
-namespace KickStart.AutoMapper
+// ReSharper disable once CheckNamespace
+namespace KickStart
 {
     /// <summary>
     /// KickStart Extension for AutoMapper.
@@ -8,7 +10,7 @@ namespace KickStart.AutoMapper
     public static class AutoMapperExtensions
     {
         /// <summary>
-        /// Use the AutoMapper extension to configure AutoMapper.
+        /// Use the KickStart extension to configure AutoMapper.
         /// </summary>
         /// <param name="configurationBuilder">The configuration builder.</param>
         /// <returns>
@@ -28,7 +30,7 @@ namespace KickStart.AutoMapper
         }
 
         /// <summary>
-        /// Use the AutoMapper extension to configure AutoMapper.
+        /// Use the KickStart extension to configure AutoMapper.
         /// </summary>
         /// <param name="configurationBuilder">The configuration builder.</param>
         /// <param name="configure">The <see langword="delegate"/> to configure AutoMapper options.</param>

@@ -3,7 +3,6 @@
 
   <PropertyGroup>
     <BuildFolder>$(MSBuildProjectDirectory)\Build</BuildFolder>
-    <TestFolder>$(MSBuildProjectDirectory)\Tests</TestFolder>
     <ToolFolder>$(MSBuildProjectDirectory)\Tools</ToolFolder>
     <SourceFolder>$(MSBuildProjectDirectory)\Source</SourceFolder>
 
@@ -47,7 +46,6 @@
   <Target Name="Clean">
     <DeleteTree Directories="**\obj\**;**\bin\**" />
     <DeleteTree Directories="$(BuildFolder)" ContinueOnError="true" />
-    <DeleteTree Directories="$(TestFolder)" ContinueOnError="true" />
   </Target>
 
   <Target Name="Version">

@@ -4,14 +4,26 @@ using Autofac.Core;
 
 namespace KickStart.Autofac
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class AutofacStarter : IKickStarter
     {
         private AutofacOptions _options;
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutofacStarter"/> class.
+        /// </summary>
+        /// <param name="options">The options.</param>
         public AutofacStarter(AutofacOptions options)
         {
             _options = options;
         }
 
+        /// <summary>
+        /// Runs the application KickStart extension with specified <paramref name="context" />.
+        /// </summary>
+        /// <param name="context">The KickStart <see cref="Context" /> containing assemblies to scan.</param>
         public void Run(Context context)
         {
             var modules = context.GetInstancesAssignableFrom<Module>();

@@ -1,6 +1,8 @@
 ﻿using System;
+using KickStart.StartupTask;
 
-namespace KickStart.StartupTask
+// ReSharper disable once CheckNamespace
+namespace KickStart
 {
     /// <summary>
     /// Extension methods to use configure startup tasks
