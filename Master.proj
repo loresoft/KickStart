@@ -23,7 +23,7 @@
 
     <Major Condition=" '$(Major)' == '' ">1</Major>
     <Minor Condition=" '$(Minor)' == '' ">0</Minor>
-    <Patch Condition=" '$(Patch)' == '' ">0</Patch>
+    <Patch Condition=" '$(Patch)' == '' ">1</Patch>
 
     <!-- 
       With prerelease
