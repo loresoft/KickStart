@@ -37,7 +37,7 @@ namespace KickStart.SimpleInjector.Tests
             Kick.Start(config => config
                 .IncludeAssemblyFor<User>()
                 .UseSimpleInjector(c => c
-                    .Initialize(b => b.Register<Employee>())
+                    .Container(b => b.Register<Employee>())
                 )
                 .LogLevel(TraceLevel.Verbose)
             );

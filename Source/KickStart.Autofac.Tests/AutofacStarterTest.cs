@@ -40,7 +40,7 @@ namespace KickStart.Autofac.Tests
             Kick.Start(config => config
                 .IncludeAssemblyFor<UserModule>()
                 .UseAutofac(c => c
-                    .Initialize(b => b
+                    .Builder(b => b
                         .Register(x => new Employee { EmailAddress = defaultEmail }
                     ))
                 )

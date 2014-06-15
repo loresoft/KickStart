@@ -12,7 +12,7 @@ namespace KickStart.Unity
             _options = options;
         }
 
-        public IUnityBuilder Initialize(Action<IUnityContainer> initializer)
+        public IUnityBuilder Container(Action<IUnityContainer> initializer)
         {
             _options.InitializeContainer = initializer;
             return this;

@@ -12,7 +12,7 @@ namespace KickStart.SimpleInjector
             _options = options;
         }
 
-        public ISimpleInjectorBuilder Initialize(Action<Container> initializer)
+        public ISimpleInjectorBuilder Container(Action<Container> initializer)
         {
             _options.InitializeContainer = initializer;
             return this;

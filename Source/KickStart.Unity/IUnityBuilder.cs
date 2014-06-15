@@ -5,7 +5,7 @@ namespace KickStart.Unity
 {
     public interface IUnityBuilder
     {
-        IUnityBuilder Initialize(Action<IUnityContainer> initializer);
+        IUnityBuilder Container(Action<IUnityContainer> initializer);
 
     }
 }

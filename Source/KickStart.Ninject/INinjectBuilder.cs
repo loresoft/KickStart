@@ -6,6 +6,6 @@ namespace KickStart.Ninject
     public interface INinjectBuilder
     {
         INinjectBuilder Settings(INinjectSettings settings);
-        INinjectBuilder Initialize(Action<IKernel> initializer);
+        INinjectBuilder Kernal(Action<IKernel> initializer);
     }
 }

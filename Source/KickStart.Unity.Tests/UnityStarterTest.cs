@@ -37,7 +37,7 @@ namespace KickStart.Unity.Tests
             Kick.Start(config => config
                 .IncludeAssemblyFor<User>()
                 .UseUnity(c => c
-                    .Initialize(b => b.RegisterType<Employee>())
+                    .Container(b => b.RegisterType<Employee>())
                 )
                 .LogLevel(TraceLevel.Verbose)
             );

@@ -21,13 +21,13 @@ namespace KickStart.Autofac
         /// </summary>
         /// <param name="initializer">The initializer.</param>
         /// <returns></returns>
-        IAutofacBuilder Initialize(Action<ContainerBuilder> initializer);
+        IAutofacBuilder Builder(Action<ContainerBuilder> initializer);
         
         /// <summary>
         /// Sets the initialize container <see langword="delegate"/>.
         /// </summary>
         /// <param name="initializer">The initializer.</param>
         /// <returns></returns>
-        IAutofacBuilder Initialize(Action<IContainer> initializer);
+        IAutofacBuilder Container(Action<IContainer> initializer);
     }
 }

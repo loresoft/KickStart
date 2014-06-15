@@ -22,7 +22,7 @@ namespace KickStart.Ninject
             return this;
         }
 
-        public INinjectBuilder Initialize(Action<IKernel> initializer)
+        public INinjectBuilder Kernal(Action<IKernel> initializer)
         {
             _options.InitializeKernel = initializer;
             return this;

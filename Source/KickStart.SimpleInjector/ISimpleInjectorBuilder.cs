@@ -5,6 +5,6 @@ namespace KickStart.SimpleInjector
 {
     public interface ISimpleInjectorBuilder
     {
-        ISimpleInjectorBuilder Initialize(Action<Container> initializer);
+        ISimpleInjectorBuilder Container(Action<Container> initializer);
     }
 }
