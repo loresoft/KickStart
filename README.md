@@ -84,6 +84,21 @@ Basic usage
         .UseAutofac() // initialize Autofac        
     );
 
+Use with ASP.NET MVC
+
+    Kick.Start(c => c
+        .IncludeAssemblyFor<UserModule>()
+        .UseAutofac(a => a
+            .Builder(b => b.RegisterControllers(typeof(MvcApplication).Assembly)) // register all controllers 
+            .Container(r => DependencyResolver.SetResolver(new AutofacDependencyResolver(r))) // set asp.net resolver
+        )
+        .UseAutoMapper()
+        .UseMongoDB()
+        .UseStartupTask()
+        .LogLevel(TraceLevel.Verbose) // turn on detail logging
+    );
+
+
 To install Autofac extension, run the following command in the Package Manager Console
 
     PM> Install-Package KickStart.Autofac
