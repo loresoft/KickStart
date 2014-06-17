@@ -23,7 +23,7 @@
 
     <Major Condition=" '$(Major)' == '' ">1</Major>
     <Minor Condition=" '$(Minor)' == '' ">0</Minor>
-    <Patch Condition=" '$(Patch)' == '' ">1</Patch>
+    <Patch Condition=" '$(Patch)' == '' ">2</Patch>
 
     <!-- 
       With prerelease
@@ -32,7 +32,7 @@
       Empty for non-prerelease
       <Prerelease></Prerelease>
     -->
-    <Prerelease Condition=" '$(Prerelease)' == '' "></Prerelease>
+    <Prerelease Condition=" '$(Prerelease)' == '' ">-alpha$(BuildNumber)</Prerelease>
     <Metadata>+build.$(BuildNumber)</Metadata>
     
     <AssemblyVersion>$(Major).0.0.0</AssemblyVersion>
