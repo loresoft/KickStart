@@ -32,7 +32,7 @@
       Empty for non-prerelease
       <Prerelease></Prerelease>
     -->
-    <Prerelease Condition=" '$(Prerelease)' == '' ">-beta$(BuildNumber)</Prerelease>
+    <Prerelease Condition=" '$(Prerelease)' == '' "></Prerelease>
     <Metadata>+build.$(BuildNumber)</Metadata>
     
     <AssemblyVersion>$(Major).0.0.0</AssemblyVersion>
