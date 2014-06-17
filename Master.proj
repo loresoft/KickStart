@@ -27,12 +27,12 @@
 
     <!-- 
       With prerelease
-      <Prerelease>-alpha$(BuildNumber)</Prerelease>
+      <Prerelease>-beta$(BuildNumber)</Prerelease>
       
       Empty for non-prerelease
       <Prerelease></Prerelease>
     -->
-    <Prerelease Condition=" '$(Prerelease)' == '' ">-alpha$(BuildNumber)</Prerelease>
+    <Prerelease Condition=" '$(Prerelease)' == '' ">-beta$(BuildNumber)</Prerelease>
     <Metadata>+build.$(BuildNumber)</Metadata>
     
     <AssemblyVersion>$(Major).0.0.0</AssemblyVersion>

@@ -175,6 +175,19 @@ namespace KickStart
             return this;
         }
 
+        /// <summary>
+        /// Set a <see langword="delegate" /> where log messages will be written. This override the default trace logging.
+        /// </summary>
+        /// <param name="writer">The writer <see langword="delegate" />..</param>
+        /// <returns>
+        /// A fluent <see langword="interface" /> to configure KickStart.
+        /// </returns>
+        public IConfigurationBuilder LogTo(Action<LogData> writer)
+        {
+            Logger.LogWritter = writer;
+            return this;
+        }
+
 
         /// <summary>
         /// Run the specified <see cref="IKickStarter"/> extension on startup.

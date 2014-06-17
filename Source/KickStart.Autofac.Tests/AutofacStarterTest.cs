@@ -60,5 +60,37 @@ namespace KickStart.Autofac.Tests
             employee.EmailAddress.Should().Be(defaultEmail);
 
         }
+
+
+        [Fact]
+        public void UseAutofacBuilderLogTo()
+        {
+            string defaultEmail = "test@email.com";
+            var _logs = new List<LogData>();
+
+            Kick.Start(config => config
+                .IncludeAssemblyFor<UserModule>()
+                .UseAutofac(c => c
+                    .Builder(b => b
+                        .Register(x => new Employee { EmailAddress = defaultEmail }
+                    ))
+                )
+                .LogTo(_logs.Add)
+            );
+
+            Kick.Container.Should().NotBeNull();
+            Kick.Container.Should().BeOfType<AutofacAdaptor>();
+            Kick.Container.As<IContainer>().Should().BeOfType<Container>();
+            
+            var repo = Kick.Container.Resolve<IUserRepository>();
+            repo.Should().NotBeNull();
+            repo.Should().BeOfType<UserRepository>();
+
+            var employee = Kick.Container.Resolve<Employee>();
+            employee.Should().NotBeNull();
+            employee.EmailAddress.Should().Be(defaultEmail);
+
+            _logs.Should().NotBeEmpty();
+        }
     }
 }

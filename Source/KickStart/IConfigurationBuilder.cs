@@ -111,5 +111,14 @@ namespace KickStart
         /// A fluent <see langword="interface"/> to configure KickStart.
         /// </returns>
         IConfigurationBuilder LogTo(TextWriter writer);
+
+        /// <summary>
+        /// Set a <see langword="delegate"/> where log messages will be written. This override the default trace logging.
+        /// </summary>
+        /// <param name="writer">The writer <see langword="delegate"/>..</param>
+        /// <returns>
+        /// A fluent <see langword="interface"/> to configure KickStart.
+        /// </returns>
+        IConfigurationBuilder LogTo(Action<LogData> writer);
     }
 }
