@@ -32,7 +32,7 @@ namespace KickStart.Autofac
 
             foreach (var module in modules)
             {
-                Logger.Verbose()
+                Logger.Trace()
                    .Message("Register Autofac Module: {0}", module)
                    .Write();
 
@@ -42,7 +42,7 @@ namespace KickStart.Autofac
             if (_options.InitializeBuilder != null)
                 _options.InitializeBuilder(builder);
 
-            Logger.Verbose()
+            Logger.Trace()
                .Message("Create Autofac Container...")
                .Write();
 

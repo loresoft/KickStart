@@ -35,7 +35,7 @@ namespace KickStart.StartupTask
             foreach (var startupTask in startupTasks)
             {
 
-                Logger.Verbose()
+                Logger.Trace()
                     .Message("Execute Startup Task; Type: '{0}'", startupTask)
                     .Write();
 
@@ -43,7 +43,7 @@ namespace KickStart.StartupTask
                 startupTask.Run();
                 watch.Stop();
 
-                Logger.Verbose()
+                Logger.Trace()
                     .Message("Complete Startup Task; Type: '{0}', Time: {1} ms", startupTask, watch.ElapsedMilliseconds)
                     .Write();
             }

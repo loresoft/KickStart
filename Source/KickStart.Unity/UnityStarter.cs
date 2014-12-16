@@ -20,7 +20,7 @@ namespace KickStart.Unity
 
             foreach (var module in modules)
             {
-                Logger.Verbose()
+                Logger.Trace()
                    .Message("Register Unity Module: {0}", module)
                    .Write();
 

@@ -20,7 +20,7 @@ namespace KickStart.SimpleInjector
 
             foreach (var module in modules)
             {
-                Logger.Verbose()
+                Logger.Trace()
                    .Message("Register SimpleInjector Module: {0}", module)
                    .Write();
 

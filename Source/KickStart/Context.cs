@@ -51,7 +51,7 @@ namespace KickStart
         /// <param name="container">The container adaptor to assign.</param>
         public void SetContainer(IContainerAdaptor container)
         {
-            Logger.Verbose()
+            Logger.Trace()
                .Message("Assign Kick Container: {0}", container)
                .Write();
 
@@ -70,7 +70,7 @@ namespace KickStart
         {
             if (useContainer && Container != null)
             {
-                Logger.Verbose()
+                Logger.Trace()
                     .Message("Resolve instances using Container: {0}", Container)
                     .Write();
 
@@ -92,7 +92,7 @@ namespace KickStart
         /// <returns>An enumerable list of types the are assignable from <typeparamref name="T"/>.</returns>
         public virtual IEnumerable<Type> GetTypesAssignableFrom<T>(Assembly assembly)
         {
-            Logger.Verbose()
+            Logger.Trace()
                 .Message("Scan Start; Assembly: '{0}', Type: '{1}'", assembly.FullName, typeof(T))
                 .Write();
 
@@ -100,7 +100,7 @@ namespace KickStart
             var types = assembly.GetTypesAssignableFrom<T>();
             watch.Stop();
 
-            Logger.Verbose()
+            Logger.Trace()
                 .Message("Scan Complete; Assembly: '{0}', Type: '{1}', Time: {2} ms", assembly.FullName, typeof(T), watch.ElapsedMilliseconds)
                 .Write();
 
@@ -114,7 +114,7 @@ namespace KickStart
         /// <returns>An instance of the specified <paramref name="type"/>.</returns>
         public virtual object CreateInstance(Type type)
         {
-            Logger.Verbose()
+            Logger.Trace()
                 .Message("Create Instance: {0}", type)
                 .Write();
 

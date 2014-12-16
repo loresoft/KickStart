@@ -20,7 +20,6 @@ namespace KickStart.Autofac.Tests
             Kick.Start(config => config
                 .IncludeAssemblyFor<UserModule>()
                 .UseAutofac()
-                .LogLevel(TraceLevel.Verbose)
             );
 
             Kick.Container.Should().NotBeNull();
@@ -44,7 +43,6 @@ namespace KickStart.Autofac.Tests
                         .Register(x => new Employee { EmailAddress = defaultEmail }
                     ))
                 )
-                .LogLevel(TraceLevel.Verbose)
             );
 
             Kick.Container.Should().NotBeNull();

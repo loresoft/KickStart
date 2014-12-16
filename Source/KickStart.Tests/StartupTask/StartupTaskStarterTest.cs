@@ -20,7 +20,6 @@ namespace KickStart.Tests.StartupTask
             Kick.Start(config => config
                 .IncludeAssemblyFor<TestStartup>()
                 .UseStartupTask()
-                .LogLevel(TraceLevel.Verbose)
             );
         }
 
@@ -30,7 +29,6 @@ namespace KickStart.Tests.StartupTask
             Kick.Start(config => config
                 .IncludeAssemblyFor<TestStartup>()
                 .UseStartupTask(c => c.UseContainer())
-                .LogLevel(TraceLevel.Verbose)
             );
         }
     }

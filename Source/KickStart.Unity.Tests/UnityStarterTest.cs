@@ -19,7 +19,6 @@ namespace KickStart.Unity.Tests
             Kick.Start(config => config
                 .IncludeAssemblyFor<User>()
                 .UseUnity()
-                .LogLevel(TraceLevel.Verbose)
             );
 
             Kick.Container.Should().NotBeNull();
@@ -39,7 +38,6 @@ namespace KickStart.Unity.Tests
                 .UseUnity(c => c
                     .Container(b => b.RegisterType<Employee>())
                 )
-                .LogLevel(TraceLevel.Verbose)
             );
 
             Kick.Container.Should().NotBeNull();

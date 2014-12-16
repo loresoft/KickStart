@@ -19,7 +19,6 @@ namespace KickStart.MongoDB.Tests
             Kick.Start(config => config
                 .IncludeAssemblyFor<UserMap>()
                 .UseMongoDB()
-                .LogLevel(TraceLevel.Verbose)
             );
 
             var isMapped = BsonClassMap.IsClassMapRegistered(typeof(User));

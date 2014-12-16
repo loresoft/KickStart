@@ -20,12 +20,12 @@ namespace KickStart.Ninject
 
             foreach (var module in modules)
             {
-                Logger.Verbose()
+                Logger.Trace()
                    .Message("Register Ninject Module: {0}", module)
                    .Write();
             }
 
-            Logger.Verbose()
+            Logger.Trace()
                .Message("Create Ninject Kernel...")
                .Write();
 

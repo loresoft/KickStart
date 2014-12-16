@@ -36,7 +36,7 @@ namespace KickStart.MongoDB
                 if (BsonClassMap.IsClassMapRegistered(classMap.ClassType))
                     continue;
 
-                Logger.Verbose()
+                Logger.Trace()
                     .Message("Register MongoDB ClassMap: {0}", classMap)
                     .Write();
 

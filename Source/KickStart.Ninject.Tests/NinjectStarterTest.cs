@@ -19,7 +19,6 @@ namespace KickStart.Ninject.Tests
             Kick.Start(config => config
                 .IncludeAssemblyFor<User>()
                 .UseNinject()
-                .LogLevel(TraceLevel.Verbose)
             );
 
             Kick.Container.Should().NotBeNull();

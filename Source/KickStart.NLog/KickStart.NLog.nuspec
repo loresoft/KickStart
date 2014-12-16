@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
-    <id>KickStart.MongoDB</id>
+    <id>KickStart.NLog</id>
     <version>1.0.0</version>
     <authors>LoreSoft</authors>
     <owners>LoreSoft</owners>
     <licenseUrl>https://raw.githubusercontent.com/loresoft/KickStart/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/loresoft/KickStart</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>KickStart Extension for MongoDB</description>
-    <summary>KickStart Extension for MongoDB</summary>
+    <description>KickStart Extension for NLog</description>
+    <summary>KickStart Extension for NLog</summary>
     <copyright>Copyright (c) 2014, LoreSoft</copyright>
     <language>en-US</language>
-    <tags>startup bootstrap ioc container initialization</tags>
+    <tags>startup bootstrap nlog logging</tags>
     <dependencies>
       <dependency id="KickStart" version="" />
-      <dependency id="mongocsharpdriver" version="1.9.2" />
+      <dependency id="NLog" version="3.1.0.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\KickStart.MongoDB.dll" target="lib\net45\KickStart.MongoDB.dll" />
-    <file src="bin\Release\KickStart.MongoDB.pdb" target="lib\net45\KickStart.MongoDB.pdb" />
-    <file src="bin\Release\KickStart.MongoDB.XML" target="lib\net45\KickStart.MongoDB.xml" />
+    <file src="bin\Release\KickStart.NLog.dll" target="lib\net45\KickStart.NLog.dll" />
+    <file src="bin\Release\KickStart.NLog.pdb" target="lib\net45\KickStart.NLog.pdb" />
+    <file src="bin\Release\KickStart.NLog.XML" target="lib\net45\KickStart.NLog.xml" />
     <file src="**\*.cs" target="src" />
     <file src="..\GlobalAssemblyInfo.cs" target="src" />
   </files>

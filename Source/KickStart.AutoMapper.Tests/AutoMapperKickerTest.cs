@@ -20,7 +20,6 @@ namespace KickStart.AutoMapper.Tests
             Kick.Start(config => config
                 .IncludeAssemblyFor<UserProfile>()
                 .UseAutoMapper()
-                .LogLevel(TraceLevel.Verbose)
             );
 
             var employee = new Employee
@@ -46,7 +45,6 @@ namespace KickStart.AutoMapper.Tests
                     .Validate()
                     .Initialize(map => map.AddGlobalIgnore("SysVersion"))
                 )
-                .LogLevel(TraceLevel.Verbose)
             );
 
             var employee = new Employee

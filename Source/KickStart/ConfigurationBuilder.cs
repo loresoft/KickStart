@@ -122,59 +122,6 @@ namespace KickStart
             return this;
         }
 
-
-        /// <summary>
-        /// Set trace <see cref="TraceLevel" />to the specified level.
-        /// </summary>
-        /// <param name="level">The level to use.</param>
-        /// <returns>
-        /// A fluent <see langword="interface"/> to configure KickStart.
-        /// </returns>
-        public IConfigurationBuilder LogLevel(TraceLevel level)
-        {
-            Logger.TraceSwitch.Level = level;
-            return this;
-        }
-
-        /// <summary>
-        /// Include the <see cref="ConsoleTraceListener" /> for logging to the console.
-        /// </summary>
-        /// <param name="value">if set to <c>true</c>, the ConsoleTraceListener will be added to the Trace.Listeners.</param>
-        /// <returns>
-        /// A fluent <see langword="interface"/> to configure KickStart.
-        /// </returns>
-        public IConfigurationBuilder LogToConsole(bool value = true)
-        {
-            Trace.Listeners.Remove("Console");
-            if (!value)
-                return this;
-
-            var listener = new ConsoleTraceListener { Name = "Console" };
-            Trace.Listeners.Add(listener);
-
-            return this;
-        }
-
-        /// <summary>
-        /// Include the <see cref="TextWriter" /> as a TextWriterTraceListener for logging.
-        /// </summary>
-        /// <param name="writer">The TextWriter to include.</param>
-        /// <returns>
-        /// A fluent <see langword="interface"/> to configure KickStart.
-        /// </returns>
-        public IConfigurationBuilder LogTo(TextWriter writer)
-        {
-            Trace.Listeners.Remove("KickStart");
-            if (writer == null)
-                return this;
-
-
-            var listener = new TextWriterTraceListener(writer) { Name = "KickStart" };
-            Trace.Listeners.Add(listener);
-
-            return this;
-        }
-
         /// <summary>
         /// Set a <see langword="delegate" /> where log messages will be written. This override the default trace logging.
         /// </summary>
@@ -184,7 +131,7 @@ namespace KickStart
         /// </returns>
         public IConfigurationBuilder LogTo(Action<LogData> writer)
         {
-            Logger.LogWritter = writer;
+            Logger.RegisterWriter(writer);
             return this;
         }
 

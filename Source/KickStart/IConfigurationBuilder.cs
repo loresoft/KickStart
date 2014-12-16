@@ -84,34 +84,6 @@ namespace KickStart
         /// </returns>
         IConfigurationBuilder Use(IKickStarter starter);
 
-
-        /// <summary>
-        /// Set trace <see cref="TraceLevel"/>to the specified level.
-        /// </summary>
-        /// <param name="level">The level to use.</param>
-        /// <returns>
-        /// A fluent <see langword="interface"/> to configure KickStart.
-        /// </returns>
-        IConfigurationBuilder LogLevel(TraceLevel level);
-
-        /// <summary>
-        /// Include the <see cref="ConsoleTraceListener"/> for logging to the console.
-        /// </summary>
-        /// <param name="value">if set to <c>true</c>, the ConsoleTraceListener will be added to the Trace.Listeners.</param>
-        /// <returns>
-        /// A fluent <see langword="interface"/> to configure KickStart.
-        /// </returns>
-        IConfigurationBuilder LogToConsole(bool value = true);
-
-        /// <summary>
-        /// Include the <see cref="TextWriter" /> as a TextWriterTraceListener for logging.
-        /// </summary>
-        /// <param name="writer">The TextWriter to include.</param>
-        /// <returns>
-        /// A fluent <see langword="interface"/> to configure KickStart.
-        /// </returns>
-        IConfigurationBuilder LogTo(TextWriter writer);
-
         /// <summary>
         /// Set a <see langword="delegate"/> where log messages will be written. This override the default trace logging.
         /// </summary>

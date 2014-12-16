@@ -19,7 +19,6 @@ namespace KickStart.SimpleInjector.Tests
             Kick.Start(config => config
                 .IncludeAssemblyFor<User>()
                 .UseSimpleInjector()
-                .LogLevel(TraceLevel.Verbose)
             );
 
             Kick.Container.Should().NotBeNull();
@@ -39,7 +38,6 @@ namespace KickStart.SimpleInjector.Tests
                 .UseSimpleInjector(c => c
                     .Container(b => b.Register<Employee>())
                 )
-                .LogLevel(TraceLevel.Verbose)
             );
 
             Kick.Container.Should().NotBeNull();

@@ -40,7 +40,6 @@ This example will scan the assembly containing UserModule.  Then it will find al
         .UseAutofac()
         .UseAutoMapper()
         .UseStartupTask()
-        .LogLevel(TraceLevel.Verbose)
     );
 
 ##Extensions
@@ -95,7 +94,6 @@ Use with ASP.NET MVC
         .UseAutoMapper()
         .UseMongoDB()
         .UseStartupTask()
-        .LogLevel(TraceLevel.Verbose) // turn on detail logging
     );
 
 

@@ -48,7 +48,7 @@ namespace KickStart
 
             foreach (var starter in config.Starters)
             {
-                Logger.Verbose()
+                Logger.Trace()
                     .Message("Execute Starter: {0}", starter)
                     .Write();
 
@@ -58,7 +58,7 @@ namespace KickStart
 
                 watch.Stop();
 
-                Logger.Verbose()
+                Logger.Trace()
                     .Message("Completed Starter: {0}, Time: {1} ms", starter, watch.ElapsedMilliseconds)
                     .Write();
             }

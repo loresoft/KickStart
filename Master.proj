@@ -21,9 +21,9 @@
     
     <BuildConfiguration  Condition=" '$(BuildConfiguration)' == '' ">Release</BuildConfiguration>
 
-    <Major Condition=" '$(Major)' == '' ">1</Major>
+    <Major Condition=" '$(Major)' == '' ">2</Major>
     <Minor Condition=" '$(Minor)' == '' ">0</Minor>
-    <Patch Condition=" '$(Patch)' == '' ">4</Patch>
+    <Patch Condition=" '$(Patch)' == '' ">0</Patch>
 
     <!-- 
       With prerelease
@@ -82,7 +82,19 @@
     <xunit Assemblies="@(TestAssemblies)" Xml="xunit.xml" />
   </Target>
 
-  <Target Name="Package" DependsOnTargets="Test">
+  <Target Name="UpdateVersion" DependsOnTargets="Version">
+    <ItemGroup>
+      <NuGetFiles Include="$(SourceFolder)\**\*.nuspec"/>
+    </ItemGroup>
+
+    <XmlUpdate XmlFileName="%(NuGetFiles.Identity)"
+               Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
+               XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='KickStart']/@version"
+               Value="@(PackageVersion)" />
+  </Target>
+
+
+  <Target Name="Package" DependsOnTargets="Test;UpdateVersion">
     <MakeDir Directories="$(BuildFolder)" Condition="!EXISTS($(BuildFolder))" />
 
     <ItemGroup>
@@ -124,86 +136,49 @@
   <Target Name="Build" DependsOnTargets="Package">
   </Target>
 
-  <Target Name="Refresh">
-    <!-- Update NuGet dependencies to match package version -->
 
-    <!-- Autofac -->
-    <XmlRead XmlFileName="$(SourceFolder)\KickStart.Autofac\packages.config"
-             XPath="/packages/package[@id='Autofac']/@version">
-      <Output TaskParameter="Value" ItemName="AutofacVersion" />
+  <ItemGroup>
+    <NuGetPackage Include="Autofac">
+      <Package>Autofac</Package>
+    </NuGetPackage>
+    <NuGetPackage Include="AutoMapper">
+      <Package>AutoMapper</Package>
+    </NuGetPackage>
+    <NuGetPackage Include="Log4Net">
+      <Package>log4net</Package>
+    </NuGetPackage>
+    <NuGetPackage Include="MongoDB">
+      <Package>mongocsharpdriver</Package>
+    </NuGetPackage>
+    <NuGetPackage Include="Ninject">
+      <Package>Ninject</Package>
+    </NuGetPackage>
+    <NuGetPackage Include="NLog">
+      <Package>NLog</Package>
+    </NuGetPackage>
+    <NuGetPackage Include="SimpleInjector">
+      <Package>SimpleInjector</Package>
+    </NuGetPackage>
+    <NuGetPackage Include="Unity">
+      <Package>Unity</Package>
+    </NuGetPackage>
+  </ItemGroup>
+
+  <Target Name="Refresh" Inputs="@NuGetPackage" Outputs="%(NuGetPackage.Identity)">
+    <XmlRead XmlFileName="$(SourceFolder)\KickStart.%(NuGetPackage.Identity)\packages.config"
+             XPath="/packages/package[@id='%(NuGetPackage.Package)']/@version">
+      <Output TaskParameter="Value" ItemName="PackageVersion" />
     </XmlRead>
 
-    <Message Text="Autofac: @(AutofacVersion)"/>
+    <Message Text="%(NuGetPackage.Identity): @(PackageVersion)"/>
 
-    <XmlUpdate XmlFileName="$(SourceFolder)\KickStart.Autofac\KickStart.Autofac.nuspec"
+    <XmlUpdate XmlFileName="$(SourceFolder)\KickStart.%(NuGetPackage.Identity)\KickStart.%(NuGetPackage.Identity).nuspec"
                Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
-               XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='Autofac']/@version"
-               Value="@(AutofacVersion)" />
-
-    <!-- AutoMapper -->
-    <XmlRead XmlFileName="$(SourceFolder)\KickStart.AutoMapper\packages.config"
-             XPath="/packages/package[@id='AutoMapper']/@version">
-      <Output TaskParameter="Value" ItemName="AutoMapperVersion" />
-    </XmlRead>
-
-    <Message Text="AutoMapper: @(AutoMapperVersion)"/>
-
-    <XmlUpdate XmlFileName="$(SourceFolder)\KickStart.AutoMapper\KickStart.AutoMapper.nuspec"
-               Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
-               XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='AutoMapper']/@version"
-               Value="@(AutoMapperVersion)" />
-
-    <!-- MongoDB -->
-    <XmlRead XmlFileName="$(SourceFolder)\KickStart.MongoDB\packages.config"
-             XPath="/packages/package[@id='mongocsharpdriver']/@version">
-      <Output TaskParameter="Value" ItemName="MongoDBVersion" />
-    </XmlRead>
-
-    <Message Text="MongoDB: @(MongoDBVersion)"/>
-
-    <XmlUpdate XmlFileName="$(SourceFolder)\KickStart.MongoDB\KickStart.MongoDB.nuspec"
-               Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
-               XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='mongocsharpdriver']/@version"
-               Value="@(MongoDBVersion)" />
-    
-    <!-- Ninject -->
-    <XmlRead XmlFileName="$(SourceFolder)\KickStart.Ninject\packages.config"
-             XPath="/packages/package[@id='Ninject']/@version">
-      <Output TaskParameter="Value" ItemName="NinjectVersion" />
-    </XmlRead>
-
-    <Message Text="Ninject: @(NinjectVersion)"/>
-
-    <XmlUpdate XmlFileName="$(SourceFolder)\KickStart.Ninject\KickStart.Ninject.nuspec"
-               Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
-               XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='Ninject']/@version"
-               Value="@(NinjectVersion)" />
-    
-    <!-- SimpleInjector -->
-    <XmlRead XmlFileName="$(SourceFolder)\KickStart.SimpleInjector\packages.config"
-             XPath="/packages/package[@id='SimpleInjector']/@version">
-      <Output TaskParameter="Value" ItemName="SimpleInjectorVersion" />
-    </XmlRead>
-
-    <Message Text="SimpleInjector: @(SimpleInjectorVersion)"/>
-
-    <XmlUpdate XmlFileName="$(SourceFolder)\KickStart.SimpleInjector\KickStart.SimpleInjector.nuspec"
-               Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
-               XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='SimpleInjector']/@version"
-               Value="@(SimpleInjectorVersion)" />
-
-    <!-- Unity -->
-    <XmlRead XmlFileName="$(SourceFolder)\KickStart.Unity\packages.config"
-             XPath="/packages/package[@id='Unity']/@version">
-      <Output TaskParameter="Value" ItemName="UnityVersion" />
-    </XmlRead>
-
-    <Message Text="Unity: @(UnityVersion)"/>
-
-    <XmlUpdate XmlFileName="$(SourceFolder)\KickStart.Unity\KickStart.Unity.nuspec"
-               Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
-               XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='Unity']/@version"
-               Value="@(UnityVersion)" />
-
+               XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='%(NuGetPackage.Package)']/@version"
+               Value="@(PackageVersion)" />
   </Target>
+
+
+
+
 </Project>
