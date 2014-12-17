@@ -5,7 +5,7 @@ environment:
   Revision: 0
 configuration: Release
 before_build:
-- .\Tools\update.cmd
+- .\bootstrap.cmd
 build:
   project: master.proj
   verbosity: minimal
