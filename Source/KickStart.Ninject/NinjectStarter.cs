@@ -21,13 +21,15 @@ namespace KickStart.Ninject
             foreach (var module in modules)
             {
                 Logger.Trace()
-                   .Message("Register Ninject Module: {0}", module)
-                   .Write();
+                    .Logger<NinjectStarter>()
+                    .Message("Register Ninject Module: {0}", module)
+                    .Write();
             }
 
             Logger.Trace()
-               .Message("Create Ninject Kernel...")
-               .Write();
+                .Logger<NinjectStarter>()                    
+                .Message("Create Ninject Kernel...")
+                .Write();
 
             var settings = _options.Settings ?? new NinjectSettings();
             var kernel = new StandardKernel(settings, modules);

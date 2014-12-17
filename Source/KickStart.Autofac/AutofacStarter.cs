@@ -10,7 +10,7 @@ namespace KickStart.Autofac
     public class AutofacStarter : IKickStarter
     {
         private AutofacOptions _options;
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AutofacStarter"/> class.
         /// </summary>
@@ -33,8 +33,9 @@ namespace KickStart.Autofac
             foreach (var module in modules)
             {
                 Logger.Trace()
-                   .Message("Register Autofac Module: {0}", module)
-                   .Write();
+                    .Logger<AutofacStarter>()
+                    .Message("Register Autofac Module: {0}", module)
+                    .Write();
 
                 builder.RegisterModule(module);
             }
@@ -43,14 +44,15 @@ namespace KickStart.Autofac
                 _options.InitializeBuilder(builder);
 
             Logger.Trace()
-               .Message("Create Autofac Container...")
-               .Write();
+                .Logger<AutofacStarter>()
+                .Message("Create Autofac Container...")
+                .Write();
 
             var container = builder.Build(_options.BuildOptions);
 
             if (_options.InitializeContainer != null)
                 _options.InitializeContainer(container);
-            
+
             var adaptor = new AutofacAdaptor(container);
             context.SetContainer(adaptor);
         }

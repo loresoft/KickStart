@@ -52,8 +52,9 @@ namespace KickStart
         public void SetContainer(IContainerAdaptor container)
         {
             Logger.Trace()
-               .Message("Assign Kick Container: {0}", container)
-               .Write();
+                .Logger<Context>()
+                .Message("Assign Kick Container: {0}", container)
+                .Write();
 
             Kick.SetContainer(container);
         }
@@ -71,6 +72,7 @@ namespace KickStart
             if (useContainer && Container != null)
             {
                 Logger.Trace()
+                    .Logger<Context>()
                     .Message("Resolve instances using Container: {0}", Container)
                     .Write();
 
@@ -93,6 +95,7 @@ namespace KickStart
         public virtual IEnumerable<Type> GetTypesAssignableFrom<T>(Assembly assembly)
         {
             Logger.Trace()
+                .Logger<Context>()
                 .Message("Scan Start; Assembly: '{0}', Type: '{1}'", assembly.FullName, typeof(T))
                 .Write();
 
@@ -101,6 +104,7 @@ namespace KickStart
             watch.Stop();
 
             Logger.Trace()
+                .Logger<Context>()
                 .Message("Scan Complete; Assembly: '{0}', Type: '{1}', Time: {2} ms", assembly.FullName, typeof(T), watch.ElapsedMilliseconds)
                 .Write();
 
@@ -115,6 +119,7 @@ namespace KickStart
         public virtual object CreateInstance(Type type)
         {
             Logger.Trace()
+                .Logger<Context>()
                 .Message("Create Instance: {0}", type)
                 .Write();
 

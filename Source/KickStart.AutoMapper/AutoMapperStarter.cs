@@ -35,7 +35,8 @@ namespace KickStart.AutoMapper
             {
                 foreach (var profile in profiles)
                 {
-                     Logger.Trace()
+                    Logger.Trace()
+                        .Logger<AutoMapperStarter>()
                         .Message("AutoMapper Profile: {0}", profile)
                         .Write();
 

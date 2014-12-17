@@ -134,6 +134,7 @@ namespace KickStart
                 _sources.Add(() => AppDomain.CurrentDomain.GetAssemblies());
 
             Logger.Trace()
+                .Logger<AssemblyResolver>()
                 .Message("Assembly Resolver Start; Sources: ({0}), Includes: ({1}), Excludes: ({2})", Sources.Count, Includes.Count, Excludes.Count)
                 .Write();
 
@@ -150,6 +151,7 @@ namespace KickStart
             watch.Stop();
 
             Logger.Trace()
+                .Logger<AssemblyResolver>()
                 .Message("Assembly Resolver Complete; Assemblies: ({0}), Time: {1} ms", assemblies.Count, watch.ElapsedMilliseconds)
                 .Write();
 

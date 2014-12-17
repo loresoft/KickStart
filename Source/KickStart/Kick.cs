@@ -49,6 +49,7 @@ namespace KickStart
             foreach (var starter in config.Starters)
             {
                 Logger.Trace()
+                    .Logger(typeof(Kick).FullName)
                     .Message("Execute Starter: {0}", starter)
                     .Write();
 
@@ -59,6 +60,7 @@ namespace KickStart
                 watch.Stop();
 
                 Logger.Trace()
+                    .Logger(typeof(Kick).FullName)
                     .Message("Completed Starter: {0}, Time: {1} ms", starter, watch.ElapsedMilliseconds)
                     .Write();
             }

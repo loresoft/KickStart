@@ -21,8 +21,9 @@ namespace KickStart.SimpleInjector
             foreach (var module in modules)
             {
                 Logger.Trace()
-                   .Message("Register SimpleInjector Module: {0}", module)
-                   .Write();
+                    .Logger<SimpleInjectorStarter>()
+                    .Message("Register SimpleInjector Module: {0}", module)
+                    .Write();
 
                 module.Register(container);
             }

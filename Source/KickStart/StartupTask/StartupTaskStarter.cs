@@ -28,7 +28,7 @@ namespace KickStart.StartupTask
         {
             var startupTasks = context.GetInstancesAssignableFrom<IStartupTask>(_options.UseContainer)
                 .OrderBy(t => t.Priority)
-                .ToList(); ;
+                .ToList();
 
             var watch = new Stopwatch();
 
@@ -36,6 +36,7 @@ namespace KickStart.StartupTask
             {
 
                 Logger.Trace()
+                    .Logger<StartupTaskStarter>()
                     .Message("Execute Startup Task; Type: '{0}'", startupTask)
                     .Write();
 
@@ -44,6 +45,7 @@ namespace KickStart.StartupTask
                 watch.Stop();
 
                 Logger.Trace()
+                    .Logger<StartupTaskStarter>()
                     .Message("Complete Startup Task; Type: '{0}', Time: {1} ms", startupTask, watch.ElapsedMilliseconds)
                     .Write();
             }

@@ -21,8 +21,9 @@ namespace KickStart.Unity
             foreach (var module in modules)
             {
                 Logger.Trace()
-                   .Message("Register Unity Module: {0}", module)
-                   .Write();
+                    .Logger<UnityStarter>()
+                    .Message("Register Unity Module: {0}", module)
+                    .Write();
 
                 module.Register(container);
             }

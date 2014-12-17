@@ -37,6 +37,7 @@ namespace KickStart.MongoDB
                     continue;
 
                 Logger.Trace()
+                    .Logger<MongoStarter>()
                     .Message("Register MongoDB ClassMap: {0}", classMap)
                     .Write();
 
