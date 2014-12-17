@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KickStart.NLog;
 
-namespace KickStart.NLog
+// ReSharper disable once CheckNamespace
+namespace KickStart
 {
     /// <summary>
     /// KickStart Extension for NLog.
