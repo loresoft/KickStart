@@ -84,7 +84,7 @@
     <XmlUpdate XmlFileName="%(NuGetFiles.Identity)"
                Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
                XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='KickStart']/@version"
-               Value="@(PackageVersion)" />
+               Value="$(PackageVersion)" />
   </Target>
 
 
@@ -158,15 +158,15 @@
   <Target Name="Refresh" Inputs="@NuGetPackage" Outputs="%(NuGetPackage.Identity)">
     <XmlRead XmlFileName="$(SourceFolder)\KickStart.%(NuGetPackage.Identity)\packages.config"
              XPath="/packages/package[@id='%(NuGetPackage.Package)']/@version">
-      <Output TaskParameter="Value" ItemName="PackageVersion" />
+      <Output TaskParameter="Value" ItemName="SourceVersion" />
     </XmlRead>
 
-    <Message Text="%(NuGetPackage.Identity): @(PackageVersion)"/>
+    <Message Text="%(NuGetPackage.Identity): @(SourceVersion)"/>
 
     <XmlUpdate XmlFileName="$(SourceFolder)\KickStart.%(NuGetPackage.Identity)\KickStart.%(NuGetPackage.Identity).nuspec"
                Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
                XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='%(NuGetPackage.Package)']/@version"
-               Value="@(PackageVersion)" />
+               Value="@(SourceVersion)" />
   </Target>
 
 
