@@ -67,13 +67,7 @@
       <TestAssemblies Include="$(SourceFolder)\**\*.Tests\bin\$(BuildConfiguration)\*.Tests.dll"/>
     </ItemGroup>
 
-    <Message Text="AppVeyor: $(APPVEYOR)"/>
-
-    <exec Condition=" '$(APPVEYOR)' != '' "
-          Command="xunit.console.exe &quot;%(TestAssemblies.Identity)&quot; /appveyor"/>
-
-    <exec Condition=" '$(APPVEYOR)' == '' "
-          Command="$(XUnitTasksPath)\xunit.console.x86.exe &quot;%(TestAssemblies.Identity)&quot;"/>
+    <exec Command="$(XUnitTasksPath)\xunit.console.exe &quot;%(TestAssemblies.Identity)&quot; -appveyor"/>
   </Target>
 
   <Target Name="UpdateVersion" DependsOnTargets="Version">
