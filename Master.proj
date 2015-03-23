@@ -7,7 +7,7 @@
     <SourceFolder>$(MSBuildProjectDirectory)\Source</SourceFolder>
 
     <MSBuildCommunityTasksPath>$(ToolFolder)\MSBuildTasks\tools</MSBuildCommunityTasksPath>
-    <XUnitTasksPath>$(ToolFolder)\xunit.runners\tools</XUnitTasksPath>
+    <XUnitTasksPath>$(ToolFolder)\xunit.runner.console\tools</XUnitTasksPath>
   </PropertyGroup>
 
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
@@ -70,10 +70,10 @@
     <Message Text="AppVeyor: $(APPVEYOR)"/>
 
     <exec Condition=" '$(APPVEYOR)' != '' "
-          Command="xunit.console.clr4.x86.exe &quot;%(TestAssemblies.Identity)&quot; /appveyor"/>
+          Command="xunit.console.exe &quot;%(TestAssemblies.Identity)&quot; /appveyor"/>
 
     <exec Condition=" '$(APPVEYOR)' == '' "
-          Command="$(XUnitTasksPath)\xunit.console.clr4.x86.exe &quot;%(TestAssemblies.Identity)&quot;"/>
+          Command="$(XUnitTasksPath)\xunit.console.x86.exe &quot;%(TestAssemblies.Identity)&quot;"/>
   </Target>
 
   <Target Name="UpdateVersion" DependsOnTargets="Version">

@@ -178,4 +178,4 @@ FakesAssemblies/
 /*.txt
 /xunit.xml
 /Tools/MSBuildTasks
-/Tools/xunit.runners
+/Tools/xunit.runner.console

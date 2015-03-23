@@ -1,2 +1,5 @@
 @echo off
-NuGet.exe install .\Tools\packages.config -OutputDirectory .\Tools\ -ExcludeVersion -NonInteractive
+Nuget.exe restore "Source\KickStart.sln"
+
+NuGet.exe install MSBuildTasks -OutputDirectory .\Tools\ -ExcludeVersion -NonInteractive
+NuGet.exe install xunit.runner.console -OutputDirectory .\Tools\ -ExcludeVersion -NonInteractive
