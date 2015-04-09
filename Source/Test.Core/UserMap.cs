@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
+using MongoDB.Bson.Serialization.Serializers;
 
 namespace Test.Core
 {
@@ -12,7 +13,7 @@ namespace Test.Core
             AutoMap();
 
             var idMember = GetMemberMap(p => p.Id)
-                .SetRepresentation(BsonType.ObjectId)
+                .SetSerializer(new StringSerializer(BsonType.ObjectId))
                 .SetIdGenerator(StringObjectIdGenerator.Instance);
 
             SetIdMember(idMember);
