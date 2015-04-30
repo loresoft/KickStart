@@ -175,8 +175,7 @@ FakesAssemblies/
 
 # Custom
 /Build
+/Tools
 /*.txt
 /xunit.xml
 *.GhostDoc.xml
-/Tools/MSBuildTasks
-/Tools/xunit.runner.console
