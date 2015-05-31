@@ -27,7 +27,7 @@ In your Package Manager settings add the following package source for developmen
 - Run tasks on application start-up
 - Extension model to add library specific start up tasks
 - Common IoC container adaptor
-- Sigleton instance of an application level IoC container
+- Singleton instance of an application level IoC container
 
 
 ## Example
@@ -55,7 +55,7 @@ This example will scan the assembly containing UserModule.  Then it will find al
 
 ### StartupTask
 
-The StartupTask extension allows running code on application start-up. To use this extension, implement the `IStartupTask` interface. Use the Priority property to control the order of execution.
+The StartupTask extension allows running code on application start-up. To use this extension, implement the `IStartupTask` interface. Use the `Priority` property to control the order of execution.
 
 
 Basic usage
