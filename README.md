@@ -1,5 +1,7 @@
 # KickStart
 
+[![Join the chat at https://gitter.im/loresoft/KickStart](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/loresoft/KickStart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Application start-up helper to initialize things like an IoC container, register mapping information or run a task.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/lk092y48a2b9f8ys)](https://ci.appveyor.com/project/LoreSoft/kickstart)
