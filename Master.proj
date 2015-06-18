@@ -133,7 +133,7 @@
       <Package>log4net</Package>
     </NuGetPackage>
     <NuGetPackage Include="MongoDB">
-      <Package>mongocsharpdriver</Package>
+      <Package>MongoDB.Driver</Package>
     </NuGetPackage>
     <NuGetPackage Include="Ninject">
       <Package>Ninject</Package>
