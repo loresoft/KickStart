@@ -10,12 +10,12 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>KickStart Extension for SimpleInjector</description>
     <summary>KickStart Extension for SimpleInjector</summary>
-    <copyright>Copyright (c) 2014, LoreSoft</copyright>
+    <copyright>Copyright (c) 2015, LoreSoft</copyright>
     <language>en-US</language>
     <tags>startup bootstrap ioc container initialization</tags>
     <dependencies>
       <dependency id="KickStart" version="2.0.0.0" />
-      <dependency id="SimpleInjector" version="3.1.0" />
+      <dependency id="SimpleInjector" version="3.1.1" />
     </dependencies>
   </metadata>
   <files>

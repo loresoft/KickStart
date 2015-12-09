@@ -10,12 +10,12 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>KickStart Extension for NLog</description>
     <summary>KickStart Extension for NLog</summary>
-    <copyright>Copyright (c) 2014, LoreSoft</copyright>
+    <copyright>Copyright (c) 2015, LoreSoft</copyright>
     <language>en-US</language>
     <tags>startup bootstrap nlog logging</tags>
     <dependencies>
       <dependency id="KickStart" version="2.0.0.0" />
-      <dependency id="NLog" version="4.2.0" />
+      <dependency id="NLog" version="4.2.2" />
     </dependencies>
   </metadata>
   <files>

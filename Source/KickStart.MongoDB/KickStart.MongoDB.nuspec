@@ -10,12 +10,12 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>KickStart Extension for MongoDB</description>
     <summary>KickStart Extension for MongoDB</summary>
-    <copyright>Copyright (c) 2014, LoreSoft</copyright>
+    <copyright>Copyright (c) 2015, LoreSoft</copyright>
     <language>en-US</language>
     <tags>startup bootstrap ioc container initialization</tags>
     <dependencies>
       <dependency id="KickStart" version="2.0.0.0" />
-      <dependency id="MongoDB.Driver" version="2.1.1" />
+      <dependency id="MongoDB.Driver" version="2.2.0" />
     </dependencies>
   </metadata>
   <files>
