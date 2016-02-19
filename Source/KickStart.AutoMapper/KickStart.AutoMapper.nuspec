@@ -15,7 +15,7 @@
     <tags>startup bootstrap ioc container initialization</tags>
     <dependencies>
       <dependency id="KickStart" version="2.0.0.0" />
-      <dependency id="AutoMapper" version="4.1.1" />
+      <dependency id="AutoMapper" version="4.2.0" />
     </dependencies>
   </metadata>
   <files>

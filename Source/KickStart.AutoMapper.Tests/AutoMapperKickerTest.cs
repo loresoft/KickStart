@@ -43,7 +43,6 @@ namespace KickStart.AutoMapper.Tests
                 .IncludeAssemblyFor<UserProfile>()
                 .UseAutoMapper(c => c
                     .Validate()
-                    .Initialize(map => map.AddGlobalIgnore("SysVersion"))
                 )
             );
 
