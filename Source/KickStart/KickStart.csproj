@@ -51,7 +51,22 @@
     <Compile Include="IKickStarter.cs" />
     <Compile Include="Kick.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="Logging\AsynchronousContext.cs" />
+    <Compile Include="Logging\DelegateLogWriter.cs" />
+    <Compile Include="Logging\DisposeAction.cs" />
+    <Compile Include="Logging\ILogBuilder.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\ILogWriter.cs" />
+    <Compile Include="Logging\IPropertyContext.cs" />
+    <Compile Include="Logging\LogBuilder.cs" />
+    <Compile Include="Logging\LogData.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LoggerCreateBuilder.cs" />
+    <Compile Include="Logging\LoggerExtensions.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Logging\ObjectPool.cs" />
+    <Compile Include="Logging\PropertyContext.cs" />
+    <Compile Include="Logging\TraceLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartupTask\IStartupTask.cs" />
     <Compile Include="StartupTask\IStartupTaskBuilder.cs" />
@@ -63,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="KickStart.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

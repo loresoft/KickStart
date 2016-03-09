@@ -1,10 +1,12 @@
 ﻿using System;
+using KickStart.Logging;
 using SimpleInjector;
 
 namespace KickStart.SimpleInjector
 {
     public class SimpleInjectorStarter : IKickStarter
     {
+        private static readonly ILogger _logger = Logger.CreateLogger<SimpleInjectorStarter>();
         private readonly SimpleInjectorOptions _options;
 
         public SimpleInjectorStarter(SimpleInjectorOptions options)
@@ -20,8 +22,7 @@ namespace KickStart.SimpleInjector
 
             foreach (var module in modules)
             {
-                Logger.Trace()
-                    .Logger<SimpleInjectorStarter>()
+                _logger.Trace()
                     .Message("Register SimpleInjector Module: {0}", module)
                     .Write();
 

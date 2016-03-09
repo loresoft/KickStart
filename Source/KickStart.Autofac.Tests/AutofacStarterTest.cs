@@ -7,13 +7,21 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Core;
 using FluentAssertions;
+using KickStart.Logging;
 using Test.Core;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace KickStart.Autofac.Tests
 {
     public class AutofacStarterTest
     {
+        public AutofacStarterTest(ITestOutputHelper output)
+        {
+            var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
+            Logger.RegisterWriter(writer);
+        }
+
         [Fact]
         public void UseAutofac()
         {
@@ -87,8 +95,6 @@ namespace KickStart.Autofac.Tests
             var employee = Kick.Container.Resolve<Employee>();
             employee.Should().NotBeNull();
             employee.EmailAddress.Should().Be(defaultEmail);
-
-            _logs.Should().NotBeEmpty();
         }
     }
 }

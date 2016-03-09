@@ -4,13 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using KickStart.Logging;
 using Test.Core;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace KickStart.Tests
 {
     public class AssemblyResolverTest
     {
+        public AssemblyResolverTest(ITestOutputHelper output)
+        {
+            var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
+            Logger.RegisterWriter(writer);
+        }
 
         [Fact]
         public void DefaultResolve()

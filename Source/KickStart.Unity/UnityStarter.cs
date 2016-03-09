@@ -1,10 +1,12 @@
 ﻿using System;
+using KickStart.Logging;
 using Microsoft.Practices.Unity;
 
 namespace KickStart.Unity
 {
     public class UnityStarter : IKickStarter
     {
+        private static readonly ILogger _logger = Logger.CreateLogger<UnityStarter>();
         private readonly UnityOptions _options;
 
         public UnityStarter(UnityOptions options)
@@ -20,8 +22,7 @@ namespace KickStart.Unity
 
             foreach (var module in modules)
             {
-                Logger.Trace()
-                    .Logger<UnityStarter>()
+                _logger.Trace()
                     .Message("Register Unity Module: {0}", module)
                     .Write();
 

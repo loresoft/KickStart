@@ -1,5 +1,7 @@
 ﻿using System;
+using KickStart.Logging;
 using KickStart.NLog;
+using KickStart.NLog.Logging;
 
 // ReSharper disable once CheckNamespace
 namespace KickStart
@@ -39,7 +41,7 @@ namespace KickStart
             }
 
             // register log writer
-            configurationBuilder.LogTo(NLogWriter.WriteLog);
+            Logger.RegisterWriter(NLogWriter.Default);
 
             return configurationBuilder;
         }

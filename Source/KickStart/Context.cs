@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using KickStart.Logging;
 
 namespace KickStart
 {
@@ -11,6 +12,7 @@ namespace KickStart
     /// </summary>
     public class Context
     {
+        private static readonly ILogger _logger = Logger.CreateLogger<Context>();
         private readonly IReadOnlyList<Assembly> _assemblies;
 
         /// <summary>
@@ -51,8 +53,7 @@ namespace KickStart
         /// <param name="container">The container adaptor to assign.</param>
         public void SetContainer(IContainerAdaptor container)
         {
-            Logger.Trace()
-                .Logger<Context>()
+            _logger.Trace()
                 .Message("Assign Kick Container: {0}", container)
                 .Write();
 
@@ -71,8 +72,7 @@ namespace KickStart
         {
             if (useContainer && Container != null)
             {
-                Logger.Trace()
-                    .Logger<Context>()
+                _logger.Trace()
                     .Message("Resolve instances using Container: {0}", Container)
                     .Write();
 
@@ -94,8 +94,7 @@ namespace KickStart
         /// <returns>An enumerable list of types the are assignable from <typeparamref name="T"/>.</returns>
         public virtual IEnumerable<Type> GetTypesAssignableFrom<T>(Assembly assembly)
         {
-            Logger.Trace()
-                .Logger<Context>()
+            _logger.Trace()
                 .Message("Scan Start; Assembly: '{0}', Type: '{1}'", assembly.FullName, typeof(T))
                 .Write();
 
@@ -103,8 +102,7 @@ namespace KickStart
             var types = assembly.GetTypesAssignableFrom<T>();
             watch.Stop();
 
-            Logger.Trace()
-                .Logger<Context>()
+            _logger.Trace()
                 .Message("Scan Complete; Assembly: '{0}', Type: '{1}', Time: {2} ms", assembly.FullName, typeof(T), watch.ElapsedMilliseconds)
                 .Write();
 
@@ -118,8 +116,7 @@ namespace KickStart
         /// <returns>An instance of the specified <paramref name="type"/>.</returns>
         public virtual object CreateInstance(Type type)
         {
-            Logger.Trace()
-                .Logger<Context>()
+            _logger.Trace()
                 .Message("Create Instance: {0}", type)
                 .Write();
 

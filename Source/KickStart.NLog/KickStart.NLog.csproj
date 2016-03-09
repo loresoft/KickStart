@@ -44,8 +44,8 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Logging\NLogWriter.cs" />
     <Compile Include="NLogExtensions.cs" />
-    <Compile Include="NLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

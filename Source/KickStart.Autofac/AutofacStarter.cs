@@ -1,6 +1,6 @@
 ﻿using System;
 using Autofac;
-using Autofac.Core;
+using KickStart.Logging;
 
 namespace KickStart.Autofac
 {
@@ -9,6 +9,7 @@ namespace KickStart.Autofac
     /// </summary>
     public class AutofacStarter : IKickStarter
     {
+        private static readonly ILogger _logger = Logger.CreateLogger<AutofacStarter>();
         private AutofacOptions _options;
 
         /// <summary>
@@ -32,8 +33,7 @@ namespace KickStart.Autofac
 
             foreach (var module in modules)
             {
-                Logger.Trace()
-                    .Logger<AutofacStarter>()
+                _logger.Trace()
                     .Message("Register Autofac Module: {0}", module)
                     .Write();
 
@@ -43,8 +43,7 @@ namespace KickStart.Autofac
             if (_options.InitializeBuilder != null)
                 _options.InitializeBuilder(builder);
 
-            Logger.Trace()
-                .Logger<AutofacStarter>()
+            _logger.Trace()
                 .Message("Create Autofac Container...")
                 .Write();
 

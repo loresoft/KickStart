@@ -5,14 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using KickStart.Logging;
 using Microsoft.Practices.Unity;
 using Test.Core;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace KickStart.Unity.Tests
 {
     public class UnityStarterTest
     {
+        public UnityStarterTest(ITestOutputHelper output)
+        {
+            var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
+            Logger.RegisterWriter(writer);
+        }
+
         [Fact]
         public void UseUnity()
         {

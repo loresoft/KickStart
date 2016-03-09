@@ -5,14 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using KickStart.Logging;
 using SimpleInjector;
 using Test.Core;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace KickStart.SimpleInjector.Tests
 {
     public class SimpleInjectorStarterTest
     {
+        public SimpleInjectorStarterTest(ITestOutputHelper output)
+        {
+            var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
+            Logger.RegisterWriter(writer);
+        }
+
         [Fact]
         public void UseSimpleInjector()
         {

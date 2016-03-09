@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using KickStart.Logging;
 
 namespace KickStart
 {
@@ -11,6 +12,7 @@ namespace KickStart
     /// </summary>
     public class AssemblyResolver
     {
+        private static readonly ILogger _logger = Logger.CreateLogger<AssemblyResolver>();
         private readonly List<Func<IEnumerable<Assembly>>> _sources;
         private readonly List<Func<Assembly, bool>> _includes;
         private readonly List<Func<Assembly, bool>> _excludes;
@@ -133,8 +135,7 @@ namespace KickStart
             if (_sources.Count == 0)
                 _sources.Add(() => AppDomain.CurrentDomain.GetAssemblies());
 
-            Logger.Trace()
-                .Logger<AssemblyResolver>()
+            _logger.Trace()
                 .Message("Assembly Resolver Start; Sources: ({0}), Includes: ({1}), Excludes: ({2})", Sources.Count, Includes.Count, Excludes.Count)
                 .Write();
 
@@ -150,8 +151,7 @@ namespace KickStart
 
             watch.Stop();
 
-            Logger.Trace()
-                .Logger<AssemblyResolver>()
+            _logger.Trace()
                 .Message("Assembly Resolver Complete; Assemblies: ({0}), Time: {1} ms", assemblies.Count, watch.ElapsedMilliseconds)
                 .Write();
 

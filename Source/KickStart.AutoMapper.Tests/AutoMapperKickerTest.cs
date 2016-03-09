@@ -6,14 +6,22 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
+using KickStart.Logging;
 using Test.Core;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace KickStart.AutoMapper.Tests
 {
 
     public class AutoMapperKickerTest
     {
+        public AutoMapperKickerTest(ITestOutputHelper output)
+        {
+            var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
+            Logger.RegisterWriter(writer);
+        }
+
         [Fact]
         public void ConfigureBasic()
         {

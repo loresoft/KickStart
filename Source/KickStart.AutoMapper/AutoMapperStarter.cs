@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
+using KickStart.Logging;
 
 namespace KickStart.AutoMapper
 {
@@ -12,6 +9,7 @@ namespace KickStart.AutoMapper
     /// </summary>
     public class AutoMapperStarter : IKickStarter
     {
+        private static readonly ILogger _logger = Logger.CreateLogger<AutoMapperStarter>();
         private readonly AutoMapperOptions _options;
 
         /// <summary>
@@ -35,8 +33,7 @@ namespace KickStart.AutoMapper
             {
                 foreach (var profile in profiles)
                 {
-                    Logger.Trace()
-                        .Logger<AutoMapperStarter>()
+                    _logger.Trace()
                         .Message("AutoMapper Profile: {0}", profile)
                         .Write();
 

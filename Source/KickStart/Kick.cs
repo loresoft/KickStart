@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using KickStart.Logging;
 
 namespace KickStart
 {
@@ -10,6 +11,7 @@ namespace KickStart
     /// </summary>
     public static class Kick
     {
+        private static readonly ILogger _logger = Logger.CreateLogger(typeof(Kick));
         private static IContainerAdaptor _container;
 
         /// <summary>
@@ -48,8 +50,7 @@ namespace KickStart
 
             foreach (var starter in config.Starters)
             {
-                Logger.Trace()
-                    .Logger(typeof(Kick).FullName)
+                _logger.Trace()
                     .Message("Execute Starter: {0}", starter)
                     .Write();
 
@@ -59,8 +60,7 @@ namespace KickStart
 
                 watch.Stop();
 
-                Logger.Trace()
-                    .Logger(typeof(Kick).FullName)
+                _logger.Trace()
                     .Message("Completed Starter: {0}, Time: {1} ms", starter, watch.ElapsedMilliseconds)
                     .Write();
             }

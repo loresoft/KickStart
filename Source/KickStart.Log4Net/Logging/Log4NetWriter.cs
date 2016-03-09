@@ -1,22 +1,22 @@
 using System;
-using log4net;
+using KickStart.Logging;
 
-namespace KickStart.Log4Net
+namespace KickStart.Log4Net.Logging
 {
     /// <summary>
-    /// log4net Log adaptor
+    /// log4net Log adapter
     /// </summary>
-    public static class Log4NetWriter
+    public class Log4NetWriter : ILogWriter
     {
         /// <summary>
         /// Writes the specified LogData to log4net.
         /// </summary>
         /// <param name="logData">The log data.</param>
-        public static void WriteLog(LogData logData)
+        public void WriteLog(LogData logData)
         {
             var name = logData.Logger ?? typeof(Log4NetWriter).FullName;
 
-            var logger = LogManager.GetLogger(name);
+            var logger = log4net.LogManager.GetLogger(name);
 
             switch (logData.LogLevel)
             {
@@ -51,17 +51,30 @@ namespace KickStart.Log4Net
 
         private static void WriteLog(LogData logData, Action<object> logAction, Action<object, Exception> errorAction)
         {
-            bool isFormatted = logData.Parameters != null && logData.Parameters.Length > 0;
-
-            string message = isFormatted
-                ? string.Format(logData.FormatProvider, logData.Message, logData.Parameters)
-                : logData.Message;
-
+            string message = logData.FormatMessage();
 
             if (logData.Exception == null)
                 logAction(message);
             else
                 errorAction(message, logData.Exception);
         }
+
+
+        private static readonly Lazy<Log4NetWriter> _current = new Lazy<Log4NetWriter>(() => new Log4NetWriter());
+
+        /// <summary>
+        /// Gets the current singleton instance of <see cref="Log4NetWriter"/>.
+        /// </summary>
+        /// <value>The current singleton instance.</value>
+        /// <remarks>
+        /// An instance of <see cref="Log4NetWriter"/> wont be created until the very first 
+        /// call to the sealed class. This is a CLR optimization that
+        /// provides a properly lazy-loading singleton. 
+        /// </remarks>
+        public static Log4NetWriter Default
+        {
+            get { return _current.Value; }
+        }
+
     }
 }

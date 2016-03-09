@@ -7,8 +7,8 @@ namespace Test.Core
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<User, Employee>();
-            Mapper.CreateMap<Employee, User>();
+            CreateMap<User, Employee>();
+            CreateMap<Employee, User>();
         }
     }
 }

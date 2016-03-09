@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using KickStart.Logging;
 
 namespace KickStart.StartupTask
 {
@@ -9,6 +10,7 @@ namespace KickStart.StartupTask
     /// </summary>
     public class StartupTaskStarter : IKickStarter
     {
+        private static readonly ILogger _logger = Logger.CreateLogger<StartupTaskStarter>();
         private readonly StartupTaskOptions _options;
 
         /// <summary>
@@ -35,8 +37,7 @@ namespace KickStart.StartupTask
             foreach (var startupTask in startupTasks)
             {
 
-                Logger.Trace()
-                    .Logger<StartupTaskStarter>()
+                _logger.Trace()
                     .Message("Execute Startup Task; Type: '{0}'", startupTask)
                     .Write();
 
@@ -44,8 +45,7 @@ namespace KickStart.StartupTask
                 startupTask.Run();
                 watch.Stop();
 
-                Logger.Trace()
-                    .Logger<StartupTaskStarter>()
+                _logger.Trace()
                     .Message("Complete Startup Task; Type: '{0}', Time: {1} ms", startupTask, watch.ElapsedMilliseconds)
                     .Write();
             }
