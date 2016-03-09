@@ -324,7 +324,16 @@ namespace KickStart.Logging
             if (writer == null)
                 throw new ArgumentNullException("writer");
 
-            Interlocked.Exchange(ref _logWriter, writer);
+            if (writer.Equals(_logWriter))
+                return;
+
+            var current = _logWriter;
+            if (Interlocked.CompareExchange(ref _logWriter, writer, current) != current)
+                return;
+
+            // clear object pool
+            _objectPool.Clear();
+
         }
 
 

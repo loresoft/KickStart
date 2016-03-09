@@ -3,7 +3,7 @@ using System;
 namespace KickStart.Logging
 {
     /// <summary>
-    /// A fluent class to build a <see cref="T:KickStart.Logging.Logger"/>.
+    /// A fluent class to build a <see cref="Logger"/>.
     /// </summary>
     public class LoggerCreateBuilder
     {

@@ -29,6 +29,11 @@ namespace KickStart.Logging
         /// reducing how far we will typically search in <see cref="Allocate"/>.
         /// </remarks>
         void Free(T obj);
+
+        /// <summary>
+        /// Remove all pooled objects from object pool.
+        /// </summary>
+        void Clear();
     }
 
     /// <summary>
@@ -164,6 +169,16 @@ namespace KickStart.Logging
                     break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Remove all pooled objects from object pool.
+        /// </summary>
+        public void Clear()
+        {
+            _firstItem = null;
+            for (int i = 0; i < _items.Length; i++)
+                _items[i].Value = null;
         }
     }
 }
