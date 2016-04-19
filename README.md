@@ -1,10 +1,20 @@
 # KickStart
 
-[![Join the chat at https://gitter.im/loresoft/KickStart](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/loresoft/KickStart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 Application start-up helper to initialize things like an IoC container, register mapping information or run a task.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/lk092y48a2b9f8ys)](https://ci.appveyor.com/project/LoreSoft/kickstart)
+
+Package  | Version |
+-------- | :------------ | :------------------
+[KickStart](https://www.nuget.org/packages/KickStart/) |  [![KickStart](https://img.shields.io/nuget/v/KickStart.svg)](https://www.nuget.org/packages/KickStart/) |
+[KickStart.Autofac](https://www.nuget.org/packages/KickStart.Autofac/) |  [![KickStart.Autofac](https://img.shields.io/nuget/v/KickStart.Autofac.svg)](https://www.nuget.org/packages/KickStart.Autofac/) |
+[KickStart.AutoMapper](https://www.nuget.org/packages/KickStart.AutoMapper/) |  [![KickStart.AutoMapper](https://img.shields.io/nuget/v/KickStart.AutoMapper.svg)](https://www.nuget.org/packages/KickStart.AutoMapper/) |
+[KickStart.Log4Net](https://www.nuget.org/packages/KickStart.Log4Net/) |  [![NuGet](https://img.shields.io/nuget/v/KickStart.Log4Net.svg)](https://www.nuget.org/packages/KickStart.Log4Net/) |
+[KickStart.MongoDB](https://www.nuget.org/packages/KickStart.MongoDB/) |  [![KickStart.MongoDB](https://img.shields.io/nuget/v/KickStart.MongoDB.svg)](https://www.nuget.org/packages/KickStart.MongoDB/) |
+[KickStart.Ninject](https://www.nuget.org/packages/KickStart.Ninject/) |  [![KickStart.Ninject](https://img.shields.io/nuget/v/KickStart.Ninject.svg)](https://www.nuget.org/packages/KickStart.Ninject/) |
+[KickStart.NLog](https://www.nuget.org/packages/KickStart.NLog/) |  [![KickStart.NLog](https://img.shields.io/nuget/v/KickStart.NLog.svg)](https://www.nuget.org/packages/KickStart.NLog/) |
+[KickStart.SimpleInjector](https://www.nuget.org/packages/KickStart.SimpleInjector/) |  [![KickStart.SimpleInjector](https://img.shields.io/nuget/v/KickStart.SimpleInjector.svg)](https://www.nuget.org/packages/KickStart.SimpleInjector/) |
+[KickStart.Unity](https://www.nuget.org/packages/KickStart.Unity/) |  [![KickStart.Unity](https://img.shields.io/nuget/v/KickStart.Unity.svg)](https://www.nuget.org/packages/KickStart.Unity/) |
 
 ## Download
 
