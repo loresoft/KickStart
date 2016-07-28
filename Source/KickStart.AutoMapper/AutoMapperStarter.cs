@@ -40,8 +40,7 @@ namespace KickStart.AutoMapper
                     config.AddProfile(profile);
                 }
 
-                if (_options.Initialize != null)
-                    _options.Initialize(config);
+                _options.Initialize?.Invoke(config);
             });
 
 

@@ -41,8 +41,8 @@ namespace KickStart.AutoMapper.Tests
             var user = Mapper.Map<User>(employee);
             user.Should().NotBeNull();
             user.EmailAddress.Should().Be(employee.EmailAddress);
-                    user.SysVersion.Should().NotBeNull();
-}
+            user.SysVersion.Should().NotBeNull();
+        }
 
         [Fact]
         public void ConfigureFull()

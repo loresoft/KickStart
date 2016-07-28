@@ -18,12 +18,12 @@ namespace KickStart.AutoMapper
         IAutoMapperBuilder Validate(bool value = true);
 
         /// <summary>
-        /// Passes the current <see cref="T:AutoMapper.IConfiguration"/> to add additional configuration options.
+        /// Passes the current <see cref="T:AutoMapper.IMapperConfigurationExpression"/> to add additional configuration options.
         /// </summary>
         /// <param name="configuration">The delegate to call for additional configuration.</param>
         /// <returns>
         /// Fluent <see cref="AutoMapperOptions"/> builder.
         /// </returns>
-        IAutoMapperBuilder Initialize(Action<IConfiguration> configuration);
+        IAutoMapperBuilder Initialize(Action<IMapperConfigurationExpression> configuration);
     }
 }

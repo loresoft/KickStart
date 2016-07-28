@@ -39,7 +39,7 @@ namespace KickStart.AutoMapper
         /// <returns>
         /// Fluent <see cref="AutoMapperOptions" /> builder.
         /// </returns>
-        public IAutoMapperBuilder Initialize(Action<IConfiguration> configuration)
+        public IAutoMapperBuilder Initialize(Action<IMapperConfigurationExpression> configuration)
         {
             _options.Initialize = configuration;
             return this;

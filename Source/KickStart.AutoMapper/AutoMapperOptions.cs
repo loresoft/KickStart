@@ -22,6 +22,6 @@ namespace KickStart.AutoMapper
         /// <value>
         /// The <see langword="delegate"/> to call for additional configuration..
         /// </value>
-        public Action<IConfiguration> Initialize { get; set; }
+        public Action<IMapperConfigurationExpression> Initialize { get; set; }
     }
 }
