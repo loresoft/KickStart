@@ -1,0 +1,33 @@
+﻿{
+  "version": "3.0.0.0",
+  "description": "KickStart Extension for Ninject",
+  "language": "en-US",
+  "authors": [ "LoreSoft" ],
+  "packOptions": {
+    "copyright": "Copyright (c) 2016, LoreSoft",
+    "owners": [ "LoreSoft" ],
+    "projectUrl": "https://github.com/loresoft/KickStart",
+    "licenseUrl": "https://raw.githubusercontent.com/loresoft/KickStart/master/LICENSE",
+    "requireLicenseAcceptance": false,
+    "summary": "KickStart Extension for Ninject",
+    "tags": [ "startup", "bootstrap", "bootstraper", "ioc", "container", "initialization", "Ninject" ]
+  },
+  "buildOptions": {
+    "compile": [ "..\\GlobalAssemblyInfo.cs" ],
+    "xmlDoc": true
+  },
+  "dependencies": {
+    "KickStart": "3.0.0.0",
+    "Ninject": "3.2.2"
+  },
+  "frameworks": {
+    "net40": {
+      "dependencies": {
+        "Microsoft.Bcl": "1.1.10"
+      }
+    },
+    "net45": {
+
+    }
+  }
+}

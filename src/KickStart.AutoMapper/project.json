@@ -1,0 +1,35 @@
+﻿{
+  "version": "3.0.0.0",
+  "description": "KickStart Extension for AutoMapper",
+  "language": "en-US",
+  "authors": [ "LoreSoft" ],
+  "packOptions": {
+    "copyright": "Copyright (c) 2016, LoreSoft",
+    "owners": [ "LoreSoft" ],
+    "projectUrl": "https://github.com/loresoft/KickStart",
+    "licenseUrl": "https://raw.githubusercontent.com/loresoft/KickStart/master/LICENSE",
+    "requireLicenseAcceptance": false,
+    "summary": "Application start-up helper",
+    "tags": [ "startup", "bootstrap", "bootstraper", "ioc", "container", "initialization", "AutoMapper" ]
+  },
+  "buildOptions": {
+    "compile": [ "..\\GlobalAssemblyInfo.cs" ],
+    "xmlDoc": true
+  },
+  "dependencies": {
+    "KickStart": "3.0.0.0",
+    "AutoMapper": "5.0.2"
+  },
+  "frameworks": {
+    "net45": {
+
+    },
+    "netstandard1.6": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.0",
+        "System.Runtime": "4.1.0",
+        "System.Threading.Thread": "4.0.0"
+      }
+    }
+  }
+}

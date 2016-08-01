@@ -4,10 +4,10 @@
   <PropertyGroup>
     <BuildFolder>$(MSBuildProjectDirectory)\Build</BuildFolder>
     <ToolFolder>$(MSBuildProjectDirectory)\Tools</ToolFolder>
-    <SourceFolder>$(MSBuildProjectDirectory)\Source</SourceFolder>
+    <SourceFolder>$(MSBuildProjectDirectory)\src</SourceFolder>
+    <TestFolder>$(MSBuildProjectDirectory)\test</TestFolder>
 
     <MSBuildCommunityTasksPath>$(ToolFolder)\MSBuildTasks\tools</MSBuildCommunityTasksPath>
-    <XUnitTasksPath>$(ToolFolder)\xunit.runner.console\tools</XUnitTasksPath>
   </PropertyGroup>
 
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
@@ -20,8 +20,8 @@
     
     <BuildConfiguration  Condition=" '$(BuildConfiguration)' == '' ">Release</BuildConfiguration>
 
-    <Major Condition=" '$(Major)' == '' ">2</Major>
-    <Minor Condition=" '$(Minor)' == '' ">5</Minor>
+    <Major Condition=" '$(Major)' == '' ">3</Major>
+    <Minor Condition=" '$(Minor)' == '' ">0</Minor>
     <Revision Condition=" '$(Revision)' == '' ">0</Revision>
 
     <AssemblyVersion>$(Major).$(Minor).0.0</AssemblyVersion>
@@ -53,117 +53,49 @@
                   AssemblyVersion="$(AssemblyVersion)"
                   AssemblyFileVersion="$(AssemblyFileVersion)"
                   AssemblyInformationalVersion="$(AssemblyInformationalVersion)"
-                  AssemblyTrademark=""
-                  ComVisible="false"/>
+                  AssemblyTrademark=""/>
+    <ItemGroup>
+      <VersionFiles Include="$(SourceFolder)\**\project.json"/>
+      <VersionFiles Include="$(TestFolder)\**\project.json"/>
+    </ItemGroup>
+
+    <FileUpdate Files="%(VersionFiles.Identity)"
+                Regex="&quot;version&quot;: &quot;$(AssemblyVersion)&quot;,"
+                ReplacementText="&quot;version&quot;: &quot;$(PackageVersion)&quot;," />
+
+    <FileUpdate Files="%(VersionFiles.Identity)"
+                Regex="&quot;KickStart&quot;: &quot;$(AssemblyVersion)&quot;,"
+                ReplacementText="&quot;KickStart&quot;: &quot;$(PackageVersion)&quot;," />
   </Target>
 
   <Target Name="Compile" DependsOnTargets="Clean;Version">
-    <MSBuild Projects="$(SourceFolder)\KickStart.sln"
+    <MSBuild Projects="KickStart.sln"
              Properties="Configuration=$(BuildConfiguration)"/>
   </Target>
 
   <Target Name="Test" DependsOnTargets="Compile">
     <ItemGroup>
-      <TestAssemblies Include="$(SourceFolder)\**\*.Tests\bin\$(BuildConfiguration)\*.Tests.dll"/>
+      <TestAssemblies Include="$(TestFolder)\**\project.json"/>
     </ItemGroup>
 
-    <exec Command="$(XUnitTasksPath)\xunit.console.exe &quot;%(TestAssemblies.Identity)&quot; -appveyor -parallel assemblies"/>
-  </Target>
-
-  <Target Name="UpdateVersion" DependsOnTargets="Version">
-    <ItemGroup>
-      <NuGetFiles Include="$(SourceFolder)\**\*.nuspec"/>
-    </ItemGroup>
-
-    <XmlUpdate XmlFileName="%(NuGetFiles.Identity)"
-               Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
-               XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='KickStart']/@version"
-               Value="$(PackageVersion)" />
+    <exec Command="dotnet test &quot;%(TestAssemblies.Identity)&quot;"
+          WorkingDirectory="$(TestFolder)\%(TestAssemblies.RecursiveDir)"/>
   </Target>
 
 
-  <Target Name="Package" DependsOnTargets="Test;UpdateVersion">
+  <Target Name="Package" DependsOnTargets="Test">
     <MakeDir Directories="$(BuildFolder)" Condition="!EXISTS($(BuildFolder))" />
 
     <ItemGroup>
-      <NuGetFiles Include="$(SourceFolder)\**\*.nuspec"/>
+      <ProjectFiles Include="$(SourceFolder)\**\project.json"/>
     </ItemGroup>
 
-    <NuGetPack File="%(NuGetFiles.Identity)"
-               OutputDirectory="$(BuildFolder)"
-               Version="$(PackageVersion)"
-               Symbols="true"  />
-
-  </Target>
-
-  <Target Name="Publish" DependsOnTargets="Package">
-
-    <!-- 
-      Requires API key to be set ...
-      nuget.exe setapikey <myget-key> -Source https://www.myget.org/F/loresoft/
-    -->
-
-    <ItemGroup>
-      <NuGetPackages Include="$(BuildFolder)\*.nupkg" Exclude="$(BuildFolder)\*.symbols.nupkg"/>
-      <NuGetSymbols Include="$(BuildFolder)\*.symbols.nupkg" />
-    </ItemGroup>
-
-    <!-- Push to MyGet on Build -->
-    <NuGetPush File="%(NuGetPackages.Identity)"
-               Source="https://www.myget.org/F/loresoft/" />
-
-    <!-- Push to Symbols on Build -->
-    <NuGetPush File="%(NuGetSymbols.Identity)"
-               Source="https://nuget.symbolsource.org/MyGet/loresoft" />
-
+    <exec Command="dotnet pack --output &quot;$(BuildFolder)&quot; &quot;%(ProjectFiles.Identity)&quot; "
+          WorkingDirectory="$(SourceFolder)\%(ProjectFiles.RecursiveDir)"/>
+    
   </Target>
 
   <Target Name="Build" DependsOnTargets="Package">
   </Target>
-
-
-  <ItemGroup>
-    <NuGetPackage Include="Autofac">
-      <Package>Autofac</Package>
-    </NuGetPackage>
-    <NuGetPackage Include="AutoMapper">
-      <Package>AutoMapper</Package>
-    </NuGetPackage>
-    <NuGetPackage Include="Log4Net">
-      <Package>log4net</Package>
-    </NuGetPackage>
-    <NuGetPackage Include="MongoDB">
-      <Package>MongoDB.Driver</Package>
-    </NuGetPackage>
-    <NuGetPackage Include="Ninject">
-      <Package>Ninject</Package>
-    </NuGetPackage>
-    <NuGetPackage Include="NLog">
-      <Package>NLog</Package>
-    </NuGetPackage>
-    <NuGetPackage Include="SimpleInjector">
-      <Package>SimpleInjector</Package>
-    </NuGetPackage>
-    <NuGetPackage Include="Unity">
-      <Package>Unity</Package>
-    </NuGetPackage>
-  </ItemGroup>
-
-  <Target Name="Refresh" Inputs="@NuGetPackage" Outputs="%(NuGetPackage.Identity)">
-    <XmlRead XmlFileName="$(SourceFolder)\KickStart.%(NuGetPackage.Identity)\packages.config"
-             XPath="/packages/package[@id='%(NuGetPackage.Package)']/@version">
-      <Output TaskParameter="Value" ItemName="SourceVersion" />
-    </XmlRead>
-
-    <Message Text="%(NuGetPackage.Identity): @(SourceVersion)"/>
-
-    <XmlUpdate XmlFileName="$(SourceFolder)\KickStart.%(NuGetPackage.Identity)\KickStart.%(NuGetPackage.Identity).nuspec"
-               Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
-               XPath="/d:package/d:metadata/d:dependencies/d:dependency[@id='%(NuGetPackage.Package)']/@version"
-               Value="@(SourceVersion)" />
-  </Target>
-
-
-
 
 </Project>
