@@ -1,5 +1,4 @@
 ﻿using System;
-using KickStart.Log4Net;
 using KickStart.Log4Net.Logging;
 using KickStart.Logging;
 

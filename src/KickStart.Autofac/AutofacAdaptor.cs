@@ -21,7 +21,7 @@ namespace KickStart.Autofac
         public AutofacAdaptor(IContainer container)
         {
             if (container == null)
-                throw new ArgumentNullException("container");
+                throw new ArgumentNullException(nameof(container));
 
             _container = container;
         }
@@ -76,7 +76,7 @@ namespace KickStart.Autofac
         public object Resolve(Type serviceType, string key)
         {
             if (serviceType == null)
-                throw new ArgumentNullException("serviceType");
+                throw new ArgumentNullException(nameof(serviceType));
 
             return key == null
                 ? _container.Resolve(serviceType)
@@ -104,7 +104,7 @@ namespace KickStart.Autofac
         public IEnumerable<object> ResolveAll(Type serviceType)
         {
             if (serviceType == null)
-                throw new ArgumentNullException("serviceType");
+                throw new ArgumentNullException(nameof(serviceType));
 
             var enumerableType = typeof(IEnumerable<>).MakeGenericType(serviceType);
 

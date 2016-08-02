@@ -5,7 +5,7 @@ using KickStart.Logging;
 namespace KickStart.Autofac
 {
     /// <summary>
-    /// 
+    /// KickStart extension for Autofac
     /// </summary>
     public class AutofacStarter : IKickStarter
     {
@@ -40,8 +40,7 @@ namespace KickStart.Autofac
                 builder.RegisterModule(module);
             }
 
-            if (_options.InitializeBuilder != null)
-                _options.InitializeBuilder(builder);
+            _options.InitializeBuilder?.Invoke(builder);
 
             _logger.Trace()
                 .Message("Create Autofac Container...")
@@ -49,8 +48,7 @@ namespace KickStart.Autofac
 
             var container = builder.Build(_options.BuildOptions);
 
-            if (_options.InitializeContainer != null)
-                _options.InitializeContainer(container);
+            _options.InitializeContainer?.Invoke(container);
 
             var adaptor = new AutofacAdaptor(container);
             context.SetContainer(adaptor);

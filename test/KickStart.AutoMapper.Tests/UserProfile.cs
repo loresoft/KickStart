@@ -6,7 +6,7 @@ namespace KickStart.AutoMapper.Tests
 {
     public class UserProfile : Profile
     {
-        protected override void Configure()
+        public UserProfile()
         {
             CreateMap<User, Employee>();
             CreateMap<Employee, User>();

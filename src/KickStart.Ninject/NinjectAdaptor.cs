@@ -21,7 +21,7 @@ namespace KickStart.Ninject
         public NinjectAdaptor(IKernel kernel)
         {
             if (kernel == null)
-                throw new ArgumentNullException("kernel");
+                throw new ArgumentNullException(nameof(kernel));
 
             _kernel = kernel;
         }

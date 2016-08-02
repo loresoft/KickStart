@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Text;
-using System.Threading.Tasks;
 using KickStart.Logging;
 #if PORTABLE
 using Stopwatch = KickStart.Portability.Stopwatch;
+#else
+using Stopwatch = System.Diagnostics.Stopwatch;
 #endif
 
 namespace KickStart
@@ -43,6 +42,9 @@ namespace KickStart
         /// </example>
         public static void Start(Action<IConfigurationBuilder> configurator)
         {
+            if (configurator == null)
+                throw new ArgumentNullException(nameof(configurator));
+
             var config = new Configuration();
             var builder = new ConfigurationBuilder(config);
 
@@ -57,7 +59,7 @@ namespace KickStart
                     .Message("Execute Starter: {0}", starter)
                     .Write();
 
-                Stopwatch watch = Stopwatch.StartNew();
+                var watch = Stopwatch.StartNew();
 
                 starter.Run(context);
 

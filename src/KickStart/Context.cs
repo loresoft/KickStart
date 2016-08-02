@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using KickStart.Logging;
 #if PORTABLE
 using Stopwatch = KickStart.Portability.Stopwatch;
+#else
+using Stopwatch = System.Diagnostics.Stopwatch;
 #endif
 
 namespace KickStart
@@ -74,20 +75,19 @@ namespace KickStart
         public virtual IEnumerable<T> GetInstancesAssignableFrom<T>(bool useContainer = false)
             where T : class
         {
-            if (useContainer && Container != null)
-            {
-                _logger.Trace()
-                    .Message("Resolve instances using Container: {0}", Container)
-                    .Write();
+            if (!useContainer || Container == null)
+                return Assemblies
+                    .SelectMany(GetTypesAssignableFrom<T>)
+                    .Select(CreateInstance)
+                    .OfType<T>()
+                    .ToList();
 
-                return Container.ResolveAll<T>().ToList();
-            }
 
-            return Assemblies
-                .SelectMany(GetTypesAssignableFrom<T>)
-                .Select(CreateInstance)
-                .OfType<T>()
-                .ToList();
+            _logger.Trace()
+                .Message("Resolve instances using Container: {0}", Container)
+                .Write();
+
+            return Container.ResolveAll<T>().ToList();
         }
 
         /// <summary>

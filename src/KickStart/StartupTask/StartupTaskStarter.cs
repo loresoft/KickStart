@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using KickStart.Logging;
 #if PORTABLE
 using Stopwatch = KickStart.Portability.Stopwatch;
+#else
+using Stopwatch = System.Diagnostics.Stopwatch;
 #endif
 
 namespace KickStart.StartupTask

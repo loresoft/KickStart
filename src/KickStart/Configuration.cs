@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace KickStart
 {
@@ -9,25 +8,22 @@ namespace KickStart
     /// </summary>
     public class Configuration
     {
-        private readonly AssemblyResolver _assemblies;
-        private readonly List<IKickStarter> _starters;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Configuration"/> class.
         /// </summary>
         public Configuration()
         {
-            _assemblies = new AssemblyResolver();
+            Assemblies = new AssemblyResolver();
 
             // exclude system assemblies
-            _assemblies.ExcludeName("mscorlib");
-            _assemblies.ExcludeName("Microsoft");
-            _assemblies.ExcludeName("System");
+            Assemblies.ExcludeName("mscorlib");
+            Assemblies.ExcludeName("Microsoft");
+            Assemblies.ExcludeName("System");
             
             // exclude self
-            _assemblies.ExcludeAssemblyFor<IKickStarter>();
+            Assemblies.ExcludeAssemblyFor<IKickStarter>();
 
-            _starters = new List<IKickStarter>();
+            Starters = new List<IKickStarter>();
         }
 
         /// <summary>
@@ -36,10 +32,7 @@ namespace KickStart
         /// <value>
         /// The assemblies use by KickStart.
         /// </value>
-        public AssemblyResolver Assemblies
-        {
-            get { return _assemblies; }
-        }
+        public AssemblyResolver Assemblies { get; }
 
         /// <summary>
         /// Gets the <see cref="IKickStarter"/> extensions to use.
@@ -47,9 +40,6 @@ namespace KickStart
         /// <value>
         /// The IKickStarter extensions to use.
         /// </value>
-        public List<IKickStarter> Starters
-        {
-            get { return _starters; }
-        }
+        public List<IKickStarter> Starters { get; }
     }
 }

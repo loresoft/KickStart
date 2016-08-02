@@ -5,7 +5,7 @@ using Autofac.Builder;
 namespace KickStart.Autofac
 {
     /// <summary>
-    /// 
+    /// Autofac builder interface
     /// </summary>
     public interface IAutofacBuilder
     {
