@@ -66,6 +66,10 @@
     <FileUpdate Files="%(VersionFiles.Identity)"
                 Regex="&quot;KickStart&quot;: &quot;$(AssemblyVersion)&quot;,"
                 ReplacementText="&quot;KickStart&quot;: &quot;$(PackageVersion)&quot;," />
+
+    <exec Command="dotnet restore"
+          WorkingDirectory="$(MSBuildProjectDirectory)"/>
+
   </Target>
 
   <Target Name="Compile" DependsOnTargets="Clean;Version">
