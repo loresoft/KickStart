@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "3.0.0.0",
   "description": "KickStart Extension for NLog",
   "language": "en-US",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "KickStart": "3.0.0.0",
-    "NLog": "4.4.0-betaV15" 
+    "NLog": "4.3.6"
   },
   "frameworks": {
     "net40": {
@@ -28,13 +28,6 @@
     },
     "net45": {
 
-    },
-    "netstandard1.6": {
-      "dependencies": {
-        "NETStandard.Library": "1.6.0",
-        "System.Runtime": "4.1.0",
-        "System.Threading.Thread": "4.0.0"
-      }
     }
   }
 }
