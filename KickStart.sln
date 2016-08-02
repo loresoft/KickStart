@@ -39,6 +39,11 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "KickStart.SimpleInjector.Te
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "KickStart.Unity.Tests", "test\KickStart.Unity.Tests\KickStart.Unity.Tests.xproj", "{C037951A-7AE7-4B69-B745-5A1BD7F1C0E4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C2F076BC-C22F-4383-AC89-3DF0C2F4BCEC}"
+	ProjectSection(SolutionItems) = preProject
+		Master.proj = Master.proj
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

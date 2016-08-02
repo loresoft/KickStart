@@ -67,6 +67,34 @@
                 Regex="&quot;KickStart&quot;: &quot;$(AssemblyVersion)&quot;,"
                 ReplacementText="&quot;KickStart&quot;: &quot;$(PackageVersion)&quot;," />
 
+    <FileUpdate Files="%(VersionFiles.Identity)"
+                Regex="&quot;KickStart.Autofac&quot;: &quot;$(AssemblyVersion)&quot;,"
+                ReplacementText="&quot;KickStart.Autofac&quot;: &quot;$(PackageVersion)&quot;," />
+
+    <FileUpdate Files="%(VersionFiles.Identity)"
+                Regex="&quot;KickStart.AutoMapper&quot;: &quot;$(AssemblyVersion)&quot;,"
+                ReplacementText="&quot;KickStart.AutoMapper&quot;: &quot;$(PackageVersion)&quot;," />
+
+    <FileUpdate Files="%(VersionFiles.Identity)"
+                Regex="&quot;KickStart.MongoDB&quot;: &quot;$(AssemblyVersion)&quot;,"
+                ReplacementText="&quot;KickStart.MongoDB&quot;: &quot;$(PackageVersion)&quot;," />
+
+    <FileUpdate Files="%(VersionFiles.Identity)"
+                Regex="&quot;KickStart.Ninject&quot;: &quot;$(AssemblyVersion)&quot;,"
+                ReplacementText="&quot;KickStart.Ninject&quot;: &quot;$(PackageVersion)&quot;," />
+
+    <FileUpdate Files="%(VersionFiles.Identity)"
+                Regex="&quot;KickStart.SimpleInjector&quot;: &quot;$(AssemblyVersion)&quot;,"
+                ReplacementText="&quot;KickStart.SimpleInjector&quot;: &quot;$(PackageVersion)&quot;," />
+
+    <FileUpdate Files="%(VersionFiles.Identity)"
+                Regex="&quot;KickStart.Unity&quot;: &quot;$(AssemblyVersion)&quot;,"
+                ReplacementText="&quot;KickStart.Unity&quot;: &quot;$(PackageVersion)&quot;," />
+
+    <FileUpdate Files="%(VersionFiles.Identity)"
+                Regex="&quot;Test.Core&quot;: &quot;$(AssemblyVersion)&quot;,"
+                ReplacementText="&quot;Test.Core&quot;: &quot;$(PackageVersion)&quot;," />
+
     <exec Command="dotnet restore"
           WorkingDirectory="$(MSBuildProjectDirectory)"/>
 
