@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_6
+#if !PORTABLE
 namespace KickStart.Logging
 {
 

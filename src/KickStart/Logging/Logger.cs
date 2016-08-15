@@ -32,16 +32,18 @@ namespace KickStart.Logging
         static Logger()
         {
             _globalProperties = new Lazy<IPropertyContext>(CreateGlobal);
+
 #if !PORTABLE
             _threadProperties = new ThreadLocal<IPropertyContext>(CreateLocal);
-#endif
-#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_6
-            _asyncProperties = new Lazy<IPropertyContext>(CreateAsync);
-
             _logWriter = new TraceLogWriter();
 #else
             _logWriter = new DelegateLogWriter();            
 #endif
+
+#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_6
+            _asyncProperties = new Lazy<IPropertyContext>(CreateAsync);
+#endif
+
             _objectPool = new ObjectPool<LogBuilder>(() => new LogBuilder(_logWriter, _objectPool), 25);
         }
 
