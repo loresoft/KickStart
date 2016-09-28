@@ -1,4 +1,4 @@
-{
+﻿{
   "version": "3.0.0.0",
   "description": "KickStart Extension for Autofac",
   "language": "en-US",
@@ -17,8 +17,8 @@
     "xmlDoc": true
   },
   "dependencies": {
-    "KickStart": "3.0.0.0",
-    "Autofac": "4.0.0"
+    "Autofac": "4.1.1",
+    "KickStart": "3.0.0.0"
   },
   "frameworks": {
     "net45": {

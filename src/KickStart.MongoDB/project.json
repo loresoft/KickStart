@@ -18,11 +18,19 @@
   },
   "dependencies": {
     "KickStart": "3.0.0.0",
-    "MongoDB.Driver": "2.2.4"
+    "MongoDB.Driver": "2.3.0"
   },
   "frameworks": {
     "net45": {
 
+    },
+    "netstandard1.6": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.0",
+        "System.Runtime": "4.1.0",
+        "System.Threading.Thread": "4.0.0"
+      }
     }
+
   }
 }

@@ -1,14 +1,14 @@
-{
+﻿{
   "version": "3.0.0.0",
   "testRunner": "xunit",
   "dependencies": {
     "KickStart": "3.0.0.0",
     "KickStart.MongoDB": "3.0.0.0",
     "Test.Core": "3.0.0.0",
-    "MongoDB.Driver": "2.2.4",
     "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "FluentAssertions": "4.13.0"
+    "FluentAssertions": "4.14.0",
+    "MongoDB.Driver": "2.3.0"
   },
   "buildOptions": {
     "copyToOutput": {
@@ -16,9 +16,17 @@
     }
   },
   "frameworks": {
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0"
+        }
+      }
+    },
     "net451": {
       "dependencies": {
-        "Microsoft.NETCore.Platforms": "1.0.1"
+        "Microsoft.NETCore.Platforms": "1.0.0"
       }
     }
   }
