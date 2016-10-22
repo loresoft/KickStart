@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "KickStart": "3.0.0.0",
-    "SimpleInjector": "3.2.2"
+    "SimpleInjector": "3.2.3"
   },
   "frameworks": {
     "net40": {
@@ -29,7 +29,7 @@
     "net45": {
 
     },
-    "netstandard1.6": {
+    "netstandard1.5": {
       "dependencies": {
         "NETStandard.Library": "1.6.0",
         "System.Runtime": "4.1.0",

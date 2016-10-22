@@ -3,19 +3,23 @@
   "testRunner": "xunit",
   "dependencies": {
     "KickStart": "3.0.0.0",
+    "KickStart.Serilog": "3.0.0.0",
+    "Test.Core": "3.0.0.0",
+    "Rx-Main": "2.2.5",
+    "Serilog": "2.3.0",
+    "Serilog.Sinks.Literate": "2.0.0",
+    "Serilog.Sinks.RollingFile": "3.1.0",
+    "Serilog.Sinks.Observable": "2.0.1",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "FluentAssertions": "4.15.0",
     "xunit": "2.2.0-beta3-build3402"
   },
+  "buildOptions": {
+    "copyToOutput": {
+      "include": [ "xunit.runner.json" ]
+    }
+  },
   "frameworks": {
-    "netcoreapp1.0": {
-      "dependencies": {
-        "Microsoft.NETCore.App": {
-          "type": "platform",
-          "version": "1.0.0"
-        }
-      }
-    },
     "net451": {
       "dependencies": {
         "Microsoft.NETCore.Platforms": "1.0.1"

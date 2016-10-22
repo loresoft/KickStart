@@ -18,7 +18,7 @@ namespace KickStart.Logging
 #if !PORTABLE
         private static readonly ThreadLocal<IPropertyContext> _threadProperties;
 #endif
-#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_6
+#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_5 && !NETSTANDARD1_6
         private static readonly Lazy<IPropertyContext> _asyncProperties;
 #endif
         private static readonly Lazy<IPropertyContext> _globalProperties;
@@ -40,7 +40,7 @@ namespace KickStart.Logging
             _logWriter = new DelegateLogWriter();            
 #endif
 
-#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_6
+#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_5 && !NETSTANDARD1_6
             _asyncProperties = new Lazy<IPropertyContext>(CreateAsync);
 #endif
 
@@ -82,7 +82,7 @@ namespace KickStart.Logging
         }
 #endif
 
-#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_6
+#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_5 && !NETSTANDARD1_6
         /// <summary>
         /// Gets the property context that maintains state across asynchronous tasks and call contexts. All values are copied to each log on write.
         /// </summary>
@@ -459,7 +459,7 @@ namespace KickStart.Logging
         }
 #endif
 
-#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_6
+#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_5 && !NETSTANDARD1_6
         private static IPropertyContext CreateAsync()
         {
             var propertyContext = new AsynchronousContext();
@@ -487,7 +487,7 @@ namespace KickStart.Logging
                 _threadProperties.Value.Apply(builder);
 #endif
 
-#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_6
+#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_5 && !NETSTANDARD1_6
             // copy async properties to current builder only if it has been created
             if (_asyncProperties.IsValueCreated)
                 _asyncProperties.Value.Apply(builder);

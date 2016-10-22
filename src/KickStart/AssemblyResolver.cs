@@ -70,7 +70,7 @@ namespace KickStart
         /// </summary>
         public void IncludeLoadedAssemblies()
         {
-#if PORTABLE || NETSTANDARD1_3 || NETSTANDARD1_6
+#if PORTABLE || NETSTANDARD1_3 || NETSTANDARD1_5 || NETSTANDARD1_6
             //TDOD figure out how to do this    
 #else
             _sources.Add(() => AppDomain.CurrentDomain.GetAssemblies());

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_6
+#if !PORTABLE && !NETSTANDARD1_3 && !NETSTANDARD1_5 && !NETSTANDARD1_6
 namespace KickStart.Logging
 {
 

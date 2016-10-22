@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "KickStart": "3.0.0.0",
-    "NLog": "4.3.9"
+    "NLog": "4.3.10"
   },
   "frameworks": {
     "net40": {

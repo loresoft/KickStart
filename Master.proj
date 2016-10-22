@@ -84,6 +84,10 @@
                 ReplacementText="&quot;KickStart.Ninject&quot;: &quot;$(PackageVersion)&quot;" />
 
     <FileUpdate Files="%(VersionFiles.Identity)"
+                Regex="&quot;KickStart.Serilog&quot;: &quot;$(AssemblyVersion)&quot;"
+                ReplacementText="&quot;KickStart.Serilog&quot;: &quot;$(PackageVersion)&quot;" />
+
+    <FileUpdate Files="%(VersionFiles.Identity)"
                 Regex="&quot;KickStart.SimpleInjector&quot;: &quot;$(AssemblyVersion)&quot;"
                 ReplacementText="&quot;KickStart.SimpleInjector&quot;: &quot;$(PackageVersion)&quot;" />
 
