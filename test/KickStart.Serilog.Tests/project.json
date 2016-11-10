@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "3.0.0.0",
   "testRunner": "xunit",
   "dependencies": {
@@ -8,11 +8,11 @@
     "Rx-Main": "2.2.5",
     "Serilog": "2.3.0",
     "Serilog.Sinks.Literate": "2.0.0",
-    "Serilog.Sinks.RollingFile": "3.1.0",
     "Serilog.Sinks.Observable": "2.0.1",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "FluentAssertions": "4.15.0",
-    "xunit": "2.2.0-beta3-build3402"
+    "FluentAssertions": "4.17.0",
+    "Serilog.Sinks.RollingFile": "3.2.0",
+    "xunit": "2.2.0-beta4-build3444"
   },
   "buildOptions": {
     "copyToOutput": {

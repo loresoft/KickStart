@@ -1,11 +1,11 @@
-﻿{
+{
   "version": "3.0.0.0",
   "testRunner": "xunit",
   "dependencies": {
     "KickStart": "3.0.0.0",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "FluentAssertions": "4.15.0",
-    "xunit": "2.2.0-beta3-build3402"
+    "FluentAssertions": "4.17.0",
+    "xunit": "2.2.0-beta4-build3444"
   },
   "frameworks": {
     "netcoreapp1.0": {

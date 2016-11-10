@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "3.0.0.0",
   "description": "KickStart Extension for SimpleInjector",
   "language": "en-US",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "KickStart": "3.0.0.0",
-    "SimpleInjector": "3.2.3"
+    "SimpleInjector": "3.2.7"
   },
   "frameworks": {
     "net40": {
