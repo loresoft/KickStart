@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "3.0.0.0",
   "description": "KickStart Extension for AutoMapper",
   "language": "en-US",
@@ -17,8 +17,8 @@
     "xmlDoc": true
   },
   "dependencies": {
-    "KickStart": "3.0.0.0",
-    "AutoMapper": "5.1.1"
+    "AutoMapper": "5.2.0",
+    "KickStart": "3.0.0.0"
   },
   "frameworks": {
     "net45": {

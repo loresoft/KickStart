@@ -17,7 +17,7 @@
     "xmlDoc": true
   },
   "dependencies": {
-    "Autofac": "4.2.0",
+    "Autofac": "4.2.1",
     "KickStart": "3.0.0.0"
   },
   "frameworks": {
