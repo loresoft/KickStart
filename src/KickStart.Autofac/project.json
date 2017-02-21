@@ -1,4 +1,4 @@
-{
+﻿{
   "version": "3.0.0.0",
   "description": "KickStart Extension for Autofac",
   "language": "en-US",
@@ -17,7 +17,7 @@
     "xmlDoc": true
   },
   "dependencies": {
-    "Autofac": "4.2.1",
+    "Autofac": "4.3.0",
     "KickStart": "3.0.0.0"
   },
   "frameworks": {

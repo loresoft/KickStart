@@ -1,4 +1,4 @@
-{
+﻿{
   "version": "3.0.0.0",
   "testRunner": "xunit",
   "dependencies": {
@@ -7,8 +7,8 @@
     "Test.Core": "3.0.0.0",
     "Ninject": "3.2.2",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "xunit": "2.2.0-beta4-build3444",
-    "FluentAssertions": "4.18.0"
+    "xunit": "2.2.0",
+    "FluentAssertions": "4.19.0"
   },
   "buildOptions": {
     "copyToOutput": {

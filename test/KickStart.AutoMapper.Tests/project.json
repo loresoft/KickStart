@@ -1,4 +1,4 @@
-{
+﻿{
   "version": "3.0.0.0",
   "testRunner": "xunit",
   "dependencies": {
@@ -6,9 +6,9 @@
     "KickStart.AutoMapper": "3.0.0.0",
     "Test.Core": "3.0.0.0",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "xunit": "2.2.0-beta4-build3444",
     "AutoMapper": "5.2.0",
-    "FluentAssertions": "4.18.0"
+    "xunit": "2.2.0",
+    "FluentAssertions": "4.19.0"
   },
   "buildOptions": {
     "copyToOutput": {
