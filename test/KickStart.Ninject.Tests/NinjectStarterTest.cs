@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using KickStart.Logging;
+using KickStart.Services;
 using Ninject;
 using Test.Core;
 using Xunit;
@@ -29,11 +30,11 @@ namespace KickStart.Ninject.Tests
                 .UseNinject()
             );
 
-            Kick.Container.Should().NotBeNull();
-            Kick.Container.Should().BeOfType<NinjectAdaptor>();
-            Kick.Container.As<IKernel>().Should().BeOfType<StandardKernel>();
+            Kick.ServiceProvider.Should().NotBeNull();
+            Kick.ServiceProvider.Should().BeOfType<StandardKernel>();
+            Kick.ServiceProvider.As<IKernel>().Should().BeOfType<StandardKernel>();
 
-            var repo = Kick.Container.Resolve<IUserRepository>();
+            var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
             repo.Should().BeOfType<UserRepository>();
         }

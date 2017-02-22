@@ -8,6 +8,7 @@ using Autofac;
 using Autofac.Core;
 using FluentAssertions;
 using KickStart.Logging;
+using KickStart.Services;
 using Test.Core;
 using Xunit;
 using Xunit.Abstractions;
@@ -30,11 +31,10 @@ namespace KickStart.Autofac.Tests
                 .UseAutofac()
             );
 
-            Kick.Container.Should().NotBeNull();
-            Kick.Container.Should().BeOfType<AutofacAdaptor>();
-            Kick.Container.As<IContainer>().Should().BeOfType<Container>();
+            Kick.ServiceProvider.Should().NotBeNull();
+            Kick.ServiceProvider.Should().BeOfType<AutofacServiceProvider>();
 
-            var repo = Kick.Container.Resolve<IUserRepository>();
+            var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
             repo.Should().BeOfType<UserRepository>();
         }
@@ -53,15 +53,14 @@ namespace KickStart.Autofac.Tests
                 )
             );
 
-            Kick.Container.Should().NotBeNull();
-            Kick.Container.Should().BeOfType<AutofacAdaptor>();
-            Kick.Container.As<IContainer>().Should().BeOfType<Container>();
+            Kick.ServiceProvider.Should().NotBeNull();
+            Kick.ServiceProvider.Should().BeOfType<AutofacServiceProvider>();
             
-            var repo = Kick.Container.Resolve<IUserRepository>();
+            var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
             repo.Should().BeOfType<UserRepository>();
 
-            var employee = Kick.Container.Resolve<Employee>();
+            var employee = Kick.ServiceProvider.GetService<Employee>();
             employee.Should().NotBeNull();
             employee.EmailAddress.Should().Be(defaultEmail);
 
@@ -84,15 +83,14 @@ namespace KickStart.Autofac.Tests
                 .LogTo(_logs.Add)
             );
 
-            Kick.Container.Should().NotBeNull();
-            Kick.Container.Should().BeOfType<AutofacAdaptor>();
-            Kick.Container.As<IContainer>().Should().BeOfType<Container>();
+            Kick.ServiceProvider.Should().NotBeNull();
+            Kick.ServiceProvider.Should().BeOfType<AutofacServiceProvider>();
             
-            var repo = Kick.Container.Resolve<IUserRepository>();
+            var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
             repo.Should().BeOfType<UserRepository>();
 
-            var employee = Kick.Container.Resolve<Employee>();
+            var employee = Kick.ServiceProvider.GetService<Employee>();
             employee.Should().NotBeNull();
             employee.EmailAddress.Should().Be(defaultEmail);
         }

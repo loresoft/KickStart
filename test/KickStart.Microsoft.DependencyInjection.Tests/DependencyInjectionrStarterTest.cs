@@ -6,33 +6,30 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using KickStart.Logging;
-using KickStart.Services;
-using Microsoft.Practices.Unity;
+using Microsoft.Extensions.DependencyInjection;
 using Test.Core;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace KickStart.Unity.Tests
+namespace KickStart.Microsoft.DependencyInjection.Tests
 {
-    public class UnityStarterTest
+    public class DependencyInjectionStarterTest
     {
-        public UnityStarterTest(ITestOutputHelper output)
+        public DependencyInjectionStarterTest(ITestOutputHelper output)
         {
             var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
             Logger.RegisterWriter(writer);
         }
 
         [Fact]
-        public void UseUnity()
+        public void UseSimpleInjector()
         {
             Kick.Start(config => config
-                .IncludeAssemblyFor<UserUnityRegistration>()
-                .UseUnity()
+                .IncludeAssemblyFor<UserDependencyInjectionRegistration>()
+                .UseDependencyInjection()
             );
 
             Kick.ServiceProvider.Should().NotBeNull();
-            Kick.ServiceProvider.Should().BeOfType<UnityServiceProvider>();
-            Kick.ServiceProvider.As<IUnityContainer>().Should().BeOfType<UnityContainer>();
 
             var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
@@ -40,19 +37,17 @@ namespace KickStart.Unity.Tests
         }
 
         [Fact]
-        public void UseUnityInitialize()
+        public void UseSimpleInjectorInitialize()
         {
             Kick.Start(config => config
-                .IncludeAssemblyFor<UserUnityRegistration>()
-                .UseUnity(c => c
-                    .Container(b => b.RegisterType<Employee>())
+                .IncludeAssemblyFor<UserDependencyInjectionRegistration>()
+                .UseDependencyInjection(c => c
+                    .Services(b => b.AddTransient<Employee>())
                 )
             );
 
             Kick.ServiceProvider.Should().NotBeNull();
-            Kick.ServiceProvider.Should().BeOfType<UnityServiceProvider>();
-            Kick.ServiceProvider.As<IUnityContainer>().Should().BeOfType<UnityContainer>();
-            
+
             var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
             repo.Should().BeOfType<UserRepository>();

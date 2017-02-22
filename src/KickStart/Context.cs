@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using KickStart.Logging;
+using KickStart.Services;
 #if PORTABLE
 using Stopwatch = KickStart.Portability.Stopwatch;
 #else
@@ -35,9 +36,9 @@ namespace KickStart
         /// <value>
         /// The container.
         /// </value>
-        public IContainerAdaptor Container
+        public IServiceProvider ServiceProvider
         {
-            get { return Kick.Container; }
+            get { return Kick.ServiceProvider; }
         }
 
         /// <summary>
@@ -55,14 +56,14 @@ namespace KickStart
         /// <summary>
         /// Sets the global <see cref="P:KickStart.Kick.Container"/>.
         /// </summary>
-        /// <param name="container">The container adaptor to assign.</param>
-        public void SetContainer(IContainerAdaptor container)
+        /// <param name="serviceProvider">The container adaptor to assign.</param>
+        public void SetServiceProvider(IServiceProvider serviceProvider)
         {
             _logger.Trace()
-                .Message("Assign Kick Container: {0}", container)
+                .Message("Assign Kick service provider: {0}", serviceProvider)
                 .Write();
 
-            Kick.SetContainer(container);
+            Kick.SetServiceProvider(serviceProvider);
         }
 
 
@@ -70,12 +71,12 @@ namespace KickStart
         /// Gets the instances assignable from the specified generic type.
         /// </summary>
         /// <typeparam name="T">The Type to scan for</typeparam>
-        /// <param name="useContainer">if set to <c>true</c>, use <see cref="Kick.Container"/> to resolve instances.</param>
+        /// <param name="useContainer">if set to <c>true</c>, use <see cref="Kick.ServiceProvider"/> to resolve instances.</param>
         /// <returns>An enumerable list of instances of type <typeparamref name="T"/>.</returns>
         public virtual IEnumerable<T> GetInstancesAssignableFrom<T>(bool useContainer = false)
             where T : class
         {
-            if (!useContainer || Container == null)
+            if (!useContainer || ServiceProvider == null)
                 return Assemblies
                     .SelectMany(GetTypesAssignableFrom<T>)
                     .Select(CreateInstance)
@@ -84,10 +85,10 @@ namespace KickStart
 
 
             _logger.Trace()
-                .Message("Resolve instances using Container: {0}", Container)
+                .Message("Resolve instances using Container: {0}", ServiceProvider)
                 .Write();
 
-            return Container.ResolveAll<T>().ToList();
+            return ServiceProvider.GetServices<T>().ToList();
         }
 
         /// <summary>

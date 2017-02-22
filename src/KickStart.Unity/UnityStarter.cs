@@ -1,5 +1,4 @@
-﻿using System;
-using KickStart.Logging;
+﻿using KickStart.Logging;
 using Microsoft.Practices.Unity;
 
 namespace KickStart.Unity
@@ -43,8 +42,8 @@ namespace KickStart.Unity
 
             _options.InitializeContainer?.Invoke(container);
 
-            var adaptor = new UnityAdaptor(container);
-            context.SetContainer(adaptor);
+            var provider = new UnityServiceProvider(container);
+            context.SetServiceProvider(provider);
         }
     }
 }

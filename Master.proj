@@ -20,7 +20,7 @@
     
     <BuildConfiguration  Condition=" '$(BuildConfiguration)' == '' ">Release</BuildConfiguration>
 
-    <Major Condition=" '$(Major)' == '' ">3</Major>
+    <Major Condition=" '$(Major)' == '' ">4</Major>
     <Minor Condition=" '$(Minor)' == '' ">0</Minor>
     <Revision Condition=" '$(Revision)' == '' ">0</Revision>
 
@@ -54,52 +54,8 @@
                   AssemblyFileVersion="$(AssemblyFileVersion)"
                   AssemblyInformationalVersion="$(AssemblyInformationalVersion)"
                   AssemblyTrademark=""/>
-    <ItemGroup>
-      <VersionFiles Include="$(SourceFolder)\**\project.json"/>
-      <VersionFiles Include="$(TestFolder)\**\project.json"/>
-    </ItemGroup>
 
-    <FileUpdate Files="%(VersionFiles.Identity)"
-                Regex="&quot;version&quot;: &quot;$(AssemblyVersion)&quot;"
-                ReplacementText="&quot;version&quot;: &quot;$(PackageVersion)&quot;" />
-
-    <FileUpdate Files="%(VersionFiles.Identity)"
-                Regex="&quot;KickStart&quot;: &quot;$(AssemblyVersion)&quot;"
-                ReplacementText="&quot;KickStart&quot;: &quot;$(PackageVersion)&quot;" />
-
-    <FileUpdate Files="%(VersionFiles.Identity)"
-                Regex="&quot;KickStart.Autofac&quot;: &quot;$(AssemblyVersion)&quot;"
-                ReplacementText="&quot;KickStart.Autofac&quot;: &quot;$(PackageVersion)&quot;" />
-
-    <FileUpdate Files="%(VersionFiles.Identity)"
-                Regex="&quot;KickStart.AutoMapper&quot;: &quot;$(AssemblyVersion)&quot;"
-                ReplacementText="&quot;KickStart.AutoMapper&quot;: &quot;$(PackageVersion)&quot;" />
-
-    <FileUpdate Files="%(VersionFiles.Identity)"
-                Regex="&quot;KickStart.MongoDB&quot;: &quot;$(AssemblyVersion)&quot;"
-                ReplacementText="&quot;KickStart.MongoDB&quot;: &quot;$(PackageVersion)&quot;" />
-
-    <FileUpdate Files="%(VersionFiles.Identity)"
-                Regex="&quot;KickStart.Ninject&quot;: &quot;$(AssemblyVersion)&quot;"
-                ReplacementText="&quot;KickStart.Ninject&quot;: &quot;$(PackageVersion)&quot;" />
-
-    <FileUpdate Files="%(VersionFiles.Identity)"
-                Regex="&quot;KickStart.Serilog&quot;: &quot;$(AssemblyVersion)&quot;"
-                ReplacementText="&quot;KickStart.Serilog&quot;: &quot;$(PackageVersion)&quot;" />
-
-    <FileUpdate Files="%(VersionFiles.Identity)"
-                Regex="&quot;KickStart.SimpleInjector&quot;: &quot;$(AssemblyVersion)&quot;"
-                ReplacementText="&quot;KickStart.SimpleInjector&quot;: &quot;$(PackageVersion)&quot;" />
-
-    <FileUpdate Files="%(VersionFiles.Identity)"
-                Regex="&quot;KickStart.Unity&quot;: &quot;$(AssemblyVersion)&quot;"
-                ReplacementText="&quot;KickStart.Unity&quot;: &quot;$(PackageVersion)&quot;" />
-
-    <FileUpdate Files="%(VersionFiles.Identity)"
-                Regex="&quot;Test.Core&quot;: &quot;$(AssemblyVersion)&quot;"
-                ReplacementText="&quot;Test.Core&quot;: &quot;$(PackageVersion)&quot;" />
-
-    <exec Command="dotnet restore"
+    <exec Command="dotnet restore KickStart.sln"
           WorkingDirectory="$(MSBuildProjectDirectory)"/>
 
   </Target>
@@ -111,7 +67,7 @@
 
   <Target Name="Test" DependsOnTargets="Compile">
     <ItemGroup>
-      <TestAssemblies Include="$(TestFolder)\**\project.json"/>
+      <TestAssemblies Include="$(TestFolder)\**\*.csproj"/>
     </ItemGroup>
 
     <exec Command="dotnet test &quot;%(TestAssemblies.Identity)&quot;"
@@ -123,12 +79,12 @@
     <MakeDir Directories="$(BuildFolder)" Condition="!EXISTS($(BuildFolder))" />
 
     <ItemGroup>
-      <ProjectFiles Include="$(SourceFolder)\**\project.json"/>
+      <ProjectFiles Include="$(SourceFolder)\**\*.csproj"/>
     </ItemGroup>
 
-    <exec Command="dotnet pack --output &quot;$(BuildFolder)&quot; &quot;%(ProjectFiles.Identity)&quot; "
+    <exec Command="dotnet pack &quot;%(ProjectFiles.Identity)&quot; --output &quot;$(BuildFolder)&quot; --include-symbols --configuration $(BuildConfiguration) --include-source -p:Version=$(PackageVersion)"
           WorkingDirectory="$(SourceFolder)\%(ProjectFiles.RecursiveDir)"/>
-    
+
   </Target>
 
   <Target Name="Build" DependsOnTargets="Package">

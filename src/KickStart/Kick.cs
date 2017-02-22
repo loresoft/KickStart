@@ -14,7 +14,7 @@ namespace KickStart
     public static class Kick
     {
         private static readonly ILogger _logger = Logger.CreateLogger(typeof(Kick));
-        private static IContainerAdaptor _container;
+        private static IServiceProvider _serviceProvider;
 
         /// <summary>
         /// Gets a common IoC container that can be used in KickStart extensions.
@@ -22,9 +22,9 @@ namespace KickStart
         /// <value>
         /// The common IoC container.
         /// </value>
-        public static IContainerAdaptor Container
+        public static IServiceProvider ServiceProvider
         {
-            get { return _container; }
+            get { return _serviceProvider; }
         }
 
         /// <summary>
@@ -72,12 +72,12 @@ namespace KickStart
         }
 
         /// <summary>
-        /// Sets the global <see cref="P:KickStart.Kick.Container"/>.
+        /// Sets the global <see cref="P:KickStart.Kick.ServiceProvider"/>.
         /// </summary>
-        /// <param name="container">The container adaptor to assign.</param>
-        internal static void SetContainer(IContainerAdaptor container)
+        /// <param name="serviceProvider">The <see cref="IServiceProvider"/> to set.</param>
+        internal static void SetServiceProvider(IServiceProvider serviceProvider)
         {
-            _container = container;
+            _serviceProvider = serviceProvider;
         }
     }
 }

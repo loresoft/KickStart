@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using FluentAssertions;
 using KickStart.Logging;
 using Test.Core;
@@ -19,6 +17,7 @@ namespace KickStart.Tests
             Logger.RegisterWriter(writer);
         }
 
+#if !(PORTABLE || NETSTANDARD1_3 || NETSTANDARD1_5 || NETSTANDARD1_6 || NETCOREAPP1_0)
         [Fact]
         public void DefaultResolve()
         {
@@ -35,8 +34,6 @@ namespace KickStart.Tests
         [Fact]
         public void ExcludeSystem()
         {
-            var domainAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-
             var resolver = new AssemblyResolver();
             resolver.Should().NotBeNull();
 
@@ -46,6 +43,43 @@ namespace KickStart.Tests
             assemblies.Should().NotBeEmpty();
             assemblies.Should().NotContain(a => a.FullName.StartsWith("System"));
         }
+#endif
+
+        [Fact]
+        public void SystemExplicit()
+        {
+            var resolver = new AssemblyResolver();
+            resolver.Should().NotBeNull();
+
+            // add a few defaults
+            resolver.IncludeAssemblyFor<Guid>();
+            resolver.IncludeAssemblyFor<Assembly>();
+            resolver.IncludeAssemblyFor<SampleWorker>();
+
+
+            var assemblies = resolver.Resolve().ToList();
+            assemblies.Should().NotBeEmpty();
+            assemblies.Should().Contain(a => a.FullName.StartsWith("System"));
+        }
+
+        [Fact]
+        public void ExcludeSystemExplicit()
+        {
+            var resolver = new AssemblyResolver();
+            resolver.Should().NotBeNull();
+
+            // add a few defaults
+            resolver.IncludeAssemblyFor<Guid>();
+            resolver.IncludeAssemblyFor<Assembly>();
+            resolver.IncludeAssemblyFor<SampleWorker>();
+
+            resolver.ExcludeName("System");
+
+            var assemblies = resolver.Resolve().ToList();
+            assemblies.Should().NotBeEmpty();
+            assemblies.Should().NotContain(a => a.FullName.StartsWith("System"));
+        }
+
 
         [Fact]
         public void IncludeAssemblyForTestCore()
@@ -58,7 +92,7 @@ namespace KickStart.Tests
             var assemblies = resolver.Resolve().ToList();
             assemblies.Should().NotBeEmpty();
             assemblies.Count.Should().Be(1);
-            assemblies.Should().Contain(a => a == typeof(SampleWorker).Assembly);
+            assemblies.Should().Contain(a => a == typeof(SampleWorker).GetTypeInfo().Assembly);
         }
     }
 }

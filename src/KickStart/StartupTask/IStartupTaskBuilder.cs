@@ -8,9 +8,9 @@ namespace KickStart.StartupTask
     public interface IStartupTaskBuilder
     {
         /// <summary>
-        /// Uses the <see cref="Kick.Container"/> to resolve startup task instances.
+        /// Uses the <see cref="Kick.ServiceProvider"/> to resolve startup task instances.
         /// </summary>
-        /// <param name="value">if set to <c>true</c>, startup task instances will be resolved from the <see cref="Kick.Container"/>.</param>
+        /// <param name="value">if set to <c>true</c>, startup task instances will be resolved from the <see cref="Kick.ServiceProvider"/>.</param>
         /// <returns>
         /// A fluent <see langword="interface"/> to configure startup tasks
         /// </returns>

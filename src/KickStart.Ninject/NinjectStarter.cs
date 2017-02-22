@@ -48,8 +48,7 @@ namespace KickStart.Ninject
 
             _options.InitializeKernel?.Invoke(kernel);
             
-            var adaptor = new NinjectAdaptor(kernel);
-            context.SetContainer(adaptor);
+            context.SetServiceProvider(kernel);
         }
     }
 }

@@ -43,8 +43,7 @@ namespace KickStart.SimpleInjector
 
             _options.InitializeContainer?.Invoke(container);
 
-            var adaptor = new SimpleInjectorAdaptor(container);
-            context.SetContainer(adaptor);
+            context.SetServiceProvider(container);
         }
     }
 }

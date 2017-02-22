@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using KickStart.Logging;
+using KickStart.Services;
 using SimpleInjector;
 using Test.Core;
 using Xunit;
@@ -29,11 +30,11 @@ namespace KickStart.SimpleInjector.Tests
                 .UseSimpleInjector()
             );
 
-            Kick.Container.Should().NotBeNull();
-            Kick.Container.Should().BeOfType<SimpleInjectorAdaptor>();
-            Kick.Container.As<Container>().Should().BeOfType<Container>();
+            Kick.ServiceProvider.Should().NotBeNull();
+            Kick.ServiceProvider.Should().BeOfType<Container>();
+            Kick.ServiceProvider.As<Container>().Should().BeOfType<Container>();
 
-            var repo = Kick.Container.Resolve<IUserRepository>();
+            var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
             repo.Should().BeOfType<UserRepository>();
         }
@@ -48,15 +49,15 @@ namespace KickStart.SimpleInjector.Tests
                 )
             );
 
-            Kick.Container.Should().NotBeNull();
-            Kick.Container.Should().BeOfType<SimpleInjectorAdaptor>();
-            Kick.Container.As<Container>().Should().BeOfType<Container>();
+            Kick.ServiceProvider.Should().NotBeNull();
+            Kick.ServiceProvider.Should().BeOfType<Container>();
+            Kick.ServiceProvider.As<Container>().Should().BeOfType<Container>();
 
-            var repo = Kick.Container.Resolve<IUserRepository>();
+            var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
             repo.Should().BeOfType<UserRepository>();
 
-            var employee = Kick.Container.Resolve<Employee>();
+            var employee = Kick.ServiceProvider.GetService<Employee>();
             employee.Should().NotBeNull();
         }
 

@@ -50,8 +50,8 @@ namespace KickStart.Autofac
 
             _options.InitializeContainer?.Invoke(container);
 
-            var adaptor = new AutofacAdaptor(container);
-            context.SetContainer(adaptor);
+            var provider = new AutofacServiceProvider(container);
+            context.SetServiceProvider(provider);
         }
     }
 }

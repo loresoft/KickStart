@@ -129,7 +129,7 @@ namespace KickStart
         /// <param name="name">The name to compare.</param>
         public void ExcludeName(string name)
         {
-            _excludes.Add(a => a.FullName.Contains(name));
+            _excludes.Add(a => a.FullName.StartsWith(name));
         }
 
 
