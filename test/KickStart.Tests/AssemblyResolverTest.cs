@@ -53,7 +53,9 @@ namespace KickStart.Tests
 
             // add a few defaults
             resolver.IncludeAssemblyFor<Guid>();
+            resolver.IncludeAssemblyFor<Uri>();
             resolver.IncludeAssemblyFor<Assembly>();
+            resolver.IncludeAssemblyFor<ParallelQuery>();
             resolver.IncludeAssemblyFor<SampleWorker>();
 
 
@@ -70,7 +72,9 @@ namespace KickStart.Tests
 
             // add a few defaults
             resolver.IncludeAssemblyFor<Guid>();
+            resolver.IncludeAssemblyFor<Uri>();
             resolver.IncludeAssemblyFor<Assembly>();
+            resolver.IncludeAssemblyFor<ParallelQuery>();
             resolver.IncludeAssemblyFor<SampleWorker>();
 
             resolver.ExcludeName("System");

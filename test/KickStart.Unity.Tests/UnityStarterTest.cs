@@ -32,7 +32,6 @@ namespace KickStart.Unity.Tests
 
             Kick.ServiceProvider.Should().NotBeNull();
             Kick.ServiceProvider.Should().BeOfType<UnityServiceProvider>();
-            Kick.ServiceProvider.As<IUnityContainer>().Should().BeOfType<UnityContainer>();
 
             var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
@@ -51,8 +50,7 @@ namespace KickStart.Unity.Tests
 
             Kick.ServiceProvider.Should().NotBeNull();
             Kick.ServiceProvider.Should().BeOfType<UnityServiceProvider>();
-            Kick.ServiceProvider.As<IUnityContainer>().Should().BeOfType<UnityContainer>();
-            
+
             var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
             repo.Should().BeOfType<UserRepository>();
