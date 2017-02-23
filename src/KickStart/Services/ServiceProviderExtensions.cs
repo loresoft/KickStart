@@ -54,4 +54,5 @@ namespace KickStart.Services
             return (IEnumerable<object>)provider.GetService(genericEnumerable);
         }
     }
+
 }

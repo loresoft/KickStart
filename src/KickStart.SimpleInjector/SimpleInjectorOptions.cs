@@ -19,5 +19,13 @@ namespace KickStart.SimpleInjector
         /// The initialize container delegate.
         /// </value>
         public Action<Container> InitializeContainer { get; set; }
+
+        /// <summary>
+        /// Gets or sets how the container should verify its configuration.
+        /// </summary>
+        /// <value>
+        /// How the container should verify its configuration. 
+        /// </value>
+        public VerificationOption? VerificationOption { get; set; }
     }
 }

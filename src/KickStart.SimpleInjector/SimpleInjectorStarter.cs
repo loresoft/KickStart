@@ -1,5 +1,6 @@
 ﻿using System;
 using KickStart.Logging;
+using KickStart.Services;
 using SimpleInjector;
 
 namespace KickStart.SimpleInjector
@@ -28,10 +29,24 @@ namespace KickStart.SimpleInjector
         /// <param name="context">The KickStart <see cref="T:KickStart.Context" /> containing assemblies to scan.</param>
         public void Run(Context context)
         {
-            var modules = context.GetInstancesAssignableFrom<ISimpleInjectorRegistration>();
 
             var container = new Container();
 
+            RegisterSimpleInjector(context, container);
+            RegisterServiceModule(context, container);
+
+            _options.InitializeContainer?.Invoke(container);
+
+            if (_options.VerificationOption.HasValue)
+                container.Verify(_options.VerificationOption.Value);
+
+            context.SetServiceProvider(container);
+        }
+
+
+        private void RegisterSimpleInjector(Context context, Container container)
+        {
+            var modules = context.GetInstancesAssignableFrom<ISimpleInjectorRegistration>();
             foreach (var module in modules)
             {
                 _logger.Trace()
@@ -40,10 +55,20 @@ namespace KickStart.SimpleInjector
 
                 module.Register(container);
             }
+        }
 
-            _options.InitializeContainer?.Invoke(container);
+        private void RegisterServiceModule(Context context, Container container)
+        {
+            var wrapper = new SimpleInjectorRegistration(container);
+            var modules = context.GetInstancesAssignableFrom<IServiceModule>();
+            foreach (var module in modules)
+            {
+                _logger.Trace()
+                    .Message("Register Service Module: {0}", module)
+                    .Write();
 
-            context.SetServiceProvider(container);
+                module.Register(wrapper);
+            }
         }
     }
 }

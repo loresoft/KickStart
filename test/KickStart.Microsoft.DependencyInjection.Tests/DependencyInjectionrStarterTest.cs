@@ -56,5 +56,28 @@ namespace KickStart.Microsoft.DependencyInjection.Tests
             employee.Should().NotBeNull();
         }
 
+
+        [Fact]
+        public void UseServiceInitialize()
+        {
+            Kick.Start(config => config
+                .IncludeAssemblyFor<UserDependencyInjectionRegistration>()
+                .IncludeAssemblyFor<UserServiceModule>()
+                .UseDependencyInjection()
+            );
+
+            Kick.ServiceProvider.Should().NotBeNull();
+
+            var repo = Kick.ServiceProvider.GetService<IUserRepository>();
+            repo.Should().NotBeNull();
+            repo.Should().BeOfType<UserRepository>();
+
+            var userService = Kick.ServiceProvider.GetService<IUserService>();
+            userService.Should().NotBeNull();
+            userService.Connection.Should().NotBeNull();
+            userService.Connection.Should().BeOfType<SampleConnection>();
+        }
+
+
     }
 }

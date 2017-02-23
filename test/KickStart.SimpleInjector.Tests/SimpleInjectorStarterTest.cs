@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using KickStart.Logging;
 using KickStart.Services;
@@ -32,7 +27,6 @@ namespace KickStart.SimpleInjector.Tests
 
             Kick.ServiceProvider.Should().NotBeNull();
             Kick.ServiceProvider.Should().BeOfType<Container>();
-            Kick.ServiceProvider.As<Container>().Should().BeOfType<Container>();
 
             var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
@@ -51,7 +45,6 @@ namespace KickStart.SimpleInjector.Tests
 
             Kick.ServiceProvider.Should().NotBeNull();
             Kick.ServiceProvider.Should().BeOfType<Container>();
-            Kick.ServiceProvider.As<Container>().Should().BeOfType<Container>();
 
             var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
@@ -59,6 +52,27 @@ namespace KickStart.SimpleInjector.Tests
 
             var employee = Kick.ServiceProvider.GetService<Employee>();
             employee.Should().NotBeNull();
+
+        }
+
+
+        [Fact]
+        public void UseServiceInitialize()
+        {
+            Kick.Start(config => config
+                .IncludeAssemblyFor<UserSimpleInjectorRegistration>()
+                .IncludeAssemblyFor<UserServiceModule>()
+                .UseSimpleInjector()
+            );
+
+            Kick.ServiceProvider.Should().NotBeNull();
+            Kick.ServiceProvider.Should().BeOfType<Container>();
+
+
+            var userService = Kick.ServiceProvider.GetService<IUserService>();
+            userService.Should().NotBeNull();
+            userService.Connection.Should().NotBeNull();
+            userService.Connection.Should().BeOfType<SampleConnection>();
         }
 
     }

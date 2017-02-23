@@ -94,5 +94,30 @@ namespace KickStart.Autofac.Tests
             employee.Should().NotBeNull();
             employee.EmailAddress.Should().Be(defaultEmail);
         }
+
+
+        [Fact]
+        public void UseServiceInitialize()
+        {
+            Kick.Start(config => config
+                .IncludeAssemblyFor<UserModule>()
+                .IncludeAssemblyFor<UserServiceModule>()
+                .UseAutofac()
+            );
+
+            Kick.ServiceProvider.Should().NotBeNull();
+            Kick.ServiceProvider.Should().BeOfType<AutofacServiceProvider>();
+
+            var repo = Kick.ServiceProvider.GetService<IUserRepository>();
+            repo.Should().NotBeNull();
+            repo.Should().BeOfType<UserRepository>();
+
+
+            var userService = Kick.ServiceProvider.GetService<IUserService>();
+            userService.Should().NotBeNull();
+            userService.Should().BeOfType<UserService>();
+            userService.Connection.Should().NotBeNull();
+            userService.Connection.Should().BeOfType<SampleConnection>();
+        }
     }
 }

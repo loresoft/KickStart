@@ -1,5 +1,6 @@
 ﻿using System;
 using KickStart.Logging;
+using KickStart.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -29,9 +30,21 @@ namespace KickStart.Microsoft.DependencyInjection
         /// <param name="context">The KickStart <see cref="T:KickStart.Context" /> containing assemblies to scan.</param>
         public void Run(Context context)
         {
-            var modules = context.GetInstancesAssignableFrom<IDependencyInjectionRegistration>();
             var serviceCollection = _options.ServiceCollection ?? new ServiceCollection();
 
+            RegisterDependencyInjection(context, serviceCollection);
+            RegisterServiceModule(context, serviceCollection);
+
+            _options.Initializer?.Invoke(serviceCollection);
+
+            var provider = serviceCollection.BuildServiceProvider();
+            context.SetServiceProvider(provider);
+        }
+
+
+        private void RegisterDependencyInjection(Context context, IServiceCollection serviceCollection)
+        {
+            var modules = context.GetInstancesAssignableFrom<IDependencyInjectionRegistration>();
             foreach (var module in modules)
             {
                 _logger.Trace()
@@ -40,12 +53,22 @@ namespace KickStart.Microsoft.DependencyInjection
 
                 module.Register(serviceCollection);
             }
-
-            _options.Initializer?.Invoke(serviceCollection);
-
-            var provider = serviceCollection.BuildServiceProvider();
-            context.SetServiceProvider(provider);
         }
+
+        private void RegisterServiceModule(Context context, IServiceCollection serviceCollection)
+        {
+            var wrapper = new DependencyInjectionRegistration(serviceCollection);
+            var modules = context.GetInstancesAssignableFrom<IServiceModule>();
+            foreach (var module in modules)
+            {
+                _logger.Trace()
+                    .Message("Register Service Module: {0}", module)
+                    .Write();
+
+                module.Register(wrapper);
+            }
+        }
+
     }
 
 }

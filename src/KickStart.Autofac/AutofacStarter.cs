@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using KickStart.Logging;
+using KickStart.Services;
 
 namespace KickStart.Autofac
 {
@@ -27,18 +28,10 @@ namespace KickStart.Autofac
         /// <param name="context">The KickStart <see cref="Context" /> containing assemblies to scan.</param>
         public void Run(Context context)
         {
-            var modules = context.GetInstancesAssignableFrom<Module>();
-
             var builder = new ContainerBuilder();
 
-            foreach (var module in modules)
-            {
-                _logger.Trace()
-                    .Message("Register Autofac Module: {0}", module)
-                    .Write();
-
-                builder.RegisterModule(module);
-            }
+            RegisterAutofacModule(context, builder);
+            RegisterServiceModule(context, builder);
 
             _options.InitializeBuilder?.Invoke(builder);
 
@@ -53,5 +46,34 @@ namespace KickStart.Autofac
             var provider = new AutofacServiceProvider(container);
             context.SetServiceProvider(provider);
         }
+
+
+        private void RegisterAutofacModule(Context context, ContainerBuilder builder)
+        {
+            var modules = context.GetInstancesAssignableFrom<Module>();
+            foreach (var module in modules)
+            {
+                _logger.Trace()
+                    .Message("Register Autofac Module: {0}", module)
+                    .Write();
+
+                builder.RegisterModule(module);
+            }
+        }
+
+        private void RegisterServiceModule(Context context, ContainerBuilder builder)
+        {
+            var wrapper = new AutofacServiceRegistration(builder);
+            var modules = context.GetInstancesAssignableFrom<IServiceModule>();
+            foreach (var module in modules)
+            {
+                _logger.Trace()
+                    .Message("Register Service Module: {0}", module)
+                    .Write();
+
+                module.Register(wrapper);
+            }
+        }
+
     }
 }

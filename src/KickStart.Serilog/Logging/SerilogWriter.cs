@@ -8,16 +8,18 @@ namespace KickStart.Serilog.Logging
     /// <summary>
     /// Serilog log writer adapter 
     /// </summary>
-    public class SerilogWriter : ILogWriter 
+    public class SerilogWriter : ILogWriter
     {
         /// <summary>
         /// Writes the specified <see cref="LogData"/> to the underlying logger.
         /// </summary>
         /// <param name="logData">The log data.</param>
-        public void WriteLog(LogData logData) {
+        public void WriteLog(LogData logData)
+        {
             var logger = Log.Logger;
 
-            switch (logData.LogLevel) {
+            switch (logData.LogLevel)
+            {
                 case LogLevel.Trace:
                     if (Log.IsEnabled(LogEventLevel.Verbose))
                         WriteLog(logData, logger.Verbose);
@@ -52,19 +54,24 @@ namespace KickStart.Serilog.Logging
         }
 
 
-        private static void WriteLog(LogData logData, Action<Exception, string, object[]> writer) {
+        private static void WriteLog(LogData logData, Action<Exception, string, object[]> writer)
+        {
             string message = FormatMessage(logData);
 
             writer(logData.Exception, message, logData.Parameters);
         }
 
-        private static string FormatMessage(LogData logData) {
+        private static string FormatMessage(LogData logData)
+        {
             string message = null;
-            try {
+            try
+            {
                 message = logData.MessageFormatter != null
                     ? logData.MessageFormatter()
                     : logData.Message;
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 // don't throw error
             }
 
