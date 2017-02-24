@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
-using KickStart.Logging;
 using Test.Core;
 using Xunit;
 using Xunit.Abstractions;
@@ -16,16 +15,18 @@ namespace KickStart.AutoMapper.Tests
 
     public class AutoMapperKickerTest
     {
+        private readonly ITestOutputHelper _output;
+
         public AutoMapperKickerTest(ITestOutputHelper output)
         {
-            var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
-            Logger.RegisterWriter(writer);
+            _output = output;
         }
 
         [Fact]
         public void ConfigureBasic()
         {
             Kick.Start(config => config
+                .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserProfile>()
                 .UseAutoMapper()
             );
@@ -48,6 +49,7 @@ namespace KickStart.AutoMapper.Tests
         public void ConfigureFull()
         {
             Kick.Start(config => config
+                .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserProfile>()
                 .UseAutoMapper(c => c
                     .Validate()

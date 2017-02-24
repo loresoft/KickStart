@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
-using KickStart.Logging;
 using KickStart.Services;
 using Microsoft.Practices.Unity;
 using Test.Core;
@@ -16,16 +15,18 @@ namespace KickStart.Unity.Tests
 {
     public class UnityStarterTest
     {
+        private readonly ITestOutputHelper _output;
+
         public UnityStarterTest(ITestOutputHelper output)
         {
-            var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
-            Logger.RegisterWriter(writer);
+            _output = output;
         }
 
         [Fact]
         public void UseUnity()
         {
             Kick.Start(config => config
+                .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserUnityRegistration>()
                 .UseUnity()
             );
@@ -42,6 +43,7 @@ namespace KickStart.Unity.Tests
         public void UseUnityInitialize()
         {
             Kick.Start(config => config
+                .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserUnityRegistration>()
                 .UseUnity(c => c
                     .Container(b => b.RegisterType<Employee>())
@@ -57,6 +59,26 @@ namespace KickStart.Unity.Tests
 
             var employee = Kick.ServiceProvider.GetService<Employee>();
             employee.Should().NotBeNull();
+        }
+
+
+        [Fact]
+        public void UseServiceInitialize()
+        {
+            Kick.Start(config => config
+                .LogTo(_output.WriteLine)
+                .IncludeAssemblyFor<UserUnityRegistration>()
+                .UseUnity()
+            );
+
+            Kick.ServiceProvider.Should().NotBeNull();
+            Kick.ServiceProvider.Should().BeOfType<UnityServiceProvider>();
+
+
+            var userService = Kick.ServiceProvider.GetService<IUserService>();
+            userService.Should().NotBeNull();
+            userService.Connection.Should().NotBeNull();
+            userService.Connection.Should().BeOfType<SampleConnection>();
         }
 
     }

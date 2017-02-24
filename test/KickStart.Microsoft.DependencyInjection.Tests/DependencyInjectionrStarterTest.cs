@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
-using KickStart.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Core;
 using Xunit;
@@ -15,16 +9,18 @@ namespace KickStart.Microsoft.DependencyInjection.Tests
 {
     public class DependencyInjectionStarterTest
     {
+        private readonly ITestOutputHelper _output;
+
         public DependencyInjectionStarterTest(ITestOutputHelper output)
         {
-            var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
-            Logger.RegisterWriter(writer);
+            _output = output;
         }
 
         [Fact]
         public void UseSimpleInjector()
         {
             Kick.Start(config => config
+                .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserDependencyInjectionRegistration>()
                 .UseDependencyInjection()
             );
@@ -40,6 +36,7 @@ namespace KickStart.Microsoft.DependencyInjection.Tests
         public void UseSimpleInjectorInitialize()
         {
             Kick.Start(config => config
+                .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserDependencyInjectionRegistration>()
                 .UseDependencyInjection(c => c
                     .Services(b => b.AddTransient<Employee>())
@@ -61,6 +58,7 @@ namespace KickStart.Microsoft.DependencyInjection.Tests
         public void UseServiceInitialize()
         {
             Kick.Start(config => config
+                .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserDependencyInjectionRegistration>()
                 .IncludeAssemblyFor<UserServiceModule>()
                 .UseDependencyInjection()

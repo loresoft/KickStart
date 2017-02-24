@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
-using KickStart.Logging;
 using KickStart.Services;
 using Ninject;
 using Test.Core;
@@ -16,16 +15,18 @@ namespace KickStart.Ninject.Tests
 {
     public class NinjectStarterTest
     {
+        private readonly ITestOutputHelper _output;
+
         public NinjectStarterTest(ITestOutputHelper output)
         {
-            var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
-            Logger.RegisterWriter(writer);
+            _output = output;
         }
 
         [Fact]
         public void UseNinject()
         {
             Kick.Start(config => config
+                .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserNinjectModule>()
                 .UseNinject()
             );

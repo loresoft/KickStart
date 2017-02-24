@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace KickStart.Microsoft.DependencyInjection
@@ -12,7 +13,8 @@ namespace KickStart.Microsoft.DependencyInjection
         /// Register injections with the specified IServiceCollection.
         /// </summary>
         /// <param name="services">The services collection.</param>
-        void Register(IServiceCollection services);
+        /// <param name="data">The data dictionary shared with all starter modules.</param>
+        void Register(IServiceCollection services, IDictionary<string, object> data);
     }
 
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using KickStart.Logging;
 using Ninject;
 using Ninject.Modules;
 
@@ -12,7 +11,6 @@ namespace KickStart.Ninject
     /// <seealso cref="KickStart.IKickStarter" />
     public class NinjectStarter : IKickStarter
     {
-        private static readonly ILogger _logger = Logger.CreateLogger<NinjectStarter>();
         private readonly NinjectOptions _options;
 
         /// <summary>
@@ -34,14 +32,10 @@ namespace KickStart.Ninject
 
             foreach (var module in modules)
             {
-                _logger.Trace()
-                    .Message("Register Ninject Module: {0}", module)
-                    .Write();
+                context.WriteLog("Register Ninject Module: {0}", module);
             }
 
-            _logger.Trace()
-                .Message("Create Ninject Kernel...")
-                .Write();
+            context.WriteLog("Create Ninject Kernel...");
 
             var settings = _options.Settings ?? new NinjectSettings();
             var kernel = new StandardKernel(settings, modules);

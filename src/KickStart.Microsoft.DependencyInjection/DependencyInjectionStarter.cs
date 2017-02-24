@@ -1,5 +1,4 @@
 ﻿using System;
-using KickStart.Logging;
 using KickStart.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,7 +11,6 @@ namespace KickStart.Microsoft.DependencyInjection
     /// <seealso cref="KickStart.IKickStarter" />
     public class DependencyInjectionStarter : IKickStarter
     {
-        private static readonly ILogger _logger = Logger.CreateLogger<DependencyInjectionStarter>();
         private readonly DependencyInjectionOptions _options;
 
         /// <summary>
@@ -47,11 +45,9 @@ namespace KickStart.Microsoft.DependencyInjection
             var modules = context.GetInstancesAssignableFrom<IDependencyInjectionRegistration>();
             foreach (var module in modules)
             {
-                _logger.Trace()
-                    .Message("Register DependencyInjection Module: {0}", module)
-                    .Write();
+                context.WriteLog("Register DependencyInjection Module: {0}", module);
 
-                module.Register(serviceCollection);
+                module.Register(serviceCollection, context.Data);
             }
         }
 
@@ -61,11 +57,9 @@ namespace KickStart.Microsoft.DependencyInjection
             var modules = context.GetInstancesAssignableFrom<IServiceModule>();
             foreach (var module in modules)
             {
-                _logger.Trace()
-                    .Message("Register Service Module: {0}", module)
-                    .Write();
+                context.WriteLog("Register Service Module: {0}", module);
 
-                module.Register(wrapper);
+                module.Register(wrapper, context.Data);
             }
         }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using KickStart.Logging;
 using KickStart.Services;
 using SimpleInjector;
 
@@ -11,7 +10,6 @@ namespace KickStart.SimpleInjector
     /// <seealso cref="KickStart.IKickStarter" />
     public class SimpleInjectorStarter : IKickStarter
     {
-        private static readonly ILogger _logger = Logger.CreateLogger<SimpleInjectorStarter>();
         private readonly SimpleInjectorOptions _options;
 
         /// <summary>
@@ -49,11 +47,9 @@ namespace KickStart.SimpleInjector
             var modules = context.GetInstancesAssignableFrom<ISimpleInjectorRegistration>();
             foreach (var module in modules)
             {
-                _logger.Trace()
-                    .Message("Register SimpleInjector Module: {0}", module)
-                    .Write();
+                context.WriteLog("Register SimpleInjector Module: {0}", module);
 
-                module.Register(container);
+                module.Register(container, context.Data);
             }
         }
 
@@ -63,11 +59,9 @@ namespace KickStart.SimpleInjector
             var modules = context.GetInstancesAssignableFrom<IServiceModule>();
             foreach (var module in modules)
             {
-                _logger.Trace()
-                    .Message("Register Service Module: {0}", module)
-                    .Write();
+                context.WriteLog("Register Service Module: {0}", module);
 
-                module.Register(wrapper);
+                module.Register(wrapper, context.Data);
             }
         }
     }

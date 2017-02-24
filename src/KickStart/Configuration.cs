@@ -13,7 +13,7 @@ namespace KickStart
         /// </summary>
         public Configuration()
         {
-            Assemblies = new AssemblyResolver();
+            Assemblies = new AssemblyResolver(m => LogWriter?.Invoke(m));
 
             // exclude system assemblies
             Assemblies.ExcludeName("mscorlib");
@@ -24,6 +24,7 @@ namespace KickStart
             Assemblies.ExcludeAssemblyFor<IKickStarter>();
 
             Starters = new List<IKickStarter>();
+            Data = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -40,6 +41,22 @@ namespace KickStart
         /// <value>
         /// The IKickStarter extensions to use.
         /// </value>
-        public List<IKickStarter> Starters { get; }
+        public IList<IKickStarter> Starters { get; }
+
+        /// <summary>
+        /// Gets the data dictionary shared with all starter modules.
+        /// </summary>
+        /// <value>
+        /// The data dictionary shared with all starter modules.
+        /// </value>
+        public IDictionary<string, object> Data { get; }
+
+        /// <summary>
+        /// Gets or set the <see langword="delegate" /> where log messages will be written.
+        /// </summary>
+        /// <value>
+        /// The <see langword="delegate" /> where log messages will be written.
+        /// </value>
+        public Action<string> LogWriter { get; set;  }
     }
 }

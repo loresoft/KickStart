@@ -1,6 +1,5 @@
 ﻿using System;
 using AutoMapper;
-using KickStart.Logging;
 
 namespace KickStart.AutoMapper
 {
@@ -9,7 +8,6 @@ namespace KickStart.AutoMapper
     /// </summary>
     public class AutoMapperStarter : IKickStarter
     {
-        private static readonly ILogger _logger = Logger.CreateLogger<AutoMapperStarter>();
         private readonly AutoMapperOptions _options;
 
         /// <summary>
@@ -33,9 +31,7 @@ namespace KickStart.AutoMapper
             {
                 foreach (var profile in profiles)
                 {
-                    _logger.Trace()
-                        .Message("AutoMapper Profile: {0}", profile)
-                        .Write();
+                    context.WriteLog("AutoMapper Profile: {0}", profile);
 
                     config.AddProfile(profile);
                 }

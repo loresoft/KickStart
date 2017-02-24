@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using KickStart.Logging;
 #if PORTABLE
 using Stopwatch = KickStart.Portability.Stopwatch;
 #else
@@ -16,19 +15,20 @@ namespace KickStart
     /// </summary>
     public class AssemblyResolver
     {
-        private static readonly ILogger _logger = Logger.CreateLogger<AssemblyResolver>();
         private readonly List<Func<IEnumerable<Assembly>>> _sources;
         private readonly List<Func<Assembly, bool>> _includes;
         private readonly List<Func<Assembly, bool>> _excludes;
+        private readonly Action<string> _logWriter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyResolver"/> class.
         /// </summary>
-        public AssemblyResolver()
+        public AssemblyResolver(Action<string> logWriter = null)
         {
             _sources = new List<Func<IEnumerable<Assembly>>>();
             _includes = new List<Func<Assembly, bool>>();
             _excludes = new List<Func<Assembly, bool>>();
+            _logWriter = logWriter;
         }
 
         /// <summary>
@@ -143,9 +143,7 @@ namespace KickStart
             if (_sources.Count == 0)
                 IncludeLoadedAssemblies();
 
-            _logger.Trace()
-                .Message("Assembly Resolver Start; Sources: ({0}), Includes: ({1}), Excludes: ({2})", Sources.Count, Includes.Count, Excludes.Count)
-                .Write();
+            _logWriter?.Invoke($"Assembly Resolver Start; Sources: ({Sources.Count}), Includes: ({Includes.Count}), Excludes: ({Excludes.Count})");
 
 
             var watch = Stopwatch.StartNew();
@@ -159,9 +157,7 @@ namespace KickStart
 
             watch.Stop();
 
-            _logger.Trace()
-                .Message("Assembly Resolver Complete; Assemblies: ({0}), Time: {1} ms", assemblies.Count, watch.ElapsedMilliseconds)
-                .Write();
+            _logWriter?.Invoke($"Assembly Resolver Complete; Assemblies: ({assemblies.Count}), Time: {watch.ElapsedMilliseconds} ms");
 
             return assemblies;
         }

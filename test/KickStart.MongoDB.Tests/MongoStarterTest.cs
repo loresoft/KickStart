@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
-using KickStart.Logging;
 using MongoDB.Bson.Serialization;
 using Test.Core;
 using Xunit;
@@ -15,16 +14,18 @@ namespace KickStart.MongoDB.Tests
 {
     public class MongoStarterTest
     {
+        private readonly ITestOutputHelper _output;
+
         public MongoStarterTest(ITestOutputHelper output)
         {
-            var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
-            Logger.RegisterWriter(writer);
+            _output = output;
         }
 
         [Fact]
         public void Configure()
         {
             Kick.Start(config => config
+                .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserMap>()
                 .UseMongoDB()
             );

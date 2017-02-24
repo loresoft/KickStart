@@ -11,9 +11,9 @@ namespace KickStart.Unity
         private readonly IUnityContainer _container;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="UnityServiceProvider"/> class.
         /// </summary>
-        /// <param name="container"></param>
+        /// <param name="container">The container.</param>
         public UnityServiceProvider(IUnityContainer container)
         {
             _container = container;
@@ -31,4 +31,5 @@ namespace KickStart.Unity
             return _container.Resolve(serviceType);
         }
     }
+
 }

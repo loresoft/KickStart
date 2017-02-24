@@ -1,4 +1,4 @@
-﻿using KickStart.Logging;
+﻿using KickStart.Services;
 using Microsoft.Practices.Unity;
 
 namespace KickStart.Unity
@@ -9,7 +9,6 @@ namespace KickStart.Unity
     /// <seealso cref="KickStart.IKickStarter" />
     public class UnityStarter : IKickStarter
     {
-        private static readonly ILogger _logger = Logger.CreateLogger<UnityStarter>();
         private readonly UnityOptions _options;
 
         /// <summary>
@@ -27,23 +26,41 @@ namespace KickStart.Unity
         /// <param name="context">The KickStart <see cref="T:KickStart.Context" /> containing assemblies to scan.</param>
         public void Run(Context context)
         {
-            var modules = context.GetInstancesAssignableFrom<IUnityRegistration>();
 
             var container = new UnityContainer();
 
-            foreach (var module in modules)
-            {
-                _logger.Trace()
-                    .Message("Register Unity Module: {0}", module)
-                    .Write();
-
-                module.Register(container);
-            }
+            RegisterUnity(context, container);
+            RegisterServiceModule(context, container);
 
             _options.InitializeContainer?.Invoke(container);
 
             var provider = new UnityServiceProvider(container);
             context.SetServiceProvider(provider);
         }
+
+        private void RegisterUnity(Context context, IUnityContainer container)
+        {
+            var modules = context.GetInstancesAssignableFrom<IUnityRegistration>();
+            foreach (var module in modules)
+            {
+                context.WriteLog("Register Unity Module: {0}", module);
+
+                module.Register(container);
+            }
+        }
+
+
+        private void RegisterServiceModule(Context context, IUnityContainer container)
+        {
+            var wrapper = new UnityServiceRegistration(container);
+            var modules = context.GetInstancesAssignableFrom<IServiceModule>();
+            foreach (var module in modules)
+            {
+                context.WriteLog("Register Service Module: {0}", module);
+
+                module.Register(wrapper, context.Data);
+            }
+        }
+
     }
 }

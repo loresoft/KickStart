@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
-using KickStart.Logging;
 
 namespace KickStart
 {
@@ -75,6 +75,26 @@ namespace KickStart
 
 
         /// <summary>
+        /// Sets the context data element with the specified <paramref name="key"/>.
+        /// </summary>
+        /// <param name="key">The key of the element to set.</param>
+        /// <param name="value">The value for specified key.</param>
+        /// <returns>
+        /// A fluent <see langword="interface"/> to configure KickStart.
+        /// </returns>
+        IConfigurationBuilder Data(string key, object value);
+
+        /// <summary>
+        /// Configure the context data with the specified <paramref name="data"/> <see langword="delegate"/>.
+        /// </summary>
+        /// <param name="data">The <see langword="delegate"/> to configure context data.</param>
+        /// <returns>
+        /// A fluent <see langword="interface"/> to configure KickStart.
+        /// </returns>
+        IConfigurationBuilder Data(Action<IDictionary<string, object>> data);
+
+
+        /// <summary>
         /// Run the specified IKickStarter extension on startup.
         /// </summary>
         /// <param name="starter">The IKickStarter extension to run.</param>
@@ -90,6 +110,6 @@ namespace KickStart
         /// <returns>
         /// A fluent <see langword="interface"/> to configure KickStart.
         /// </returns>
-        IConfigurationBuilder LogTo(Action<LogData> writer);
+        IConfigurationBuilder LogTo(Action<string> writer);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace KickStart.StartupTask
 {
@@ -8,11 +9,11 @@ namespace KickStart.StartupTask
     public class StartupTaskOptions
     {
         /// <summary>
-        /// Gets or sets a value indicating whether to use the <see cref="Kick.ServiceProvider" /> to resolve startup task instances.
+        /// Gets the startup actions.
         /// </summary>
         /// <value>
-        ///   <c>true</c> to  use the <see cref="Kick.ServiceProvider" /> to resolve; otherwise, <c>false</c>.
+        /// The startup actions.
         /// </value>
-        public bool UseContainer { get; set; }
+        public IList<Action<IServiceProvider, IDictionary<string, object>>> Actions { get; } = new List<Action<IServiceProvider, IDictionary<string, object>>>();
     }
 }

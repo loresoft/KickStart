@@ -1,6 +1,5 @@
 ﻿using System;
 using Autofac;
-using KickStart.Logging;
 using KickStart.Services;
 
 namespace KickStart.Autofac
@@ -10,7 +9,6 @@ namespace KickStart.Autofac
     /// </summary>
     public class AutofacStarter : IKickStarter
     {
-        private static readonly ILogger _logger = Logger.CreateLogger<AutofacStarter>();
         private AutofacOptions _options;
 
         /// <summary>
@@ -35,9 +33,7 @@ namespace KickStart.Autofac
 
             _options.InitializeBuilder?.Invoke(builder);
 
-            _logger.Trace()
-                .Message("Create Autofac Container...")
-                .Write();
+            context.WriteLog("Create Autofac Container...");
 
             var container = builder.Build(_options.BuildOptions);
 
@@ -53,9 +49,7 @@ namespace KickStart.Autofac
             var modules = context.GetInstancesAssignableFrom<Module>();
             foreach (var module in modules)
             {
-                _logger.Trace()
-                    .Message("Register Autofac Module: {0}", module)
-                    .Write();
+                context.WriteLog("Register Autofac Module: {0}", module);
 
                 builder.RegisterModule(module);
             }
@@ -67,11 +61,9 @@ namespace KickStart.Autofac
             var modules = context.GetInstancesAssignableFrom<IServiceModule>();
             foreach (var module in modules)
             {
-                _logger.Trace()
-                    .Message("Register Service Module: {0}", module)
-                    .Write();
+                context.WriteLog("Register Service Module: {0}", module);
 
-                module.Register(wrapper);
+                module.Register(wrapper, context.Data);
             }
         }
 

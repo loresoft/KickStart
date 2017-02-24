@@ -1,6 +1,5 @@
 ﻿using System;
 using FluentAssertions;
-using KickStart.Logging;
 using KickStart.Services;
 using SimpleInjector;
 using Test.Core;
@@ -11,16 +10,18 @@ namespace KickStart.SimpleInjector.Tests
 {
     public class SimpleInjectorStarterTest
     {
+        private readonly ITestOutputHelper _output;
+
         public SimpleInjectorStarterTest(ITestOutputHelper output)
         {
-            var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
-            Logger.RegisterWriter(writer);
+            _output = output;
         }
 
         [Fact]
         public void UseSimpleInjector()
         {
             Kick.Start(config => config
+                .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserSimpleInjectorRegistration>()
                 .UseSimpleInjector()
             );
@@ -37,6 +38,7 @@ namespace KickStart.SimpleInjector.Tests
         public void UseSimpleInjectorInitialize()
         {
             Kick.Start(config => config
+                .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserSimpleInjectorRegistration>()
                 .UseSimpleInjector(c => c
                     .Container(b => b.Register<Employee>())
@@ -60,6 +62,7 @@ namespace KickStart.SimpleInjector.Tests
         public void UseServiceInitialize()
         {
             Kick.Start(config => config
+                .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserSimpleInjectorRegistration>()
                 .IncludeAssemblyFor<UserServiceModule>()
                 .UseSimpleInjector()

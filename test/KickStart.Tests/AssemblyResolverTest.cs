@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using FluentAssertions;
-using KickStart.Logging;
 using Test.Core;
 using Xunit;
 using Xunit.Abstractions;
@@ -11,10 +10,11 @@ namespace KickStart.Tests
 {
     public class AssemblyResolverTest
     {
+        private readonly ITestOutputHelper _output;
+
         public AssemblyResolverTest(ITestOutputHelper output)
         {
-            var writer = new DelegateLogWriter(d => output.WriteLine(d.ToString()));
-            Logger.RegisterWriter(writer);
+            _output = output;
         }
 
 #if !(PORTABLE || NETSTANDARD1_3 || NETSTANDARD1_5 || NETSTANDARD1_6 || NETCOREAPP1_0)
@@ -22,7 +22,7 @@ namespace KickStart.Tests
         public void DefaultResolve()
         {
 
-            var resolver = new AssemblyResolver();
+            var resolver = new AssemblyResolver(_output.WriteLine);
             resolver.Should().NotBeNull();
 
             var assemblies = resolver.Resolve().ToList();
@@ -34,7 +34,7 @@ namespace KickStart.Tests
         [Fact]
         public void ExcludeSystem()
         {
-            var resolver = new AssemblyResolver();
+            var resolver = new AssemblyResolver(_output.WriteLine);
             resolver.Should().NotBeNull();
 
             resolver.ExcludeName("System");
@@ -48,7 +48,7 @@ namespace KickStart.Tests
         [Fact]
         public void SystemExplicit()
         {
-            var resolver = new AssemblyResolver();
+            var resolver = new AssemblyResolver(_output.WriteLine);
             resolver.Should().NotBeNull();
 
             // add a few defaults
@@ -67,7 +67,7 @@ namespace KickStart.Tests
         [Fact]
         public void ExcludeSystemExplicit()
         {
-            var resolver = new AssemblyResolver();
+            var resolver = new AssemblyResolver(_output.WriteLine);
             resolver.Should().NotBeNull();
 
             // add a few defaults
@@ -88,7 +88,7 @@ namespace KickStart.Tests
         [Fact]
         public void IncludeAssemblyForTestCore()
         {
-            var resolver = new AssemblyResolver();
+            var resolver = new AssemblyResolver(_output.WriteLine);
             resolver.Should().NotBeNull();
 
             resolver.IncludeAssemblyFor<SampleWorker>();

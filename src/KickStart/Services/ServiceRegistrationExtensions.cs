@@ -7,7 +7,6 @@ namespace KickStart.Services
     /// </summary>
     public static class ServiceRegistrationExtensions
     {
-
         /// <summary>
         /// Registers a transient service of the type specified in <paramref name="serviceType"/> with an
         /// implementation of the type specified in <paramref name="implementationType"/> to the
@@ -355,6 +354,5 @@ namespace KickStart.Services
 
             return services.RegisterSingleton(typeof(TService), implementationInstance);
         }
-
     }
 }

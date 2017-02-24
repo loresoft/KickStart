@@ -1,5 +1,4 @@
 ﻿using System;
-using KickStart.Logging;
 using MongoDB.Bson.Serialization;
 
 namespace KickStart.MongoDB
@@ -9,7 +8,6 @@ namespace KickStart.MongoDB
     /// </summary>
     public class MongoStarter : IKickStarter
     {
-        private static readonly ILogger _logger = Logger.CreateLogger<MongoStarter>();
         private readonly MongoOptions _options;
 
         /// <summary>
@@ -34,9 +32,7 @@ namespace KickStart.MongoDB
                 if (BsonClassMap.IsClassMapRegistered(classMap.ClassType))
                     continue;
 
-                _logger.Trace()
-                    .Message("Register MongoDB ClassMap: {0}", classMap)
-                    .Write();
+                context.WriteLog("Register MongoDB ClassMap: {0}", classMap);
 
                 BsonClassMap.RegisterClassMap(classMap);
             }

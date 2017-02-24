@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SimpleInjector;
 
 namespace KickStart.SimpleInjector
@@ -12,6 +13,7 @@ namespace KickStart.SimpleInjector
         /// Register injections with the specified container.
         /// </summary>
         /// <param name="container">The container.</param>
-        void Register(Container container);
+        /// <param name="data">The data dictionary shared with all starter modules.</param>
+        void Register(Container container, IDictionary<string, object> data);
     }
 }

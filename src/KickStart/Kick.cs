@@ -1,5 +1,4 @@
 ﻿using System;
-using KickStart.Logging;
 #if PORTABLE
 using Stopwatch = KickStart.Portability.Stopwatch;
 #else
@@ -13,7 +12,6 @@ namespace KickStart
     /// </summary>
     public static class Kick
     {
-        private static readonly ILogger _logger = Logger.CreateLogger(typeof(Kick));
         private static IServiceProvider _serviceProvider;
 
         /// <summary>
@@ -51,13 +49,11 @@ namespace KickStart
             configurator(builder);
 
             var assemblies = config.Assemblies.Resolve();
-            var context = new Context(assemblies);
+            var context = new Context(assemblies, config.Data, config.LogWriter);
 
             foreach (var starter in config.Starters)
             {
-                _logger.Trace()
-                    .Message("Execute Starter: {0}", starter)
-                    .Write();
+                context.WriteLog("Execute Starter: {0}", starter);
 
                 var watch = Stopwatch.StartNew();
 
@@ -65,19 +61,11 @@ namespace KickStart
 
                 watch.Stop();
 
-                _logger.Trace()
-                    .Message("Completed Starter: {0}, Time: {1} ms", starter, watch.ElapsedMilliseconds)
-                    .Write();
+                context.WriteLog("Completed Starter: {0}, Time: {1} ms", starter, watch.ElapsedMilliseconds);
             }
-        }
 
-        /// <summary>
-        /// Sets the global <see cref="P:KickStart.Kick.ServiceProvider"/>.
-        /// </summary>
-        /// <param name="serviceProvider">The <see cref="IServiceProvider"/> to set.</param>
-        internal static void SetServiceProvider(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
+            // save service provider
+            _serviceProvider = context.ServiceProvider;
         }
     }
 }
