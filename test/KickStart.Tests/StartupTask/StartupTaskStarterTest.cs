@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using Test.Core.Startup;
 using Xunit;
 using Xunit.Abstractions;
@@ -23,6 +24,54 @@ namespace KickStart.Tests.StartupTask
                 .UseStartupTask()
             );
         }
+
+        [Fact]
+        public void MultipleTasks()
+        {
+            //hack use logs to track execution order
+            var logs = new List<string>();
+            
+            Kick.Start(config => config
+                .LogTo(m =>
+                {
+                    logs.Add(m);
+                    _output.WriteLine(m);
+                })
+                .IncludeAssemblyFor<TestStartup>()
+                .IncludeAssemblyFor<HighTask>()
+                .UseStartupTask()
+            );
+
+
+            int highExecute = logs.IndexOf("Execute Startup Task; Type: 'KickStart.Tests.StartupTask.HighTask'");
+            int mediumExecuteA = logs.IndexOf("Execute Startup Task; Type: 'KickStart.Tests.StartupTask.MediumATask'");
+            int mediumExecuteB = logs.IndexOf("Execute Startup Task; Type: 'KickStart.Tests.StartupTask.MediumBTask'");
+            int mediumExecuteC = logs.IndexOf("Execute Startup Task; Type: 'KickStart.Tests.StartupTask.MediumCTask'");
+            int mediumCompleteA = logs.FindIndex(m => m.StartsWith("Complete Startup Task; Type: 'KickStart.Tests.StartupTask.MediumATask'"));
+            int mediumCompleteB = logs.FindIndex(m => m.StartsWith("Complete Startup Task; Type: 'KickStart.Tests.StartupTask.MediumBTask'"));
+            int mediumCompleteC = logs.FindIndex(m => m.StartsWith("Complete Startup Task; Type: 'KickStart.Tests.StartupTask.MediumCTask'"));
+
+
+            int startUpExecute = logs.IndexOf("Execute Startup Task; Type: 'Test.Core.Startup.TestStartup'");
+
+            // check order by using log position
+            highExecute.Should().BeLessThan(mediumExecuteA);
+            highExecute.Should().BeLessThan(mediumExecuteB);
+            highExecute.Should().BeLessThan(mediumExecuteC);
+
+            mediumExecuteA.Should().BeLessThan(startUpExecute);
+            mediumExecuteB.Should().BeLessThan(startUpExecute);
+            mediumExecuteC.Should().BeLessThan(startUpExecute);
+
+            // check parallel, b started before a completed
+            mediumExecuteB.Should().BeLessThan(mediumCompleteA);
+            // check parallel, c started before a completed
+            mediumExecuteC.Should().BeLessThan(mediumCompleteA);
+            // check parallel, c completed before a completed
+            mediumCompleteC.Should().BeLessThan(mediumCompleteA);
+        }
+
+
 
         [Fact]
         public void ConfigureData()
@@ -64,4 +113,7 @@ namespace KickStart.Tests.StartupTask
         }
     }
 
+
+
 }
+

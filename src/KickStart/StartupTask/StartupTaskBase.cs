@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace KickStart.StartupTask
 {
     /// <summary>
-    /// Base class for start tasks
+    /// Base class for start tasks, must override <see cref="Run(IDictionary{string, object})"/> or <see cref="RunAsync(IDictionary{string, object})"/>
     /// </summary>
     public abstract class StartupTaskBase : IStartupTask
     {
@@ -28,6 +29,18 @@ namespace KickStart.StartupTask
         /// Runs the startup task with the specified context <paramref name="data"/>.
         /// </summary>
         /// <param name="data">The data dictionary shared with all starter modules.</param>
-        public abstract void Run(IDictionary<string, object> data);
+        public virtual void Run(IDictionary<string, object> data)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Runs the startup task with the specified context <paramref name="data"/> asynchronously.
+        /// </summary>
+        /// <param name="data">The data dictionary shared with all starter modules.</param>
+        public virtual Task RunAsync(IDictionary<string, object> data)
+        {
+            return Task.Factory.StartNew(() => Run(data));
+        }
     }
 }

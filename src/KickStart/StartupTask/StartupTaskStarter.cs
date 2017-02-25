@@ -32,7 +32,6 @@ namespace KickStart.StartupTask
         /// <param name="context">The KickStart <see cref="Context" /> containing assemblies to scan.</param>
         public void Run(Context context)
         {
-            RunSynchronousTasks(context);
             RunAsynchronousTask(context);
             RunActions(context);
         }
@@ -53,55 +52,39 @@ namespace KickStart.StartupTask
             watch.Stop();
         }
 
-        private void RunSynchronousTasks(Context context)
-        {
-            var startupTasks = context.GetInstancesAssignableFrom<IStartupTask>()
-                .OrderBy(t => t.Priority)
-                .ToList();
-
-
-            var watch = Stopwatch.StartNew();
-            foreach (var startupTask in startupTasks)
-            {
-                context.WriteLog("Execute Startup Task; Type: '{0}'", startupTask);
-
-                watch.Restart();
-                startupTask.Run(context.Data);
-                watch.Stop();
-
-                context.WriteLog("Complete Startup Task; Type: '{0}', Time: {1} ms", startupTask, watch.ElapsedMilliseconds);
-            }
-            watch.Stop();
-
-        }
-
         private void RunAsynchronousTask(Context context)
         {
-            var startupGroups = context.GetInstancesAssignableFrom<IStartupTaskAsync>()
+            // order and group by priority
+            var startupGroups = context.GetInstancesAssignableFrom<IStartupTask>()
                 .OrderBy(t => t.Priority)
                 .GroupBy(p => p.Priority);
 
 
+            // each priority group is run in parallel 
             foreach (var startGroup in startupGroups)
             {
+                context.WriteLog("Execute Startup Tasks; Priority: '{0}'", startGroup.Key);
+
+                // start all tasts for this priority
                 var tasks = startGroup
                     .Select(startTask => RunTaskAsync(context, startTask))
                     .ToArray();
 
+                // wait till all done before starting next priority
                 Task.WaitAll(tasks);
             }
         }
 
-        private Task RunTaskAsync(Context context, IStartupTaskAsync startupTask)
+        private Task RunTaskAsync(Context context, IStartupTask startupTask)
         {
             var watch = Stopwatch.StartNew();
-            context.WriteLog("Execute Asynchronous Startup Task; Type: '{0}'", startupTask);
+            context.WriteLog("Execute Startup Task; Type: '{0}'", startupTask);
 
             return startupTask.RunAsync(context.Data)
                 .ContinueWith(t =>
                 {
                     watch.Stop();
-                    context.WriteLog("Complete Asynchronous Startup Task; Type: '{0}', Time: {1} ms", startupTask, watch.ElapsedMilliseconds);
+                    context.WriteLog("Complete Startup Task; Type: '{0}', Time: {1} ms", startupTask, watch.ElapsedMilliseconds);
                 });
         }
     }

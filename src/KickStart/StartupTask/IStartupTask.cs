@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace KickStart.StartupTask
 {
@@ -17,9 +18,9 @@ namespace KickStart.StartupTask
         int Priority { get; }
 
         /// <summary>
-        /// Runs the startup task with the specified context <paramref name="data"/>.
+        /// Runs the startup task with the specified context <paramref name="data"/> asynchronously.
         /// </summary>
         /// <param name="data">The data dictionary shared with all starter modules.</param>
-        void Run(IDictionary<string, object> data);
+        Task RunAsync(IDictionary<string, object> data);
     }
 }
