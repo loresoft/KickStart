@@ -39,7 +39,7 @@ namespace KickStart.Microsoft.DependencyInjection.Tests
                 .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserDependencyInjectionRegistration>()
                 .UseDependencyInjection(c => c
-                    .Services(b => b.AddTransient<Employee>())
+                    .Initialize(b => b.AddTransient<Employee>())
                 )
             );
 

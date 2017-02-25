@@ -33,24 +33,24 @@ namespace KickStart.Autofac
         }
 
         /// <summary>
-        /// Sets the initialize builder <see langword="delegate" />.
+        /// Sets the initialize builder <see langword="delegate" />.  Register services under this <see langword="delegate" />.
         /// </summary>
-        /// <param name="initializer">The initializer.</param>
+        /// <param name="initializer">The initialize builder <see langword="delegate" />.</param>
         /// <returns></returns>
-        public IAutofacBuilder Builder(Action<ContainerBuilder> initializer)
+        public IAutofacBuilder Initialize(Action<ContainerBuilder> initializer)
         {
-            _options.InitializeBuilder = initializer;
+            _options.Initializer = initializer;
             return this;
         }
 
         /// <summary>
-        /// Sets the initialize container <see langword="delegate" />.
+        /// Sets the container accessor <see langword="delegate" />.  Resolve services under this <see langword="delegate" />.
         /// </summary>
-        /// <param name="initializer">The initializer.</param>
+        /// <param name="accessor">The container accessor <see langword="delegate" />.</param>
         /// <returns></returns>
-        public IAutofacBuilder Container(Action<IContainer> initializer)
+        public IAutofacBuilder Container(Action<IContainer> accessor)
         {
-            _options.InitializeContainer = initializer;
+            _options.Accessor = accessor;
             return this;
         }
 

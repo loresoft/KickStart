@@ -10,20 +10,37 @@ namespace KickStart.Microsoft.DependencyInjection
     public class DependencyInjectionOptions
     {
         /// <summary>
-        /// Gets or sets the initialize services collection delegate.
+        /// Initializes a new instance of the <see cref="DependencyInjectionOptions"/> class.
+        /// </summary>
+        public DependencyInjectionOptions()
+        {
+            Creator = () => new ServiceCollection();
+        }
+
+        /// <summary>
+        /// Gets or sets the service provider accessor <see langword="delegate" />.
         /// </summary>
         /// <value>
-        /// The initialize services collection delegate.
+        /// The accessor.
+        /// </value>
+        public Action<IServiceProvider> Accessor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="IServiceCollection" /> creator <see langword="delegate" />.
+        /// </summary>
+        /// <value>
+        /// The <see cref="IServiceCollection" /> creator <see langword="delegate" />.
+        /// </value>
+        public Func<IServiceCollection> Creator { get; set; }
+
+        /// <summary>
+        /// Gets or sets the initialize services <see langword="delegate" />.
+        /// </summary>
+        /// <value>
+        /// The initialize services <see langword="delegate" />.
         /// </value>
         public Action<IServiceCollection> Initializer { get; set; }
 
-        /// <summary>
-        /// Gets or sets the service collection.
-        /// </summary>
-        /// <value>
-        /// The service collection.
-        /// </value>
-        public IServiceCollection ServiceCollection { get; set; } = new ServiceCollection();
     }
 
 }

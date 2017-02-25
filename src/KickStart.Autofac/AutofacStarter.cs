@@ -31,13 +31,13 @@ namespace KickStart.Autofac
             RegisterAutofacModule(context, builder);
             RegisterServiceModule(context, builder);
 
-            _options.InitializeBuilder?.Invoke(builder);
+            _options.Initializer?.Invoke(builder);
 
             context.WriteLog("Create Autofac Container...");
 
             var container = builder.Build(_options.BuildOptions);
 
-            _options.InitializeContainer?.Invoke(container);
+            _options.Accessor?.Invoke(container);
 
             var provider = new AutofacServiceProvider(container);
             context.SetServiceProvider(provider);

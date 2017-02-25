@@ -31,7 +31,7 @@ namespace KickStart.Autofac
         /// <value>
         /// The initialize builder <see langword="delegate"/>.
         /// </value>
-        public Action<ContainerBuilder> InitializeBuilder { get; set; }
+        public Action<ContainerBuilder> Initializer { get; set; }
 
         /// <summary>
         /// Gets or sets the initialize container <see langword="delegate"/>.
@@ -39,6 +39,6 @@ namespace KickStart.Autofac
         /// <value>
         /// The initialize container <see langword="delegate"/>.
         /// </value>
-        public Action<IContainer> InitializeContainer { get; set; }
+        public Action<IContainer> Accessor { get; set; }
     }
 }

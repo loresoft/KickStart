@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using KickStart.Services;
+using KickStart.StartupTask;
 using SimpleInjector;
 using Test.Core;
 using Xunit;
@@ -78,5 +80,26 @@ namespace KickStart.SimpleInjector.Tests
             userService.Connection.Should().BeOfType<SampleConnection>();
         }
 
+
+        [Fact]
+        public void InjectorStartTask()
+        {
+            Kick.Start(config => config
+                .LogTo(_output.WriteLine)
+                .IncludeAssemblyFor<UserSimpleInjectorRegistration>()
+                .IncludeAssemblyFor<UserServiceModule>()
+                .UseSimpleInjector()
+                .UseStartupTask()
+            );
+
+            Kick.ServiceProvider.Should().NotBeNull();
+            Kick.ServiceProvider.Should().BeOfType<Container>();
+
+
+            var userService = Kick.ServiceProvider.GetService<IUserService>();
+            userService.Should().NotBeNull();
+            userService.Connection.Should().NotBeNull();
+            userService.Connection.Should().BeOfType<SampleConnection>();
+        }
     }
 }

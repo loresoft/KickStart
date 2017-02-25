@@ -28,7 +28,7 @@ namespace KickStart.Microsoft.DependencyInjection
         /// <param name="context">The KickStart <see cref="T:KickStart.Context" /> containing assemblies to scan.</param>
         public void Run(Context context)
         {
-            var serviceCollection = _options.ServiceCollection ?? new ServiceCollection();
+            var serviceCollection = _options?.Creator() ?? new ServiceCollection();
 
             RegisterDependencyInjection(context, serviceCollection);
             RegisterServiceModule(context, serviceCollection);
@@ -36,6 +36,9 @@ namespace KickStart.Microsoft.DependencyInjection
             _options.Initializer?.Invoke(serviceCollection);
 
             var provider = serviceCollection.BuildServiceProvider();
+
+            _options.Accessor?.Invoke(provider);
+
             context.SetServiceProvider(provider);
         }
 

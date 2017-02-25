@@ -20,7 +20,7 @@ namespace KickStart
         /// </returns>
         public static IConfigurationBuilder UseDependencyInjection(this IConfigurationBuilder configurationBuilder)
         {
-            return UseDependencyInjection(configurationBuilder, c => { });
+            return UseDependencyInjection(configurationBuilder, c => c.Creator(() => new ServiceCollection()));
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace KickStart
         /// </returns>
         public static IConfigurationBuilder UseDependencyInjection(this IConfigurationBuilder configurationBuilder, IServiceCollection collection)
         {
-            return UseDependencyInjection(configurationBuilder, c => c.Collection(collection));
+            return UseDependencyInjection(configurationBuilder, c => c.Creator(() => collection));
         }
 
         /// <summary>

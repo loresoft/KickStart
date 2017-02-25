@@ -44,7 +44,7 @@ namespace KickStart.Autofac.Tests
                 .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserModule>()
                 .UseAutofac(c => c
-                    .Builder(b => b
+                    .Initialize(b => b
                         .Register(x => new Employee { EmailAddress = defaultEmail }
                     ))
                 )
@@ -73,7 +73,7 @@ namespace KickStart.Autofac.Tests
                 .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserModule>()
                 .UseAutofac(c => c
-                    .Builder(b => b
+                    .Initialize(b => b
                         .Register(x => new Employee { EmailAddress = defaultEmail }
                     ))
                 )

@@ -21,22 +21,33 @@ namespace KickStart.Microsoft.DependencyInjection
         }
 
         /// <summary>
-        /// Sets the initial service collection.
+        /// Sets the service provider accessor <see langword="delegate" />. Resolve services under this <see langword="delegate" />.
         /// </summary>
-        /// <param name="collection">The collection.</param>
+        /// <param name="accessor">The service provider accessor <see langword="delegate" />.</param>
         /// <returns></returns>
-        public IDependencyInjectionBuilder Collection(IServiceCollection collection)
+        public IDependencyInjectionBuilder Container(Action<IServiceProvider> accessor)
         {
-            _options.ServiceCollection = collection;
+            _options.Accessor = accessor;
             return this;
         }
 
         /// <summary>
-        /// Sets the initialize container <see langword="delegate" />.
+        /// Sets the <see cref="IServiceCollection" /> creator <see langword="delegate" />.
         /// </summary>
-        /// <param name="initializer">The initializer.</param>
+        /// <param name="creator">The <see cref="IServiceCollection" /> creator.</param>
         /// <returns></returns>
-        public IDependencyInjectionBuilder Services(Action<IServiceCollection> initializer)
+        public IDependencyInjectionBuilder Creator(Func<IServiceCollection> creator)
+        {
+            _options.Creator = creator;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the initialize services <see langword="delegate" />.  Register services under this <see langword="delegate" />.
+        /// </summary>
+        /// <param name="initializer">The initialize services <see langword="delegate" />.</param>
+        /// <returns></returns>
+        public IDependencyInjectionBuilder Initialize(Action<IServiceCollection> initializer)
         {
             _options.Initializer = initializer;
             return this;

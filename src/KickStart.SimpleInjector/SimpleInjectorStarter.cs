@@ -27,16 +27,17 @@ namespace KickStart.SimpleInjector
         /// <param name="context">The KickStart <see cref="T:KickStart.Context" /> containing assemblies to scan.</param>
         public void Run(Context context)
         {
-
-            var container = new Container();
+            var container = _options?.Creator() ?? new Container();
 
             RegisterSimpleInjector(context, container);
             RegisterServiceModule(context, container);
 
-            _options.InitializeContainer?.Invoke(container);
+            _options.Initializer?.Invoke(container);
 
             if (_options.VerificationOption.HasValue)
                 container.Verify(_options.VerificationOption.Value);
+
+            _options.Accessor?.Invoke(container);
 
             context.SetServiceProvider(container);
         }

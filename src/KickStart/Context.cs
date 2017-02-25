@@ -129,7 +129,7 @@ namespace KickStart
 
             try
             {
-                WriteLog("Create '{0}' from service provider '{1}'", type);
+                WriteLog("Create '{0}' from service provider '{1}'", type, provider);
                 instance = provider.GetService(type);
             }
             catch (Exception ex)
