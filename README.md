@@ -253,7 +253,8 @@ public class StartupTaskStarterTest
 - [Breaking] Renamed `Kick.Container` to `Kick.ServiceProvider`
 - [Breaking] Removed logging abstractions.  Logging is now a simple `Action<string>` delegate
 - [Breaking] changed object creation to use ServiceProvider by default
-- added async startup tasks with `IStartupTaskAsync` that run in parallel by Priority
+- [Breaking] changed `IStartupTask.Run` to `IStartupTask.RunAsync` 
+- changed startup tasks that run async and in parallel by Priority
 - added shared data dictionary that is passed to all startup modules
 - added delegate based startup action
 - added `IServiceModule` and `IServiceRegistration` to abstract service/container registration
