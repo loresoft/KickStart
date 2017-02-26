@@ -3,7 +3,7 @@ using KickStart.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 
-namespace KickStart.Microsoft.DependencyInjection
+namespace KickStart.DependencyInjection
 {
     /// <summary>
     /// Microsoft.Extensions.DependencyInjection KickStarter extension

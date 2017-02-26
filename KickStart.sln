@@ -47,9 +47,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C2F076BC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickStart.Serilog", "src\KickStart.Serilog\KickStart.Serilog.csproj", "{4A649161-DBAC-4134-A030-DFABB47F9616}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickStart.Microsoft.DependencyInjection", "src\KickStart.Microsoft.DependencyInjection\KickStart.Microsoft.DependencyInjection.csproj", "{673E6664-861B-48E4-A7E3-082B80FA88C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickStart.DependencyInjection", "src\KickStart.DependencyInjection\KickStart.DependencyInjection.csproj", "{673E6664-861B-48E4-A7E3-082B80FA88C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickStart.Microsoft.DependencyInjection.Tests", "test\KickStart.Microsoft.DependencyInjection.Tests\KickStart.Microsoft.DependencyInjection.Tests.csproj", "{402BE3EC-5CE8-4141-AF9E-8D3F2E1646AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickStart.DependencyInjection.Tests", "test\KickStart.DependencyInjection.Tests\KickStart.DependencyInjection.Tests.csproj", "{402BE3EC-5CE8-4141-AF9E-8D3F2E1646AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,7 +5,7 @@ using Test.Core;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace KickStart.Microsoft.DependencyInjection.Tests
+namespace KickStart.DependencyInjection.Tests
 {
     public class DependencyInjectionStarterTest
     {

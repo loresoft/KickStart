@@ -7,8 +7,8 @@
     <Authors>LoreSoft</Authors>
     <TargetFrameworks>net45;netstandard1.5</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>KickStart.Microsoft.DependencyInjection</AssemblyName>
-    <PackageId>KickStart.Microsoft.DependencyInjection</PackageId>
+    <AssemblyName>KickStart.DependencyInjection</AssemblyName>
+    <PackageId>KickStart.DependencyInjection</PackageId>
     <PackageTags>startup;bootstrap;bootstraper;initialization;DependencyInjection</PackageTags>
     <PackageProjectUrl>https://github.com/loresoft/KickStart</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/loresoft/KickStart/master/LICENSE</PackageLicenseUrl>

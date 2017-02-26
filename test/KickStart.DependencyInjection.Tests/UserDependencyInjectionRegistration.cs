@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using KickStart.Microsoft.DependencyInjection;
+using KickStart.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Core;
 
-namespace KickStart.Microsoft.DependencyInjection.Tests
+namespace KickStart.DependencyInjection.Tests
 {
     public class UserDependencyInjectionRegistration : IDependencyInjectionRegistration
     {

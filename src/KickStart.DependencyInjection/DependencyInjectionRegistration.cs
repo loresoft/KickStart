@@ -3,7 +3,7 @@ using KickStart.Services;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceLifetime = KickStart.Services.ServiceLifetime;
 
-namespace KickStart.Microsoft.DependencyInjection
+namespace KickStart.DependencyInjection
 {
     /// <summary>
     /// Microsoft.Extensions.DependencyInjection implementation for <see cref="IServiceRegistration"/>.

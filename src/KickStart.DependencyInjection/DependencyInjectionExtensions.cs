@@ -1,5 +1,5 @@
 ﻿using System;
-using KickStart.Microsoft.DependencyInjection;
+using KickStart.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
 
