@@ -126,7 +126,7 @@ Use with ASP.NET MVC
 Kick.Start(c => c
     .IncludeAssemblyFor<UserModule>()
     .UseAutofac(a => a
-        .Builder(b => b.RegisterControllers(typeof(MvcApplication).Assembly)) // register all controllers 
+        .Initialize(b => b.RegisterControllers(typeof(MvcApplication).Assembly)) // register all controllers 
         .Container(r => DependencyResolver.SetResolver(new AutofacDependencyResolver(r))) // set asp.net resolver
     )
     .UseAutoMapper()
