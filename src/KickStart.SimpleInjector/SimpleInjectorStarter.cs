@@ -29,11 +29,12 @@ namespace KickStart.SimpleInjector
         {
             var container = _options?.Creator() ?? new Container();
 
-            RegisterSimpleInjector(context, container);
-            RegisterServiceModule(context, container);
-
+            // must run first to allow settings options
             _options.Initializer?.Invoke(container);
 
+            RegisterSimpleInjector(context, container);
+            RegisterServiceModule(context, container);
+                        
             if (_options.VerificationOption.HasValue)
                 container.Verify(_options.VerificationOption.Value);
 
