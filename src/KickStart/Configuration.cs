@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace KickStart
@@ -24,7 +25,7 @@ namespace KickStart
             Assemblies.ExcludeAssemblyFor<IKickStarter>();
 
             Starters = new List<IKickStarter>();
-            Data = new Dictionary<string, object>();
+            Data = new ConcurrentDictionary<string, object>(StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>
