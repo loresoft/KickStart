@@ -30,6 +30,10 @@
     <PackageVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</PackageVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <SolutionFiles Include="*.sln"/>
+  </ItemGroup>
+
 
   <Target Name="Clean">
     <DeleteTree Directories="**\obj\**;**\bin\**" />
@@ -55,13 +59,13 @@
                   AssemblyInformationalVersion="$(AssemblyInformationalVersion)"
                   AssemblyTrademark=""/>
 
-    <exec Command="dotnet restore KickStart.sln"
+    <exec Command="dotnet restore &quot;%(SolutionFiles.Identity)&quot;"
           WorkingDirectory="$(MSBuildProjectDirectory)"/>
 
   </Target>
 
   <Target Name="Compile" DependsOnTargets="Clean;Version">
-    <MSBuild Projects="KickStart.sln"
+    <MSBuild Projects="%(SolutionFiles.Identity)"
              Properties="Configuration=$(BuildConfiguration)"/>
   </Target>
 

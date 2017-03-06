@@ -20,7 +20,7 @@ namespace KickStart.AutoMapper
         /// Gets or sets the <see langword="delegate"/> to call for additional configuration.
         /// </summary>
         /// <value>
-        /// The <see langword="delegate"/> to call for additional configuration..
+        /// The <see langword="delegate"/> to call for additional configuration.
         /// </value>
         public Action<IMapperConfigurationExpression> Initialize { get; set; }
     }
