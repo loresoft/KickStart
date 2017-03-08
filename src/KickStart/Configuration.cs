@@ -20,7 +20,7 @@ namespace KickStart
             Assemblies.ExcludeName("mscorlib");
             Assemblies.ExcludeName("Microsoft");
             Assemblies.ExcludeName("System");
-            
+
             // exclude self
             Assemblies.ExcludeAssemblyFor<IKickStarter>();
 
@@ -58,6 +58,6 @@ namespace KickStart
         /// <value>
         /// The <see langword="delegate" /> where log messages will be written.
         /// </value>
-        public Action<string> LogWriter { get; set;  }
+        public Action<string> LogWriter { get; set; }
     }
 }

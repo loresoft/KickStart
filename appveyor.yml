@@ -1,8 +1,8 @@
-version: 4.0.0.{build}
+version: 4.1.0.{build}
 os: Visual Studio 2017 RC
 environment:
   Major: 4
-  Minor: 0
+  Minor: 1
   Revision: 0
 configuration: Release
 before_build:

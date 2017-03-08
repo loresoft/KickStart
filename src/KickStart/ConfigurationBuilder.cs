@@ -37,7 +37,7 @@ namespace KickStart
 
 
         /// <summary>
-        /// Include the current loaded assemblies as a source.
+        /// Include the current loaded assemblies as a type scaning source.
         /// </summary>
         /// <returns>
         /// A fluent <see langword="interface"/> to configure KickStart.
@@ -49,19 +49,7 @@ namespace KickStart
         }
 
         /// <summary>
-        /// Include the assembly from the specified type <typeparamref name="T" />.
-        /// </summary>
-        /// <typeparam name="T">The type to get assembly from.</typeparam>
-        /// <returns>
-        /// A fluent <see langword="interface"/> to configure KickStart.
-        /// </returns>
-        public IConfigurationBuilder IncludeAssemblyFor<T>()
-        {
-            return IncludeAssembly(typeof(T).GetTypeInfo().Assembly);
-        }
-
-        /// <summary>
-        /// Include the specified <see cref="Assembly" />.
+        /// Include the specified <see cref="Assembly" /> as a type scaning source.
         /// </summary>
         /// <param name="assembly">The assembly to include.</param>
         /// <returns>
@@ -78,7 +66,7 @@ namespace KickStart
         }
 
         /// <summary>
-        /// Include the assemblies that contain the specified name.
+        /// Include the assemblies that contain the specified name as a type scaning source.
         /// </summary>
         /// <param name="name">The name to compare.</param>
         /// <returns>
@@ -96,19 +84,7 @@ namespace KickStart
 
 
         /// <summary>
-        /// Exclude the assembly from the specified type <typeparamref name="T" />.
-        /// </summary>
-        /// <typeparam name="T">The type to get assembly from.</typeparam>
-        /// <returns>
-        /// A fluent <see langword="interface"/> to configure KickStart.
-        /// </returns>
-        public IConfigurationBuilder ExcludeAssemblyFor<T>()
-        {
-            return ExcludeAssembly(typeof(T).GetTypeInfo().Assembly);
-        }
-
-        /// <summary>
-        /// Exclude the specified <see cref="Assembly" />.
+        /// Exclude the specified <see cref="Assembly" /> as a type scaning source.
         /// </summary>
         /// <param name="assembly">The assembly to exclude.</param>
         /// <returns>
@@ -125,7 +101,7 @@ namespace KickStart
         }
 
         /// <summary>
-        /// Exclude the assemblies that start with the specified name.
+        /// Exclude the assemblies that start with the specified name as a type scaning source.
         /// </summary>
         /// <param name="name">The name to compare.</param>
         /// <returns>
@@ -179,7 +155,7 @@ namespace KickStart
 
 
         /// <summary>
-        /// Set a <see langword="delegate" /> where log messages will be written. This override the default trace logging.
+        /// Set a <see langword="delegate" /> where log messages will be written.
         /// </summary>
         /// <param name="writer">The writer <see langword="delegate" />..</param>
         /// <returns>

@@ -64,8 +64,8 @@ namespace KickStart.EntityChange.Tests
             items.Path.Should().Be("Items[0]");
             items.CurrentFormatted.Should().Be("abc-123");
             items.Operation.Should().Be(ChangeOperation.Add);
-            
-            
+
+
             WriteMarkdown(changes);
         }
 
