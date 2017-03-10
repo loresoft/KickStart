@@ -48,6 +48,8 @@ namespace KickStart
 
             configurator(builder);
 
+
+
             var assemblies = config.Assemblies.Resolve();
             var context = new Context(assemblies, config.Data, config.LogWriter);
 

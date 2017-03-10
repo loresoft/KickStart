@@ -86,7 +86,7 @@
       <ProjectFiles Include="$(SourceFolder)\**\*.csproj"/>
     </ItemGroup>
 
-    <exec Command="dotnet pack &quot;%(ProjectFiles.Identity)&quot; --output &quot;$(BuildFolder)&quot; --include-symbols --configuration $(BuildConfiguration) -p:Version=$(PackageVersion)"
+    <exec Command="dotnet pack &quot;%(ProjectFiles.Identity)&quot; --output &quot;$(BuildFolder)&quot; --include-symbols --include-source --configuration $(BuildConfiguration) -p:Version=$(PackageVersion)"
           WorkingDirectory="$(SourceFolder)\%(ProjectFiles.RecursiveDir)"/>
 
   </Target>

@@ -54,7 +54,7 @@ namespace KickStart
         /// The data dictionary shared with all starter modules.
         /// </value>
         public IDictionary<string, object> Data { get; }
-        
+
         /// <summary>
         /// Gets the <see langword="delegate" /> where log messages will be written.
         /// </summary>
@@ -163,7 +163,7 @@ namespace KickStart
         {
             WriteLog(() => string.Format(format, args));
         }
-        
+
         /// <summary>
         /// Writes the message to the underlying log writer.
         /// </summary>
