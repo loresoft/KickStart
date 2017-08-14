@@ -13,7 +13,8 @@ namespace KickStart
         /// </summary>
         /// <param name="configurationBuilder">The configuration builder.</param>
         /// <returns></returns>
-        public static IConfigurationBuilder UseSerilog(this IConfigurationBuilder configurationBuilder) {
+        public static IConfigurationBuilder UseSerilog(this IConfigurationBuilder configurationBuilder)
+        {
             return UseSerilog(configurationBuilder, null);
         }
 
@@ -24,14 +25,16 @@ namespace KickStart
         /// <param name="configurationBuilder">The configuration builder.</param>
         /// <param name="configure">The configure action for Serilog.</param>
         /// <returns></returns>
-        public static IConfigurationBuilder UseSerilog(this IConfigurationBuilder configurationBuilder, Action<Serilog.LoggerConfiguration> configure) {
-            if (configure != null) {
-                var configuration = new Serilog.LoggerConfiguration();
-                configure(configuration);
+        public static IConfigurationBuilder UseSerilog(this IConfigurationBuilder configurationBuilder, Action<Serilog.LoggerConfiguration> configure)
+        {
+            var options = new SerilogOptions { Configure = configure };
+            var starter = new SerilogStarter(options);
 
-                // Activate the configuration
-                Serilog.Log.Logger = configuration.CreateLogger();
-            }
+            configurationBuilder.ExcludeAssemblyFor<SerilogStarter>();
+            configurationBuilder.ExcludeAssemblyFor<Serilog.ILogger>();
+            configurationBuilder.ExcludeName("Serilog");
+
+            configurationBuilder.Use(starter);
 
             // register log writer
             configurationBuilder.LogTo(Serilog.Log.Debug);
