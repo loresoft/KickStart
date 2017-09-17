@@ -30,14 +30,14 @@ namespace KickStart.DependencyInjection
         {
             var serviceCollection = _options?.Creator() ?? new ServiceCollection();
 
-            _options.Initializer?.Invoke(serviceCollection);
+            _options?.Initializer?.Invoke(serviceCollection);
 
             RegisterDependencyInjection(context, serviceCollection);
             RegisterServiceModule(context, serviceCollection);
 
             var provider = serviceCollection.BuildServiceProvider();
 
-            _options.Accessor?.Invoke(provider);
+            _options?.Accessor?.Invoke(provider);
 
             context.SetServiceProvider(provider);
         }
