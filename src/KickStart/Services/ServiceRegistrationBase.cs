@@ -3,15 +3,24 @@
 namespace KickStart.Services
 {
     /// <summary>
-    /// An <see langword="interface"/> for service registration
+    /// Base class for <see cref="IServiceRegistration"/>
     /// </summary>
-    public interface IServiceRegistration
+    public abstract class ServiceRegistrationBase : IServiceRegistration
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ServiceRegistrationBase"/> class.
+        /// </summary>
+        /// <param name="serviceContext">The current service <see cref="Context"/>.</param>
+        protected ServiceRegistrationBase(Context serviceContext)
+        {
+            ServiceContext = serviceContext ?? throw new ArgumentNullException(nameof(serviceContext));
+        }
+
         /// <summary>
         /// Gets the current service <see cref="Context"/>.
         /// </summary>
         /// <value>The current service <see cref="Context"/></value>
-        Context ServiceContext { get; }
+        public Context ServiceContext { get; }
 
         /// <summary>
         /// Registers a service of the type specified in <paramref name="serviceType" /> with an
@@ -24,7 +33,7 @@ namespace KickStart.Services
         /// <returns>
         /// A reference to this instance after the operation has completed.
         /// </returns>
-        IServiceRegistration Register(Type serviceType, Type implementationType, ServiceLifetime lifetime);
+        public abstract IServiceRegistration Register(Type serviceType, Type implementationType, ServiceLifetime lifetime);
 
         /// <summary>
         /// Registers a service of the type specified in <paramref name="serviceType" /> with a
@@ -38,7 +47,6 @@ namespace KickStart.Services
         /// A reference to this instance after the operation has completed.
         /// </returns>
         /// <seealso cref="ServiceLifetime.Singleton" />
-        IServiceRegistration Register(Type serviceType, Func<IServiceProvider, object> implementationFactory, ServiceLifetime lifetime);
-
+        public abstract IServiceRegistration Register(Type serviceType, Func<IServiceProvider, object> implementationFactory, ServiceLifetime lifetime);
     }
 }

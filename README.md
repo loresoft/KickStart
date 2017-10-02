@@ -23,7 +23,7 @@ To install KickStart, run the following command in the Package Manager Console
 
     PM> Install-Package KickStart
     
-More information about NuGet package avaliable at
+More information about NuGet package available at
 <https://nuget.org/packages/KickStart>
 
 ## Development Builds
@@ -58,7 +58,7 @@ Pass data to the startup modules
 
 ```csharp
 Kick.Start(config => config
-    .Data("enviroment", "debug")
+    .Data("environment", "debug")
     .Data(d =>
     {
         d["key"] = 123;
@@ -141,6 +141,46 @@ To install Autofac extension, run the following command in the Package Manager C
 
     PM> Install-Package KickStart.Autofac
 
+### DependencyInjection
+
+The DependencyInjection extension allows using Microsoft.Extensions.DependencyInjection for depenancy injection.
+
+Basic Usage
+
+```csharp
+Kick.Start(config => config
+    .LogTo(_output.WriteLine)
+    .IncludeAssemblyFor<UserRepository>() // where to look
+    .UseDependencyInjection() // initialize DependencyInjection
+);
+```
+
+Integrate with asp.net core 2.0
+
+```csharp
+public class Startup
+{
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
+    {
+        // this will auto register logging and run the DependencyInjection startup
+        services.KickStart(c => c
+            .IncludeAssemblyFor<UserRepository>() // where to look
+            .Data("configuration", Configuration) // pass configuration to all startup modules
+            .Data("hostProcess", "web") // used for conditional registration
+            .UseStartupTask() // run startup task
+        );
+    }
+}
+```
+
 ### SimpleInjector 
 
 The SimpleInjector extension allows registration of types to be resolved by running all instances of `ISimpleInjectorRegistration`.  The extension also creates a default container and sets it to the `Kick.Container` singleton for access later.
@@ -198,41 +238,6 @@ To install Unity extension, run the following command in the Package Manager Con
 
     PM> Install-Package KickStart.Unity
 
-### NLog
-
-Use NLog as a logger for KickStart
-
-Basic usage
-
-```csharp
-Kick.Start(c => c
-    .IncludeAssemblyFor<Project>()
-    .UseNLog()
-    .UseStartupTask()
-);
-```
-
-Configure NLog to use ConsoleTarget
-
-```csharp
-Kick.Start(c => c
-    .IncludeAssemblyFor<Project>()
-    .UseNLog(config =>
-    {
-        var consoleTarget = new ConsoleTarget();
-        consoleTarget.Layout = "${time} ${level:padding=1:fixedLength=true} ${logger:shortName=true} ${message} ${exception:format=tostring}";        
-        config.AddTarget("console", consoleTarget);
-
-        var consoleRule = new LoggingRule("*", NLog.LogLevel.Trace, consoleTarget);
-        config.LoggingRules.Add(consoleRule);
-    })
-    .UseStartupTask()
-);
-```
-
-To install NLog extension, run the following command in the Package Manager Console
-
-    PM> Install-Package KickStart.NLog
 
 ### xUnit
 
@@ -269,7 +274,45 @@ public class StartupTaskStarterTest
 }
 ```
 
+## Generic Service Registration
+
+KickStart has a generic service registration abstraction.  This allows for the creation of a generic class module that registers services for dependency injection that is container agnostic.
+
+Example module to register services
+
+```csharp
+public class UserServiceModule : IServiceModule
+{
+    public void Register(IServiceRegistration services, IDictionary<string, object> data)
+    {
+        services.RegisterSingleton<IConnection, SampleConnection>();
+        services.RegisterTransient<IUserService, UserService>(c => new UserService(c.GetService<IConnection>()));
+
+        // register all types that are assignable to IService
+        services.RegisterSingleton(r => r
+            .Types(t => t.AssignableTo<IService>())
+            .As(s => s.Self().ImplementedInterfaces())
+        );
+
+        // register all types that are assignable to IVehicle
+        services.RegisterSingleton(r => r
+            .Types(t => t.AssignableTo<IVehicle>())
+            .As(s => s.Self().ImplementedInterfaces())
+        );
+    }
+}
+```
+
 ## Change Log
+
+### Version 6.0
+
+- add assembly scanning for generic service registration
+- [Breaking] internal change to `Context`.  Property Assemblies changed to Types.
+
+### Version 5.0
+
+- update to .net core 2
 
 ### Version 4.0
 

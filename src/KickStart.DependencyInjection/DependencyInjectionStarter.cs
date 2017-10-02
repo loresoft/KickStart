@@ -56,7 +56,7 @@ namespace KickStart.DependencyInjection
 
         private void RegisterServiceModule(Context context, IServiceCollection serviceCollection)
         {
-            var wrapper = new DependencyInjectionRegistration(serviceCollection);
+            var wrapper = new DependencyInjectionRegistration(context, serviceCollection);
             var modules = context.GetInstancesAssignableFrom<IServiceModule>();
             foreach (var module in modules)
             {

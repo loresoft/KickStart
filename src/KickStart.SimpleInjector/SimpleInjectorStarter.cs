@@ -34,7 +34,7 @@ namespace KickStart.SimpleInjector
 
             RegisterSimpleInjector(context, container);
             RegisterServiceModule(context, container);
-                        
+
             if (_options.VerificationOption.HasValue)
                 container.Verify(_options.VerificationOption.Value);
 
@@ -57,7 +57,7 @@ namespace KickStart.SimpleInjector
 
         private void RegisterServiceModule(Context context, Container container)
         {
-            var wrapper = new SimpleInjectorRegistration(container);
+            var wrapper = new SimpleInjectorRegistration(context, container);
             var modules = context.GetInstancesAssignableFrom<IServiceModule>();
             foreach (var module in modules)
             {

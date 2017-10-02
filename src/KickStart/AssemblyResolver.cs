@@ -23,6 +23,7 @@ namespace KickStart
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyResolver"/> class.
         /// </summary>
+        /// <param name="logWriter">A function to write log messages to.</param>
         public AssemblyResolver(Action<string> logWriter = null)
         {
             _sources = new List<Func<IEnumerable<Assembly>>>();
@@ -124,7 +125,7 @@ namespace KickStart
         }
 
         /// <summary>
-        /// Exclude the assemblies that start with the specified name.
+        /// Exclude the assemblies that start with the specified <paramref name="name"/>.
         /// </summary>
         /// <param name="name">The name to compare.</param>
         public void ExcludeName(string name)

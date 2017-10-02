@@ -52,7 +52,7 @@ namespace KickStart.Unity
 
         private void RegisterServiceModule(Context context, IUnityContainer container)
         {
-            var wrapper = new UnityServiceRegistration(container);
+            var wrapper = new UnityServiceRegistration(context, container);
             var modules = context.GetInstancesAssignableFrom<IServiceModule>();
             foreach (var module in modules)
             {

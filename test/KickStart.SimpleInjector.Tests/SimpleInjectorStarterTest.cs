@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using KickStart.Services;
 using KickStart.StartupTask;
@@ -67,7 +68,7 @@ namespace KickStart.SimpleInjector.Tests
                 .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserSimpleInjectorRegistration>()
                 .IncludeAssemblyFor<UserServiceModule>()
-                .UseSimpleInjector()
+                .UseSimpleInjector(s => s.Initialize(c => c.Options.AllowOverridingRegistrations = true))
             );
 
             Kick.ServiceProvider.Should().NotBeNull();
@@ -78,6 +79,14 @@ namespace KickStart.SimpleInjector.Tests
             userService.Should().NotBeNull();
             userService.Connection.Should().NotBeNull();
             userService.Connection.Should().BeOfType<SampleConnection>();
+
+            var vehicleService = Kick.ServiceProvider.GetService<IVehicle>();
+            vehicleService.Should().NotBeNull();
+            vehicleService.Should().BeOfType<DeliveryVehicle>();
+
+            var minivanService = Kick.ServiceProvider.GetService<IMinivan>();
+            minivanService.Should().NotBeNull();
+            minivanService.Should().BeOfType<DeliveryVehicle>();
         }
 
 
@@ -88,7 +97,7 @@ namespace KickStart.SimpleInjector.Tests
                 .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserSimpleInjectorRegistration>()
                 .IncludeAssemblyFor<UserServiceModule>()
-                .UseSimpleInjector()
+                .UseSimpleInjector(s => s.Initialize(c => c.Options.AllowOverridingRegistrations = true))
                 .UseStartupTask()
             );
 

@@ -8,8 +8,8 @@ namespace KickStart.DependencyInjection
     /// <summary>
     /// Microsoft.Extensions.DependencyInjection implementation for <see cref="IServiceRegistration"/>.
     /// </summary>
-    /// <seealso cref="KickStart.Services.IServiceRegistration" />
-    public class DependencyInjectionRegistration : IServiceRegistration
+    /// <seealso cref="IServiceRegistration" />
+    public class DependencyInjectionRegistration : ServiceRegistrationBase
     {
         private readonly IServiceCollection _container;
 
@@ -17,10 +17,12 @@ namespace KickStart.DependencyInjection
         /// Initializes a new instance of the <see cref="DependencyInjectionRegistration"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
-        public DependencyInjectionRegistration(IServiceCollection container)
+        /// <param name="serviceContext">The current service <see cref="Context"/>.</param>
+        public DependencyInjectionRegistration(Context serviceContext, IServiceCollection container) : base(serviceContext)
         {
             _container = container;
         }
+
 
         /// <summary>
         /// Registers a service of the type specified in <paramref name="serviceType" /> with an
@@ -33,7 +35,7 @@ namespace KickStart.DependencyInjection
         /// <returns>
         /// A reference to this instance after the operation has completed.
         /// </returns>
-        public IServiceRegistration Register(Type serviceType, Type implementationType, ServiceLifetime lifetime)
+        public override IServiceRegistration Register(Type serviceType, Type implementationType, ServiceLifetime lifetime)
         {
             if (lifetime == ServiceLifetime.Singleton)
                 _container.AddSingleton(serviceType, implementationType);
@@ -55,7 +57,7 @@ namespace KickStart.DependencyInjection
         /// A reference to this instance after the operation has completed.
         /// </returns>
         /// <seealso cref="F:KickStart.Services.ServiceLifetime.Singleton" />
-        public IServiceRegistration Register(Type serviceType, Func<IServiceProvider, object> implementationFactory, ServiceLifetime lifetime)
+        public override IServiceRegistration Register(Type serviceType, Func<IServiceProvider, object> implementationFactory, ServiceLifetime lifetime)
         {
             if (lifetime == ServiceLifetime.Singleton)
                 _container.AddSingleton(serviceType, implementationFactory);

@@ -158,6 +158,17 @@ namespace KickStart.Services
             return services.RegisterTransient(typeof(TService), implementationFactory);
         }
 
+        /// <summary>
+        /// Scan and Register transient services using the specified builder.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceRegistration"/> to add the service to.</param>
+        /// <param name="builder">The builder delegate used to scan and register services</param>
+        /// <returns>A reference to this instance after the operation has completed.</returns>
+        public static IServiceRegistration RegisterTransient(this IServiceRegistration services, Action<IServiceRegistrationBuilder> builder)
+        {
+            return services.Register(builder, ServiceLifetime.Transient);
+        }
+
 
         /// <summary>
         /// Registers a singleton service of the type specified in <paramref name="serviceType"/> with an
@@ -353,6 +364,45 @@ namespace KickStart.Services
                 throw new ArgumentNullException(nameof(implementationInstance));
 
             return services.RegisterSingleton(typeof(TService), implementationInstance);
+        }
+
+        /// <summary>
+        /// Scan and Register singleton services using the specified <paramref name="builder"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceRegistration"/> to add the service to.</param>
+        /// <param name="builder">The builder delegate used to scan and register services</param>
+        /// <returns>A reference to this instance after the operation has completed.</returns>
+        public static IServiceRegistration RegisterSingleton(this IServiceRegistration services, Action<IServiceRegistrationBuilder> builder)
+        {
+            return services.Register(builder, ServiceLifetime.Singleton);
+        }
+
+
+        /// <summary>
+        /// Scan and Register services using the specified <paramref name="builder"/> for the specified <paramref name="lifetime"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceRegistration"/> to add the service to.</param>
+        /// <param name="builder">The builder delegate used to scan and register services</param>
+        /// <param name="lifetime">The service lifetime.</param>
+        /// <returns>A reference to this instance after the operation has completed.</returns>
+        public static IServiceRegistration Register(this IServiceRegistration services, Action<IServiceRegistrationBuilder> builder, ServiceLifetime lifetime)
+        {
+            if (services == null)
+                throw new ArgumentNullException(nameof(services));
+            if (builder == null)
+                throw new ArgumentNullException(nameof(builder));
+
+            var types = services.ServiceContext.Types;
+
+            var serviceBuilder = new ServiceRegistrationBuilder(types);
+            builder(serviceBuilder);
+
+            var mapping = serviceBuilder.TypeMaps;
+            foreach (var typeMap in mapping)
+                foreach (var serviceType in typeMap.ServiceTypes)
+                    services.Register(serviceType, typeMap.ImplementationType, lifetime);
+
+            return services;
         }
     }
 }

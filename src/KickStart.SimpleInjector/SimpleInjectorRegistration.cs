@@ -7,8 +7,8 @@ namespace KickStart.SimpleInjector
     /// <summary>
     /// SimpleInjector implementation for <see cref="IServiceRegistration"/>.
     /// </summary>
-    /// <seealso cref="KickStart.Services.IServiceRegistration" />
-    public class SimpleInjectorRegistration : IServiceRegistration
+    /// <seealso cref="IServiceRegistration" />
+    public class SimpleInjectorRegistration : ServiceRegistrationBase
     {
         private readonly Container _container;
 
@@ -16,7 +16,8 @@ namespace KickStart.SimpleInjector
         /// Initializes a new instance of the <see cref="SimpleInjectorRegistration"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
-        public SimpleInjectorRegistration(Container container)
+        /// <param name="serviceContext">The current service <see cref="Context"/>.</param>
+        public SimpleInjectorRegistration(Context serviceContext, Container container) : base(serviceContext)
         {
             _container = container;
         }
@@ -32,7 +33,7 @@ namespace KickStart.SimpleInjector
         /// <returns>
         /// A reference to this instance after the operation has completed.
         /// </returns>
-        public IServiceRegistration Register(Type serviceType, Type implementationType, ServiceLifetime lifetime)
+        public override IServiceRegistration Register(Type serviceType, Type implementationType, ServiceLifetime lifetime)
         {
             if (lifetime == ServiceLifetime.Singleton)
                 _container.RegisterSingleton(serviceType, implementationType);
@@ -54,7 +55,7 @@ namespace KickStart.SimpleInjector
         /// A reference to this instance after the operation has completed.
         /// </returns>
         /// <seealso cref="F:KickStart.Services.ServiceLifetime.Singleton" />
-        public IServiceRegistration Register(Type serviceType, Func<IServiceProvider, object> implementationFactory, ServiceLifetime lifetime)
+        public override IServiceRegistration Register(Type serviceType, Func<IServiceProvider, object> implementationFactory, ServiceLifetime lifetime)
         {
             if (lifetime == ServiceLifetime.Singleton)
                 _container.RegisterSingleton(serviceType, () => implementationFactory(_container));

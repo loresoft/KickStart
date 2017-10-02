@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 #if PORTABLE
 using Stopwatch = KickStart.Portability.Stopwatch;
 #else
@@ -51,7 +52,13 @@ namespace KickStart
 
 
             var assemblies = config.Assemblies.Resolve();
-            var context = new Context(assemblies, config.Data, config.LogWriter);
+
+            // cache types
+            var types = assemblies
+                .SelectMany(a => a.GetLoadableTypes())
+                .ToList();
+
+            var context = new Context(types, config.Data, config.LogWriter);
 
             foreach (var starter in config.Starters)
             {

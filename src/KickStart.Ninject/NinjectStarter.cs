@@ -41,7 +41,7 @@ namespace KickStart.Ninject
             var kernel = new StandardKernel(settings, modules);
 
             _options.InitializeKernel?.Invoke(kernel);
-            
+
             context.SetServiceProvider(kernel);
         }
     }

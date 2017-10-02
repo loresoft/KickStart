@@ -3,12 +3,12 @@ using KickStart.Services;
 using Autofac;
 
 namespace KickStart.Autofac
-{    
+{
     /// <summary>
     /// Autofac implementation for <see cref="IServiceRegistration"/>.
     /// </summary>
     /// <seealso cref="KickStart.Services.IServiceRegistration" />
-    public class AutofacServiceRegistration : IServiceRegistration
+    public class AutofacServiceRegistration : ServiceRegistrationBase
     {
         private readonly ContainerBuilder _container;
 
@@ -16,11 +16,11 @@ namespace KickStart.Autofac
         /// Initializes a new instance of the <see cref="AutofacServiceRegistration"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
-        public AutofacServiceRegistration(ContainerBuilder container)
+        /// <param name="serviceContext">The current service <see cref="Context"/>.</param>
+        public AutofacServiceRegistration(Context serviceContext, ContainerBuilder container) : base(serviceContext)
         {
             _container = container;
         }
-
 
         /// <summary>
         /// Registers a service of the type specified in <paramref name="serviceType" /> with an
@@ -33,7 +33,7 @@ namespace KickStart.Autofac
         /// <returns>
         /// A reference to this instance after the operation has completed.
         /// </returns>
-        public IServiceRegistration Register(Type serviceType, Type implementationType, ServiceLifetime lifetime)
+        public override IServiceRegistration Register(Type serviceType, Type implementationType, ServiceLifetime lifetime)
         {
 
             var builder = _container
@@ -42,7 +42,7 @@ namespace KickStart.Autofac
 
 
             if (lifetime == ServiceLifetime.Singleton)
-                builder = builder.SingleInstance();
+                builder.SingleInstance();
 
 
             return this;
@@ -60,7 +60,7 @@ namespace KickStart.Autofac
         /// A reference to this instance after the operation has completed.
         /// </returns>
         /// <seealso cref="F:KickStart.Services.ServiceLifetime.Singleton" />
-        public IServiceRegistration Register(Type serviceType, Func<IServiceProvider, object> implementationFactory, ServiceLifetime lifetime)
+        public override IServiceRegistration Register(Type serviceType, Func<IServiceProvider, object> implementationFactory, ServiceLifetime lifetime)
         {
             var builder = _container
                 .Register(c => implementationFactory(Wrap(c)))
@@ -68,7 +68,7 @@ namespace KickStart.Autofac
 
 
             if (lifetime == ServiceLifetime.Singleton)
-                builder = builder.SingleInstance();
+                builder.SingleInstance();
 
 
             return this;

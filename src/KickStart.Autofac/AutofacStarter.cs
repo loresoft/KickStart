@@ -57,7 +57,7 @@ namespace KickStart.Autofac
 
         private void RegisterServiceModule(Context context, ContainerBuilder builder)
         {
-            var wrapper = new AutofacServiceRegistration(builder);
+            var wrapper = new AutofacServiceRegistration(context, builder);
             var modules = context.GetInstancesAssignableFrom<IServiceModule>();
             foreach (var module in modules)
             {

@@ -11,35 +11,10 @@ namespace KickStart
     public static class AssemblyExtensions
     {
         /// <summary>
-        /// Gets the types assignable from <typeparamref name="T"/>.
-        /// </summary>
-        /// <typeparam name="T">The type to determine whether if it can be assigned.</typeparam>
-        /// <param name="assembly">The assembly to search types.</param>
-        /// <returns>An enumerable list of types the are assignable from <typeparamref name="T"/>.</returns>
-        /// <exception cref="System.ArgumentNullException">When assembly is null.</exception>
-        public static IEnumerable<Type> GetTypesAssignableFrom<T>(this Assembly assembly)
-        {
-            if (assembly == null)
-                throw new ArgumentNullException(nameof(assembly));
-
-            var type = typeof(T);
-            var typeInfo = type.GetTypeInfo();
-
-            return assembly
-                .GetLoadableTypes()
-                .Where(t =>
-                {
-                    var i = t.GetTypeInfo();
-                    return i.IsPublic && !i.IsAbstract && typeInfo.IsAssignableFrom(i);
-                });
-        }
-
-        /// <summary>
         /// Gets the public types defined in this assembly that are visible and can be loaded outside the assembly.
         /// </summary>
         /// <param name="assembly">The assembly to search types.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">assembly</exception>
+        /// <returns>The types defined in this assembly that are visible outside the assembly.</returns>
         public static IEnumerable<Type> GetLoadableTypes(this Assembly assembly)
         {
             if (assembly == null)
@@ -67,6 +42,32 @@ namespace KickStart
             }
 
             return types;
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the specified <paramref name="otherType"/> can be assigned to the current <paramref name="type"/>.
+        /// </summary>
+        /// <param name="type">The current type.</param>
+        /// <param name="otherType">The type to check.</param>
+        /// <returns>true if the specified type can be assigned to this type; otherwise, false.</returns>
+        public static bool IsAssignableTo(this Type type, Type otherType)
+        {
+            var typeInfo = type.GetTypeInfo();
+            var otherTypeInfo = otherType.GetTypeInfo();
+
+            return otherTypeInfo.IsAssignableFrom(typeInfo);
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the specified <paramref name="type"/> is concrete.
+        /// </summary>
+        /// <param name="type">The type to check.</param>
+        /// <returns>true if the specified type is concrete; otherwise, false.</returns>
+        public static bool IsConcreteType(this Type type)
+        {
+            var typeInfo = type.GetTypeInfo();
+
+            return typeInfo.IsClass && !typeInfo.IsAbstract;
         }
 
 #if NET40 || PORTABLE

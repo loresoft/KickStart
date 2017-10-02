@@ -7,8 +7,8 @@ namespace KickStart.Unity
     /// <summary>
     /// Unity implementation for <see cref="IServiceRegistration"/>.
     /// </summary>
-    /// <seealso cref="KickStart.Services.IServiceRegistration" />
-    public class UnityServiceRegistration : IServiceRegistration
+    /// <seealso cref="IServiceRegistration" />
+    public class UnityServiceRegistration : ServiceRegistrationBase
     {
         private readonly IUnityContainer _container;
 
@@ -16,11 +16,11 @@ namespace KickStart.Unity
         /// Initializes a new instance of the <see cref="UnityServiceRegistration"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
-        public UnityServiceRegistration(IUnityContainer container)
+        /// <param name="serviceContext">The current service <see cref="Context"/>.</param>
+        public UnityServiceRegistration(Context serviceContext, IUnityContainer container) : base(serviceContext)
         {
             _container = container;
         }
-
 
         /// <summary>
         /// Registers a service of the type specified in <paramref name="serviceType" /> with an
@@ -33,7 +33,7 @@ namespace KickStart.Unity
         /// <returns>
         /// A reference to this instance after the operation has completed.
         /// </returns>
-        public IServiceRegistration Register(Type serviceType, Type implementationType, ServiceLifetime lifetime)
+        public override IServiceRegistration Register(Type serviceType, Type implementationType, ServiceLifetime lifetime)
         {
             var lifetimeManager = lifetime == ServiceLifetime.Singleton ? new ContainerControlledLifetimeManager() : null;
             var builder = _container.RegisterType(serviceType, implementationType, lifetimeManager);
@@ -53,7 +53,7 @@ namespace KickStart.Unity
         /// A reference to this instance after the operation has completed.
         /// </returns>
         /// <seealso cref="F:KickStart.Services.ServiceLifetime.Singleton" />
-        public IServiceRegistration Register(Type serviceType, Func<IServiceProvider, object> implementationFactory, ServiceLifetime lifetime)
+        public override IServiceRegistration Register(Type serviceType, Func<IServiceProvider, object> implementationFactory, ServiceLifetime lifetime)
         {
             throw new NotSupportedException();
         }

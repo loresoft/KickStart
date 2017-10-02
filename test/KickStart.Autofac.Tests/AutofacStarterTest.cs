@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Autofac;
 using FluentAssertions;
 using KickStart.Services;
@@ -52,7 +53,7 @@ namespace KickStart.Autofac.Tests
 
             Kick.ServiceProvider.Should().NotBeNull();
             Kick.ServiceProvider.Should().BeOfType<AutofacServiceProvider>();
-            
+
             var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
             repo.Should().BeOfType<UserRepository>();
@@ -81,7 +82,7 @@ namespace KickStart.Autofac.Tests
 
             Kick.ServiceProvider.Should().NotBeNull();
             Kick.ServiceProvider.Should().BeOfType<AutofacServiceProvider>();
-            
+
             var repo = Kick.ServiceProvider.GetService<IUserRepository>();
             repo.Should().NotBeNull();
             repo.Should().BeOfType<UserRepository>();
@@ -115,6 +116,20 @@ namespace KickStart.Autofac.Tests
             userService.Should().BeOfType<UserService>();
             userService.Connection.Should().NotBeNull();
             userService.Connection.Should().BeOfType<SampleConnection>();
+
+            var vehicleService = Kick.ServiceProvider.GetService<IVehicle>();
+            vehicleService.Should().NotBeNull();
+            vehicleService.Should().BeOfType<DeliveryVehicle>();
+
+            var minivanService = Kick.ServiceProvider.GetService<IMinivan>();
+            minivanService.Should().NotBeNull();
+            minivanService.Should().BeOfType<DeliveryVehicle>();
+
+            var services = Kick.ServiceProvider.GetServices<IService>().ToList();
+            services.Should().NotBeNull();
+            services.Should().NotBeEmpty();
+            services.Count.Should().Be(3);
+
         }
     }
 }

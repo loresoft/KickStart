@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using KickStart.Services;
-#if PORTABLE
-using Stopwatch = KickStart.Portability.Stopwatch;
-#else
-using Stopwatch = System.Diagnostics.Stopwatch;
-#endif
 
 namespace KickStart
 {
@@ -20,12 +14,12 @@ namespace KickStart
         /// <summary>
         /// Initializes a new instance of the <see cref="Context" /> class.
         /// </summary>
-        /// <param name="assemblies">The assemblies.</param>
+        /// <param name="types">The types to scan by extensions.</param>
         /// <param name="data">The data dictionary shared with all starter modules.</param>
         /// <param name="logWriter">The <see langword="delegate" /> where log messages will be written.</param>
-        public Context(IEnumerable<Assembly> assemblies, IDictionary<string, object> data, Action<string> logWriter)
+        public Context(IEnumerable<Type> types, IDictionary<string, object> data, Action<string> logWriter)
         {
-            Assemblies = new ReadOnlyCollection<Assembly>(assemblies.ToList());
+            Types = new ReadOnlyCollection<Type>(types.ToList());
             Data = data;
             LogWriter = logWriter;
         }
@@ -40,12 +34,12 @@ namespace KickStart
         public IServiceProvider ServiceProvider { get; private set; }
 
         /// <summary>
-        /// Gets the assemblies used by KickStart.
+        /// Gets the types to scan by KickStart extensions.
         /// </summary>
         /// <value>
-        /// The assemblies.
+        /// The types to scan.
         /// </value>
-        public ReadOnlyCollection<Assembly> Assemblies { get; }
+        public ReadOnlyCollection<Type> Types { get; }
 
         /// <summary>
         /// Gets the data dictionary shared with all starter modules.
@@ -84,32 +78,30 @@ namespace KickStart
         public virtual IEnumerable<T> GetInstancesAssignableFrom<T>()
             where T : class
         {
-            return Assemblies
-                .SelectMany(GetTypesAssignableFrom<T>)
+            var type = typeof(T);
+
+            return GetTypesAssignableFrom(type)
                 .Select(CreateInstance)
                 .OfType<T>()
                 .ToList();
         }
 
         /// <summary>
-        /// Gets the types assignable from type <typeparamref name="T"/>.
+        /// Gets the types assignable from <paramref name="type"/>.
         /// </summary>
-        /// <typeparam name="T">The type to determine whether if it can be assigned.</typeparam>
-        /// <param name="assembly">The assembly to search types.</param>
-        /// <returns>An enumerable list of types the are assignable from <typeparamref name="T"/>.</returns>
-        public virtual IEnumerable<Type> GetTypesAssignableFrom<T>(Assembly assembly)
+        /// <param name="type">The type to determine whether if it can be assigned.</param>
+        /// <returns>An enumerable list of types the are assignable from <paramref name="type"/>.</returns>
+        public virtual IEnumerable<Type> GetTypesAssignableFrom(Type type)
         {
-            WriteLog("Scan Start; Assembly: '{0}', Type: '{1}'", assembly.FullName, typeof(T));
+            var typeInfo = type.GetTypeInfo();
 
-            var watch = Stopwatch.StartNew();
-            var types = assembly.GetTypesAssignableFrom<T>();
-            watch.Stop();
-
-            WriteLog("Scan Complete; Assembly: '{0}', Type: '{1}', Time: {2} ms", assembly.FullName, typeof(T), watch.ElapsedMilliseconds);
-
-            return types;
+            return Types
+                .Where(t =>
+                {
+                    var i = t.GetTypeInfo();
+                    return i.IsPublic && !i.IsAbstract && typeInfo.IsAssignableFrom(i);
+                });
         }
-
 
         /// <summary>
         /// Create an instance of the specified <paramref name="type"/>.

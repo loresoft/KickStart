@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Core;
@@ -74,6 +75,20 @@ namespace KickStart.DependencyInjection.Tests
             userService.Should().NotBeNull();
             userService.Connection.Should().NotBeNull();
             userService.Connection.Should().BeOfType<SampleConnection>();
+
+
+            var vehicleService = Kick.ServiceProvider.GetService<IVehicle>();
+            vehicleService.Should().NotBeNull();
+            vehicleService.Should().BeOfType<DeliveryVehicle>();
+
+            var minivanService = Kick.ServiceProvider.GetService<IMinivan>();
+            minivanService.Should().NotBeNull();
+            minivanService.Should().BeOfType<DeliveryVehicle>();
+
+            var services = Kick.ServiceProvider.GetServices<IService>().ToList();
+            services.Should().NotBeNull();
+            services.Should().NotBeEmpty();
+            services.Count.Should().Be(3);
         }
 
 
