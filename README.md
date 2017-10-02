@@ -180,7 +180,10 @@ public class Startup
     }
 }
 ```
+To install DependencyInjection extension, run the following command in the Package Manager Console
 
+    PM> Install-Package KickStart.DependencyInjection
+    
 ### SimpleInjector 
 
 The SimpleInjector extension allows registration of types to be resolved by running all instances of `ISimpleInjectorRegistration`.  The extension also creates a default container and sets it to the `Kick.Container` singleton for access later.
