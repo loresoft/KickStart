@@ -39,6 +39,8 @@ namespace KickStart.DependencyInjection
         {
             if (lifetime == ServiceLifetime.Singleton)
                 _container.AddSingleton(serviceType, implementationType);
+            else if (lifetime == ServiceLifetime.Scoped)
+                _container.AddScoped(serviceType, implementationType);
             else
                 _container.AddTransient(serviceType, implementationType);
 
@@ -61,6 +63,8 @@ namespace KickStart.DependencyInjection
         {
             if (lifetime == ServiceLifetime.Singleton)
                 _container.AddSingleton(serviceType, implementationFactory);
+            else if (lifetime == ServiceLifetime.Scoped)
+                _container.AddScoped(serviceType, implementationFactory);
             else
                 _container.AddTransient(serviceType, implementationFactory);
 

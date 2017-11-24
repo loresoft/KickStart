@@ -43,7 +43,8 @@ namespace KickStart.Autofac
 
             if (lifetime == ServiceLifetime.Singleton)
                 builder.SingleInstance();
-
+            else if (lifetime == ServiceLifetime.Scoped)
+                builder.InstancePerLifetimeScope();
 
             return this;
         }
@@ -69,7 +70,8 @@ namespace KickStart.Autofac
 
             if (lifetime == ServiceLifetime.Singleton)
                 builder.SingleInstance();
-
+            else if (lifetime == ServiceLifetime.Scoped)
+                builder.InstancePerLifetimeScope();
 
             return this;
         }

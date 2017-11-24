@@ -22,7 +22,7 @@ The KickStart library is available on nuget.org via package name `KickStart`.
 To install KickStart, run the following command in the Package Manager Console
 
     PM> Install-Package KickStart
-    
+
 More information about NuGet package available at
 <https://nuget.org/packages/KickStart>
 
@@ -88,7 +88,7 @@ Basic usage
 ```csharp
 Kick.Start(config => config
     .IncludeAssemblyFor<UserModule>() // where to look for tasks
-    .UseStartupTask() // include startup tasks in the Kick Start        
+    .UseStartupTask() // include startup tasks in the Kick Start
 );
 ```
 
@@ -104,7 +104,7 @@ Kick.Start(config => config
         {
             //do work here
         });
-    }) 
+    })
 );
 ```
 
@@ -117,7 +117,7 @@ Basic usage
 ```csharp
 Kick.Start(config => config
     .IncludeAssemblyFor<UserRepository>() // where to look for tasks
-    .UseAutofac() // initialize Autofac        
+    .UseAutofac() // initialize Autofac
 );
 ```
 
@@ -180,11 +180,12 @@ public class Startup
     }
 }
 ```
+
 To install DependencyInjection extension, run the following command in the Package Manager Console
 
     PM> Install-Package KickStart.DependencyInjection
-    
-### SimpleInjector 
+
+### SimpleInjector
 
 The SimpleInjector extension allows registration of types to be resolved by running all instances of `ISimpleInjectorRegistration`.  The extension also creates a default container and sets it to the `Kick.Container` singleton for access later.
 
@@ -193,7 +194,7 @@ Basic usage
 ```csharp
 Kick.Start(config => config
     .IncludeAssemblyFor<UserRepository>() // where to look
-    .UseSimpleInjector () // initialize SimpleInjector         
+    .UseSimpleInjector () // initialize SimpleInjector
 );
 ```
 
@@ -208,8 +209,8 @@ Kick.Start(c => c
         .Verify(VerificationOption.VerifyOnly)
         .Initialize(container =>
         {
-            container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle(); 
-            container.RegisterWebApiControllers(httpConfiguration); // register all controllers 
+            container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
+            container.RegisterWebApiControllers(httpConfiguration); // register all controllers
         })
         .Container(container =>
         {
@@ -224,7 +225,7 @@ To install SimpleInjector extension, run the following command in the Package Ma
 
     PM> Install-Package KickStart.SimpleInjector
 
-### Unity 
+### Unity
 
 The Unity extension allows registration of types to be resolved by running all instances of `IUnityRegistration`.  The extension also creates a default container and sets it to the `Kick.Container` singleton for access later.
 
@@ -233,7 +234,7 @@ Basic usage
 ```csharp
 Kick.Start(config => config
     .IncludeAssemblyFor<UserRepository>() // where to look
-    .UseUnity () // initialize Unity         
+    .UseUnity () // initialize Unity
 );
 ```
 
@@ -258,7 +259,7 @@ public class StartupTaskStarterTest
         // bootstrap project
         Kick.Start(config => config
             .LogTo(_output.WriteLine)
-            .Data("enviroment", "test") // pass data for conditional registration
+            .Data("environment", "test") // pass data for conditional registration
             .IncludeAssemblyFor<UserRepository>()
             .UseSimpleInjector () // initialize SimpleInjector
             .UseStartupTask()
