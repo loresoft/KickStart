@@ -3,6 +3,7 @@
 Application start-up helper to initialize things like an IoC container, register mapping information or run a task.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/lk092y48a2b9f8ys)](https://ci.appveyor.com/project/LoreSoft/kickstart)
+[![Documentation Status](https://readthedocs.org/projects/kickstart/badge/?version=latest)](http://kickstart.readthedocs.io/en/latest/?badge=latest)
 
 | Package | Version |
 | :--- | :--- |
