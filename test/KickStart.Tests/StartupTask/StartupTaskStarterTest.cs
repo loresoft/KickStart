@@ -30,7 +30,7 @@ namespace KickStart.Tests.StartupTask
         {
             //hack use logs to track execution order
             var logs = new List<string>();
-            
+
             Kick.Start(config => config
                 .LogTo(m =>
                 {

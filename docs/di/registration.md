@@ -12,6 +12,12 @@ public class UserServiceModule : IServiceModule
         services.RegisterSingleton<IConnection, SampleConnection>();
         services.RegisterTransient<IUserService, UserService>(c => new UserService(c.GetService<IConnection>()));
 
+        // register generic
+        services.RegisterSingleton(r => r
+            .Types(t => t.AssignableTo(typeof(IRepository<>)))
+            .As(s => s.Self().ImplementedInterfaces())
+        );
+
         // register all types that are assignable to IService
         services.RegisterSingleton(r => r
             .Types(t => t.AssignableTo<IService>())

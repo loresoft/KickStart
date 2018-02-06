@@ -12,11 +12,10 @@ namespace Test.Core
             services.RegisterTransient<IUserService, UserService>(c => new UserService(c.GetService<IConnection>()));
 
 
-            //services.RegisterSingleton(r => r
-            //    .Types(t => t.AssignableTo(typeof(IRepository<>)))
-            //    .As(s => s.Self().ImplementedInterfaces())
-            //);
-
+            services.RegisterSingleton(r => r
+                .Types(t => t.AssignableTo(typeof(IReadOnlyRepository<>)))
+                .As(s => s.Self().ImplementedInterfaces())
+            );
 
             services.RegisterSingleton(r => r
                 .Types(t => t.AssignableTo<IService>())

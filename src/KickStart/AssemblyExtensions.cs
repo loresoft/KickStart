@@ -55,7 +55,17 @@ namespace KickStart
             var typeInfo = type.GetTypeInfo();
             var otherTypeInfo = otherType.GetTypeInfo();
 
-            return otherTypeInfo.IsAssignableFrom(typeInfo);
+            if (!otherTypeInfo.IsGenericTypeDefinition)
+                return otherTypeInfo.IsAssignableFrom(typeInfo);
+
+            if (typeInfo.IsGenericTypeDefinition)
+                return typeInfo.Equals(otherTypeInfo);
+
+#if !NET40
+            return typeInfo.IsAssignableToGenericTypeDefinition(otherTypeInfo);
+#else
+            return false;
+#endif
         }
 
         /// <summary>
@@ -81,5 +91,43 @@ namespace KickStart
             return type;
         }
 #endif
+
+#if !NET40
+        private static bool IsAssignableToGenericTypeDefinition(this TypeInfo typeInfo, TypeInfo genericTypeInfo)
+        {
+            var interfaceTypes = typeInfo.ImplementedInterfaces.Select(t => t.GetTypeInfo());
+
+            foreach (var interfaceType in interfaceTypes)
+            {
+                if (!interfaceType.IsGenericType)
+                    continue;
+
+                var typeDefinitionTypeInfo = interfaceType
+                    .GetGenericTypeDefinition()
+                    .GetTypeInfo();
+
+                if (typeDefinitionTypeInfo.Equals(genericTypeInfo))
+                    return true;
+            }
+
+            if (typeInfo.IsGenericType)
+            {
+                var typeDefinitionTypeInfo = typeInfo
+                    .GetGenericTypeDefinition()
+                    .GetTypeInfo();
+
+                if (typeDefinitionTypeInfo.Equals(genericTypeInfo))
+                    return true;
+            }
+
+            var baseTypeInfo = typeInfo.BaseType?.GetTypeInfo();
+
+            if (baseTypeInfo == null)
+                return false;
+
+            return baseTypeInfo.IsAssignableToGenericTypeDefinition(genericTypeInfo);
+        }
+#endif
+
     }
 }

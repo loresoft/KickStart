@@ -18,7 +18,7 @@ namespace KickStart.DependencyInjection.Tests
         }
 
         [Fact]
-        public void UseSimpleInjector()
+        public void UseDependencyInjection()
         {
             Kick.Start(config => config
                 .LogTo(_output.WriteLine)
@@ -34,7 +34,7 @@ namespace KickStart.DependencyInjection.Tests
         }
 
         [Fact]
-        public void UseSimpleInjectorInitialize()
+        public void UseDependencyInjectionInitialize()
         {
             Kick.Start(config => config
                 .LogTo(_output.WriteLine)
@@ -67,9 +67,13 @@ namespace KickStart.DependencyInjection.Tests
 
             Kick.ServiceProvider.Should().NotBeNull();
 
-            var repo = Kick.ServiceProvider.GetService<IUserRepository>();
-            repo.Should().NotBeNull();
-            repo.Should().BeOfType<UserRepository>();
+            var userRepository = Kick.ServiceProvider.GetService<IUserRepository>();
+            userRepository.Should().NotBeNull();
+            userRepository.Should().BeOfType<UserRepository>();
+
+            var employeeRepository = Kick.ServiceProvider.GetService<IRepository<Employee>>();
+            employeeRepository.Should().NotBeNull();
+            employeeRepository.Should().BeOfType<EmployeeRepository>();
 
             var userService = Kick.ServiceProvider.GetService<IUserService>();
             userService.Should().NotBeNull();
