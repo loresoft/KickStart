@@ -25,6 +25,7 @@ namespace KickStart.AutoMapper.Tests
         [Fact]
         public void ConfigureBasic()
         {
+            Mapper.Reset();
             Kick.Start(config => config
                 .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserProfile>()
@@ -48,6 +49,7 @@ namespace KickStart.AutoMapper.Tests
         [Fact]
         public void ConfigureFull()
         {
+            Mapper.Reset();
             Kick.Start(config => config
                 .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserProfile>()
