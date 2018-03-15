@@ -19,15 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <PackageReference Include="EntityChange" Version="3.0.0.19" />
-    <PackageReference Include="xunit" Version="2.2.0" />
-    <PackageReference Include="FluentAssertions" Version="4.19.4" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="FluentAssertions" Version="5.1.2" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <PackageReference Include="Microsoft.NETCore.Platforms" Version="2.0.0" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>

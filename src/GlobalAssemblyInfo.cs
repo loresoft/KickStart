@@ -10,7 +10,7 @@
 
 [assembly: System.Reflection.AssemblyProduct("KickStart")]
 [assembly: System.Reflection.AssemblyCompany("LoreSoft")]
-[assembly: System.Reflection.AssemblyCopyright("Copyright © 2017 LoreSoft")]
+[assembly: System.Reflection.AssemblyCopyright("Copyright © 2018 LoreSoft")]
 [assembly: System.Reflection.AssemblyConfiguration("Release")]
 [assembly: System.Reflection.AssemblyVersion("6.0.0.0")]
 [assembly: System.Reflection.AssemblyFileVersion("6.0.0.0")]
@@ -24,7 +24,7 @@ internal sealed partial class ThisAssembly {
     
     internal const string AssemblyCompany = "LoreSoft";
     
-    internal const string AssemblyCopyright = "Copyright © 2017 LoreSoft";
+    internal const string AssemblyCopyright = "Copyright © 2018 LoreSoft";
     
     internal const string AssemblyConfiguration = "Release";
     
