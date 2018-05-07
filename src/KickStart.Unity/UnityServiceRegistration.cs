@@ -1,6 +1,7 @@
 ﻿using System;
 using KickStart.Services;
-using Microsoft.Practices.Unity;
+using Unity;
+using Unity.Lifetime;
 
 namespace KickStart.Unity
 {

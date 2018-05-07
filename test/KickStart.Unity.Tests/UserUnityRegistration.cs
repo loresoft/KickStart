@@ -1,7 +1,5 @@
-﻿using System;
-using KickStart.Unity;
-using Microsoft.Practices.Unity;
-using Test.Core;
+﻿using Test.Core;
+using Unity;
 
 namespace KickStart.Unity.Tests
 {

@@ -41,7 +41,7 @@ namespace KickStart
             }
 
             configurationBuilder.ExcludeAssemblyFor<UnityStarter>();
-            configurationBuilder.ExcludeAssemblyFor<global::Microsoft.Practices.Unity.IUnityContainer>();
+            configurationBuilder.ExcludeAssemblyFor<global::Unity.IUnityContainer>();
             configurationBuilder.Use(starter);
 
             return configurationBuilder;

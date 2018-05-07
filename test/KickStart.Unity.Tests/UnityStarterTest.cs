@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using KickStart.Services;
-using Microsoft.Practices.Unity;
 using Test.Core;
+using Unity;
 using Xunit;
 using Xunit.Abstractions;
 
