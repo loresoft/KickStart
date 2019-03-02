@@ -20,8 +20,8 @@
 
     <BuildConfiguration  Condition=" '$(BuildConfiguration)' == '' ">Release</BuildConfiguration>
 
-    <Major Condition=" '$(Major)' == '' ">6</Major>
-    <Minor Condition=" '$(Minor)' == '' ">2</Minor>
+    <Major Condition=" '$(Major)' == '' ">7</Major>
+    <Minor Condition=" '$(Minor)' == '' ">0</Minor>
     <Revision Condition=" '$(Revision)' == '' ">0</Revision>
 
     <AssemblyVersion>$(Major).$(Minor).0.0</AssemblyVersion>

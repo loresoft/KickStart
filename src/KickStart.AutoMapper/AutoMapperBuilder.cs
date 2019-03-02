@@ -43,7 +43,7 @@ namespace KickStart.AutoMapper
         {
             _options.Initialize = configuration;
             return this;
-        }        
+        }
 
     }
 }

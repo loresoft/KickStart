@@ -5,7 +5,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <VersionPrefix>5.0.0.0</VersionPrefix>
     <Authors>LoreSoft</Authors>
-    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>KickStart.Ninject</AssemblyName>
     <PackageId>KickStart.Ninject</PackageId>
@@ -33,11 +33,6 @@
 
   <ItemGroup>
     <PackageReference Include="Ninject" Version="3.3.4" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
 </Project>
