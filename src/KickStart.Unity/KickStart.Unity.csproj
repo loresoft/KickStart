@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Unity" Version="5.9.5" />
+    <PackageReference Include="Unity" Version="5.10.3" />
   </ItemGroup>
 
 </Project>

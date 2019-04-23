@@ -310,6 +310,10 @@ public class UserServiceModule : IServiceModule
 
 ## Change Log
 
+### Version 7.0
+
+- drop net45 and netstandard1.5 support
+
 ### Version 6.0
 
 - add assembly scanning for generic service registration
