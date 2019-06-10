@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityChange" Version="3.0.0.29" />
+    <PackageReference Include="EntityChange" Version="3.0.0.30" />
   </ItemGroup>
 
 </Project>
