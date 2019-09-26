@@ -1,0 +1,26 @@
+<Project>
+  <Import Project="version.props" />
+
+  <PropertyGroup Label="Source Link">
+    <ProjectParentDirectory>$([System.IO.Path]::GetDirectoryName('$(MSBuildProjectDirectory)'))</ProjectParentDirectory>
+    <ProjectParentDirectoryName>$([System.IO.Path]::GetFileName('$(ProjectParentDirectory)'))</ProjectParentDirectoryName>
+  </PropertyGroup>
+
+  <Import Project="sourcelink.props" Condition="'$(ProjectParentDirectoryName)' == 'src'" />
+
+  <PropertyGroup Label="Package">
+    <Product>KickStart</Product>
+    <Description>Application start-up helper to initialize things like an IoC container, register mapping information or run a task.</Description>
+    <Copyright>Copyright © 2019 LoreSoft</Copyright>
+    <Authors>LoreSoft</Authors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageTags>startup;bootstrap;bootstraper;ioc;container;initialization</PackageTags>
+    <PackageOutputPath>$(SolutionDir)artifacts</PackageOutputPath>
+    <PackageProjectUrl>https://github.com/loresoft/KickStart</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/loresoft/KickStart/master/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/loresoft/KickStart</RepositoryUrl>
+    <NoWarn>1591</NoWarn>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+</Project>

@@ -22,7 +22,7 @@ namespace KickStart
             Assemblies.ExcludeName("System");
 
             // exclude self
-            Assemblies.ExcludeAssemblyFor<IKickStarter>();
+            Assemblies.ExcludeAssemblyFor<Configuration>();
 
             Starters = new List<IKickStarter>();
             Data = new ConcurrentDictionary<string, object>(StringComparer.OrdinalIgnoreCase);

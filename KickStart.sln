@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C9AED8A0-A911-4617-974D-82B16D34029B}"
 EndProject
@@ -41,8 +41,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C2F076BC-C22F-4383-AC89-3DF0C2F4BCEC}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
-		bootstrap.cmd = bootstrap.cmd
-		Master.proj = Master.proj
+		build\common.props = build\common.props
+		build\sourcelink.props = build\sourcelink.props
+		build\version.props = build\version.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KickStart.Serilog", "src\KickStart.Serilog\KickStart.Serilog.csproj", "{4A649161-DBAC-4134-A030-DFABB47F9616}"

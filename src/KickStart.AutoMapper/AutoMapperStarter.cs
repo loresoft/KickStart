@@ -8,6 +8,9 @@ namespace KickStart.AutoMapper
     /// </summary>
     public class AutoMapperStarter : IKickStarter
     {
+        /// <summary>The AutoMapper configuration data key name</summary>
+        public const string AutoMapperConfiguration = "AutoMapper:Configuration";
+
         private readonly AutoMapperOptions _options;
 
         /// <summary>
@@ -27,7 +30,7 @@ namespace KickStart.AutoMapper
         {
             var profiles = context.GetInstancesAssignableFrom<Profile>();
 
-            Mapper.Initialize(config =>
+            var configuration = new MapperConfiguration(config =>
             {
                 foreach (var profile in profiles)
                 {
@@ -41,7 +44,9 @@ namespace KickStart.AutoMapper
 
 
             if (_options.Validate)
-                Mapper.AssertConfigurationIsValid();
+                configuration.AssertConfigurationIsValid();
+
+            context.Data[AutoMapperConfiguration] = configuration;
         }
     }
 }

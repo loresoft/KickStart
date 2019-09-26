@@ -236,8 +236,10 @@ _Pvt_Extensions
 .fake/
 
 # Custom
-/Build
+/artifacts
 /Tools
 /*.txt
 /xunit.xml
 *.GhostDoc.xml
+*.csv
+coverage.xml

@@ -1,31 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\build\common.props" />
 
   <PropertyGroup>
     <Description>KickStart Extension for Microsoft.Extensions.DependencyInjection</Description>
-    <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>5.0.0.0</VersionPrefix>
-    <Authors>LoreSoft</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>KickStart.DependencyInjection</AssemblyName>
-    <PackageId>KickStart.DependencyInjection</PackageId>
-    <PackageTags>startup;bootstrap;bootstraper;initialization;DependencyInjection</PackageTags>
-    <PackageProjectUrl>https://github.com/loresoft/KickStart</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/loresoft/KickStart/master/LICENSE</PackageLicenseUrl>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
-    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="..\GlobalAssemblyInfo.cs" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
-  </ItemGroup>
 
 
   <ItemGroup>
@@ -33,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
   </ItemGroup>
 
 </Project>

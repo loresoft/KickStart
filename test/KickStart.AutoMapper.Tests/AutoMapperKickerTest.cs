@@ -25,12 +25,16 @@ namespace KickStart.AutoMapper.Tests
         [Fact]
         public void ConfigureBasic()
         {
-            Mapper.Reset();
             Kick.Start(config => config
                 .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserProfile>()
                 .UseAutoMapper()
             );
+
+            Kick.Data.TryGetValue(AutoMapperStarter.AutoMapperConfiguration, out var value);
+            
+            var configuration = value as IConfigurationProvider;
+            configuration.Should().NotBeNull();
 
             var employee = new Employee
             {
@@ -40,7 +44,10 @@ namespace KickStart.AutoMapper.Tests
                 SysVersion = BitConverter.GetBytes(8)
             };
 
-            var user = Mapper.Map<User>(employee);
+            var mapper = configuration.CreateMapper();
+            mapper.Should().NotBeNull();
+
+            var user = mapper.Map<User>(employee);
             user.Should().NotBeNull();
             user.EmailAddress.Should().Be(employee.EmailAddress);
             user.SysVersion.Should().NotBeNull();
@@ -49,7 +56,6 @@ namespace KickStart.AutoMapper.Tests
         [Fact]
         public void ConfigureFull()
         {
-            Mapper.Reset();
             Kick.Start(config => config
                 .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserProfile>()
@@ -57,6 +63,11 @@ namespace KickStart.AutoMapper.Tests
                     .Validate()
                 )
             );
+
+            Kick.Data.TryGetValue(AutoMapperStarter.AutoMapperConfiguration, out var value);
+
+            var configuration = value as IConfigurationProvider;
+            configuration.Should().NotBeNull();
 
             var employee = new Employee
             {
@@ -66,7 +77,10 @@ namespace KickStart.AutoMapper.Tests
                 SysVersion = BitConverter.GetBytes(8)
             };
 
-            var user = Mapper.Map<User>(employee);
+            var mapper = configuration.CreateMapper();
+            mapper.Should().NotBeNull();
+
+            var user = mapper.Map<User>(employee);
             user.Should().NotBeNull();
             user.EmailAddress.Should().Be(employee.EmailAddress);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 #if PORTABLE
 using Stopwatch = KickStart.Portability.Stopwatch;
@@ -13,18 +14,21 @@ namespace KickStart
     /// </summary>
     public static class Kick
     {
-        private static IServiceProvider _serviceProvider;
-
         /// <summary>
         /// Gets a common IoC container that can be used in KickStart extensions.
         /// </summary>
         /// <value>
         /// The common IoC container.
         /// </value>
-        public static IServiceProvider ServiceProvider
-        {
-            get { return _serviceProvider; }
-        }
+        public static IServiceProvider ServiceProvider { get; private set; }
+
+        /// <summary>
+        /// Gets the configuration data used for startup.
+        /// </summary>
+        /// <value>
+        /// The configuration data used for startup.
+        /// </value>
+        public static IDictionary<string, object> Data { get; private set; }
 
         /// <summary>
         /// Configure and run the KickStart extensions.
@@ -48,9 +52,7 @@ namespace KickStart
             var builder = new ConfigurationBuilder(config);
 
             configurator(builder);
-
-
-
+            
             var assemblies = config.Assemblies.Resolve();
 
             // cache types
@@ -74,7 +76,8 @@ namespace KickStart
             }
 
             // save service provider
-            _serviceProvider = context.ServiceProvider;
+            ServiceProvider = context.ServiceProvider;
+            Data = context.Data;
         }
     }
 }
