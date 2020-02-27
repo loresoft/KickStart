@@ -14,7 +14,7 @@ namespace Test.Core
     {
         public void Open()
         {
-            
+            throw new NotImplementedException();
         }
     }
 

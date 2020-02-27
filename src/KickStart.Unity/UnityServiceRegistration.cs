@@ -37,7 +37,7 @@ namespace KickStart.Unity
         public override IServiceRegistration Register(Type serviceType, Type implementationType, ServiceLifetime lifetime)
         {
             var lifetimeManager = lifetime == ServiceLifetime.Singleton ? new ContainerControlledLifetimeManager() : null;
-            var builder = _container.RegisterType(serviceType, implementationType, lifetimeManager);
+            _container.RegisterType(serviceType, implementationType, lifetimeManager);
 
             return this;
         }
@@ -54,6 +54,7 @@ namespace KickStart.Unity
         /// A reference to this instance after the operation has completed.
         /// </returns>
         /// <seealso cref="F:KickStart.Services.ServiceLifetime.Singleton" />
+        /// <exception cref="NotSupportedException">Not supported.</exception>
         public override IServiceRegistration Register(Type serviceType, Func<IServiceProvider, object> implementationFactory, ServiceLifetime lifetime)
         {
             throw new NotSupportedException();

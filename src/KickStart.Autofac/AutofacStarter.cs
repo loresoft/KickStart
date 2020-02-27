@@ -9,7 +9,7 @@ namespace KickStart.Autofac
     /// </summary>
     public class AutofacStarter : IKickStarter
     {
-        private AutofacOptions _options;
+        private readonly AutofacOptions _options;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AutofacStarter"/> class.
@@ -31,13 +31,13 @@ namespace KickStart.Autofac
             RegisterAutofacModule(context, builder);
             RegisterServiceModule(context, builder);
 
-            _options.Initializer?.Invoke(builder);
+            _options?.Initializer?.Invoke(builder);
 
             context.WriteLog("Create Autofac Container...");
 
             var container = builder.Build(_options.BuildOptions);
 
-            _options.Accessor?.Invoke(container);
+            _options?.Accessor?.Invoke(container);
 
             var provider = new AutofacServiceProvider(container);
             context.SetServiceProvider(provider);

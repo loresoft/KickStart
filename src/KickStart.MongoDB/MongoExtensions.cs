@@ -20,7 +20,6 @@ namespace KickStart
         {
             var options = new MongoOptions();
             var starter = new MongoStarter(options);
-            var builder = new MongoBuilder(options);
 
             configurationBuilder.ExcludeAssemblyFor<MongoStarter>();
             configurationBuilder.ExcludeAssemblyFor<global::MongoDB.Driver.IMongoDatabase>();

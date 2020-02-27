@@ -30,7 +30,7 @@ namespace KickStart.SimpleInjector
             var container = _options?.Creator() ?? new Container();
 
             // must run first to allow settings options
-            _options.Initializer?.Invoke(container);
+            _options?.Initializer?.Invoke(container);
 
             RegisterSimpleInjector(context, container);
             RegisterServiceModule(context, container);
