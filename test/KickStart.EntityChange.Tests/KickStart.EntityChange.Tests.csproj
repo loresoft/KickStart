@@ -29,7 +29,7 @@
     </PackageReference>
     <PackageReference Include="EntityChange" Version="3.0.0.30" />
     <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="FluentAssertions" Version="5.10.0" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
   </ItemGroup>
 
   <ItemGroup>
