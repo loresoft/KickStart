@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityChange" Version="3.0.0.30" />
+    <PackageReference Include="EntityChange" Version="4.0.0.66" />
   </ItemGroup>
 
 </Project>
