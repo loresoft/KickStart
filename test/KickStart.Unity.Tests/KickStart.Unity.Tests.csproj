@@ -27,7 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Unity" Version="5.11.5" />
+    <PackageReference Include="Unity" Version="5.11.7" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
   </ItemGroup>
