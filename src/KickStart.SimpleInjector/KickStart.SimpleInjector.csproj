@@ -11,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SimpleInjector" Version="4.9.2" />
+    <PackageReference Include="SimpleInjector" Version="5.0.0" />
   </ItemGroup>
 </Project>
