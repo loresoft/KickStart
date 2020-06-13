@@ -10,6 +10,7 @@ namespace KickStart.SimpleInjector.Tests
         public void Register(Container container, IDictionary<string, object> data)
         {
             container.Register<IUserRepository, UserRepository>();
+            container.Register<InjectorStartTask>();
         }
     }
 }
