@@ -8,7 +8,7 @@ namespace KickStart.EntityChange.Tests
     {
         public override void Configure()
         {
-            Property(p => p.Total).Formatter(StringFormatter.Currency);
+            Property(p => p.Total).Formatter(v => v.ToString("c"));
 
             Collection(p => p.Items).ElementFormatter(v =>
             {

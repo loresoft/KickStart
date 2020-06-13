@@ -26,7 +26,10 @@ namespace KickStart.SimpleInjector.Tests
             Kick.Start(config => config
                 .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserSimpleInjectorRegistration>()
-                .UseSimpleInjector()
+                .UseSimpleInjector(b => b.Container(c => {
+                    c.Register<IUserService, UserService>();
+                    c.Register<IConnection, SampleConnection>();
+                }))
             );
 
             Kick.ServiceProvider.Should().NotBeNull();
@@ -43,9 +46,11 @@ namespace KickStart.SimpleInjector.Tests
             Kick.Start(config => config
                 .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<UserSimpleInjectorRegistration>()
-                .UseSimpleInjector(c => c
-                    .Container(b => b.Register<Employee>())
-                )
+                .UseSimpleInjector(b => b.Container(c => {
+                    c.Register<IUserService, UserService>();
+                    c.Register<IConnection, SampleConnection>();
+                    c.Register<Employee>();
+                }))
             );
 
             Kick.ServiceProvider.Should().NotBeNull();
