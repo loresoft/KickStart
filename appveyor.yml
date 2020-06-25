@@ -30,7 +30,7 @@ after_test:
   - csmacnz.coveralls --useRelativePaths --multiple --input "opencover=test\KickStart.Autofac.Tests\coverage.opencover.xml;opencover=test\KickStart.AutoMapper.Tests\coverage.opencover.xml;opencover=test\KickStart.DependencyInjection.Tests\coverage.opencover.xml;opencover=test\KickStart.EntityChange.Tests\coverage.opencover.xml;opencover=test\KickStart.MongoDB.Tests\coverage.opencover.xml;opencover=test\KickStart.Ninject.Tests\coverage.opencover.xml;opencover=test\KickStart.SimpleInjector.Tests\coverage.opencover.xml;opencover=test\KickStart.Tests\coverage.opencover.xml;opencover=test\KickStart.Unity.Tests\coverage.opencover.xml"
 
 artifacts:
-- path: artifacts\*.nupkg
+- path: artifacts\*.*nupkg
   name: Packages
 
 deploy:

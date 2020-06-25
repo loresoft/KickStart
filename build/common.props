@@ -11,7 +11,7 @@
   <PropertyGroup Label="Package">
     <Product>KickStart</Product>
     <Description>Application start-up helper to initialize things like an IoC container, register mapping information or run a task.</Description>
-    <Copyright>Copyright © 2019 LoreSoft</Copyright>
+    <Copyright>Copyright © $([System.DateTime]::Now.ToString(yyyy)) LoreSoft</Copyright>
     <Authors>LoreSoft</Authors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageTags>startup;bootstrap;bootstraper;ioc;container;initialization</PackageTags>
