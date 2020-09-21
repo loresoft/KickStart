@@ -24,9 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </example>
         public static IServiceCollection KickStart(this IServiceCollection services, Action<IConfigurationBuilder> configurator)
         {
-            var serviceProvider = services.BuildServiceProvider();
-            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
-            var logger = loggerFactory?.CreateLogger(typeof(Kick));
+            var logger = CreateLogger(services);
 
             Kick.Start(builder =>
             {
@@ -38,6 +36,22 @@ namespace Microsoft.Extensions.DependencyInjection
             });
 
             return services;
+        }
+
+        private static ILogger CreateLogger(IServiceCollection services)
+        {
+            try
+            {
+                var serviceProvider = services.BuildServiceProvider();
+                var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+                var logger = loggerFactory?.CreateLogger(typeof(Kick));
+                return logger;
+            }
+            catch (Exception)
+            {
+                // azure functions doesn't allow using services at startup.  
+                return null;
+            }
         }
     }
 }
