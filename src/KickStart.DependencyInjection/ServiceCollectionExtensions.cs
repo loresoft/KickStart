@@ -1,5 +1,7 @@
 ﻿using System;
+
 using KickStart;
+
 using Microsoft.Extensions.Logging;
 
 // ReSharper disable once CheckNamespace
@@ -25,11 +27,12 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection KickStart(this IServiceCollection services, Action<IConfigurationBuilder> configurator)
         {
             var logger = CreateLogger(services);
+            var canWrite = logger?.IsEnabled(LogLevel.Debug) ?? false;
 
             Kick.Start(builder =>
             {
                 builder
-                    .LogTo(m => logger?.LogDebug(m))
+                    .LogTo(m => { if (canWrite) logger?.LogDebug(m); })
                     .UseDependencyInjection(d => d.Creator(() => services));
 
                 configurator?.Invoke(builder);
