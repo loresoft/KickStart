@@ -555,6 +555,26 @@ namespace KickStart.Services
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));
 
+            return Register(services, serviceBuilder =>
+            {
+                serviceBuilder.With(lifetime);
+                builder(serviceBuilder);
+            });
+        }
+
+        /// <summary>
+        /// Scan and Register services using the specified <paramref name="builder"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceRegistration"/> to add the service to.</param>
+        /// <param name="builder">The builder delegate used to scan and register services</param>
+        /// <returns>A reference to this instance after the operation has completed.</returns>
+        public static IServiceRegistration Register(this IServiceRegistration services, Action<IServiceRegistrationBuilder> builder)
+        {
+            if (services == null)
+                throw new ArgumentNullException(nameof(services));
+            if (builder == null)
+                throw new ArgumentNullException(nameof(builder));
+
             var types = services.ServiceContext.Types;
 
             var serviceBuilder = new ServiceRegistrationBuilder(types);
@@ -563,7 +583,7 @@ namespace KickStart.Services
             var mapping = serviceBuilder.TypeMaps;
             foreach (var typeMap in mapping)
                 foreach (var serviceType in typeMap.ServiceTypes)
-                    services.Register(serviceType, typeMap.ImplementationType, lifetime);
+                    services.Register(serviceType, typeMap.ImplementationType, serviceBuilder.Lifetime);
 
             return services;
         }

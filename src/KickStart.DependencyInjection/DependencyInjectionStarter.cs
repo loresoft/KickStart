@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using KickStart.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -34,6 +35,7 @@ namespace KickStart.DependencyInjection
 
             RegisterDependencyInjection(context, serviceCollection);
             RegisterServiceModule(context, serviceCollection);
+            RegisterServiceAttributes(context, serviceCollection);
 
             var provider = serviceCollection.BuildServiceProvider();
 
@@ -42,6 +44,18 @@ namespace KickStart.DependencyInjection
             context.SetServiceProvider(provider);
         }
 
+        private void RegisterServiceAttributes(Context context, IServiceCollection serviceCollection)
+        {
+            var types = context.GetTypesWithAttribute<ServiceRegistrationAttribute>();
+            foreach (var type in types)
+            {
+                var attribute = type.GetCustomAttribute(typeof(ServiceRegistrationAttribute));
+
+                
+
+            }
+
+        }
 
         private void RegisterDependencyInjection(Context context, IServiceCollection serviceCollection)
         {
@@ -64,6 +78,14 @@ namespace KickStart.DependencyInjection
 
                 module.Register(wrapper, context.Data);
             }
+
+            wrapper.RegisterSingleton(builder =>
+            {
+                builder
+                    .Types(t => t.Where(v => v.GetCustomAttribute<ServiceRegistrationAttribute>() != null))
+                    .As(s => s.Self().ImplementedInterfaces())
+                    .With(context.);
+            });
         }
 
     }

@@ -103,6 +103,16 @@ namespace KickStart
                 });
         }
 
+        public virtual IEnumerable<Type> GetTypesWithAttribute<T>()
+        {
+            var type = typeof(T);
+
+            return Types
+                .Where(t => t.IsClass && !t.IsAbstract)
+                .Where(t => t.GetCustomAttribute(type) != null);
+        }
+
+
         /// <summary>
         /// Create an instance of the specified <paramref name="type"/>.
         /// </summary>

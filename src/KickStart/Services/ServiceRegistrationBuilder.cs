@@ -25,6 +25,10 @@ namespace KickStart.Services
         /// </summary>
         public List<TypeMap> TypeMaps { get; private set; }
 
+        /// <summary>
+        /// Gets service lifetime.
+        /// </summary>
+        public ServiceLifetime Lifetime { get; private set; } = ServiceLifetime.Transient;
 
         /// <summary>
         /// Filters the types based on a <paramref name="predicate"/>.
@@ -58,6 +62,18 @@ namespace KickStart.Services
             var typeMapper = new ServiceTypeMapper(_concreteTypes);
             mapper(typeMapper);
             TypeMaps = typeMapper.TypeMaps;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configure the service lifetime for the current types.
+        /// </summary>
+        /// <param name="lifetime">The service lifetime.</param>
+        /// <returns>An <see langword="interface"/> to build service registrations</returns>
+        public IServiceRegistrationBuilder With(ServiceLifetime lifetime)
+        {
+            Lifetime = lifetime;
 
             return this;
         }

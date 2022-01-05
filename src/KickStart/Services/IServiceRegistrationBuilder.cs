@@ -22,5 +22,12 @@ namespace KickStart.Services
         /// <returns>An <see langword="interface"/> to build service registrations</returns>
         /// <exception cref="ArgumentNullException">If the <paramref name="mapper"/> argument is <c>null</c>.</exception>
         IServiceRegistrationBuilder As(Action<IServiceTypeMapper> mapper);
+
+        /// <summary>
+        /// Configure the service lifetime for the current types.
+        /// </summary>
+        /// <param name="lifetime">The service lifetime.</param>
+        /// <returns>An <see langword="interface"/> to build service registrations</returns>
+        IServiceRegistrationBuilder With(ServiceLifetime lifetime);
     }
 }
