@@ -29,7 +29,7 @@
     </PackageReference>
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="FluentAssertions" Version="6.3.0" />
+    <PackageReference Include="FluentAssertions" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
