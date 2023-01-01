@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using EntityChange;
+﻿using EntityChange;
 using FluentAssertions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Test.Core;
 using Xunit;
 using Xunit.Abstractions;
@@ -71,7 +70,7 @@ namespace KickStart.EntityChange.Tests
 
 
 
-        private void WriteMarkdown(ReadOnlyCollection<ChangeRecord> changes)
+        private void WriteMarkdown(IReadOnlyList<ChangeRecord> changes)
         {
             var formatter = new MarkdownFormatter();
             var markdown = formatter.Format(changes);

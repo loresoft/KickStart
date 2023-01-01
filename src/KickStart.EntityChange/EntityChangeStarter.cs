@@ -26,7 +26,7 @@ namespace KickStart.EntityChange
         {
             var profiles = context.GetInstancesAssignableFrom<global::EntityChange.IEntityProfile>();
 
-            var configuration = global::EntityChange.Configuration.Default;
+            var configuration = global::EntityChange.EntityConfiguration.Default;
             configuration.Configure(c =>
             {
                 foreach (var profile in profiles)
