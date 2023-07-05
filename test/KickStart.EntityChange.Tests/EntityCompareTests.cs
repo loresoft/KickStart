@@ -71,7 +71,7 @@ namespace KickStart.EntityChange.Tests
 
 
 
-        private void WriteMarkdown(ReadOnlyCollection<ChangeRecord> changes)
+        private void WriteMarkdown(IReadOnlyList<ChangeRecord> changes)
         {
             var formatter = new MarkdownFormatter();
             var markdown = formatter.Format(changes);
