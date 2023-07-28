@@ -1,6 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\build\common.props" />
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>KickStart Extension for log4net</Description>
     <TargetFrameworks>net472</TargetFrameworks>
