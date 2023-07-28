@@ -102,4 +102,3 @@ jobs:
           echo "${0##*/}": Pushing $package...
           dotnet nuget push $package --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_KEY }} --skip-duplicate
         done
-
