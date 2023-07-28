@@ -1,4 +1,6 @@
 using System;
+using System.Globalization;
+
 using EntityChange;
 using Test.Core;
 
@@ -8,7 +10,7 @@ namespace KickStart.EntityChange.Tests
     {
         public override void Configure()
         {
-            Property(p => p.Total).Formatter(v => v.ToString("c"));
+            Property(p => p.Total).Formatter(v => v.ToString("c", CultureInfo.InvariantCulture));
 
             Collection(p => p.Items).ElementFormatter(v =>
             {
