@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace KickStart.Services
 {
@@ -75,7 +74,7 @@ namespace KickStart.Services
             if (types == null)
                 throw new ArgumentNullException(nameof(types));
 
-            return Where(t => types.Any(t.IsAssignableTo));
+            return Where(t => types.Any(v => AssemblyExtensions.IsAssignableTo(t, v)));
         }
 
         /// <summary>

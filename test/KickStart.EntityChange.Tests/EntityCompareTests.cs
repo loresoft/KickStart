@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using EntityChange;
 using FluentAssertions;
@@ -22,6 +23,8 @@ namespace KickStart.EntityChange.Tests
         [Fact]
         public void Configure()
         {
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+
             Kick.Start(config => config
                 .LogTo(_output.WriteLine)
                 .IncludeAssemblyFor<OrderProfile>()
