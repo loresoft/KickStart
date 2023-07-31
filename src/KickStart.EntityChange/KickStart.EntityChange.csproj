@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityChange" Version="5.0.21" />
+    <PackageReference Include="EntityChange" Version="5.1.0" />
   </ItemGroup>
 
 </Project>
