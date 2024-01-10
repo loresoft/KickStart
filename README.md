@@ -4,8 +4,6 @@ Application start-up helper to initialize things like an IoC container, register
 
 [![Build status](https://github.com/loresoft/KickStart/workflows/Build/badge.svg)](https://github.com/loresoft/KickStart/actions)
 
-[![Documentation Status](https://readthedocs.org/projects/kickstart/badge/?version=latest)](http://kickstart.readthedocs.io/en/latest/?badge=latest)   
-
 [![Coverage Status](https://coveralls.io/repos/github/loresoft/KickStart/badge.svg?branch=master)](https://coveralls.io/github/loresoft/KickStart?branch=master)   
 
 | Package | Version |

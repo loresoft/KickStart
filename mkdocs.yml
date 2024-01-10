@@ -1,29 +1,39 @@
 site_name: KickStart
-theme: readthedocs
+theme: material
 repo_url: https://github.com/loresoft/KickStart
 
-pages:
-- Home: index.md
+nav:
+  - Home: index.md
 
-- Configuration: configuration.md
-- Usage: usage.md
+  - Configuration: configuration.md
+  - Usage: usage.md
 
-- Startup Task: startup.md
-- AutoMapper: automapper.md
-- MongoDB: mongoDB.md
+  - Startup Task: startup.md
+  - AutoMapper: automapper.md
+  - MongoDB: mongoDB.md
 
-- Dependency Injection:
-    - Generic Registration: di/registration.md
-    - Autofac: di/autofac.md
-    - DependencyInjection: di/dependencyInjection.md
-    - Ninject: di/ninject.md
-    - SimpleInjector: di/simpleInjector.md
-    - Unity: di/unity.md
+  - Dependency Injection:
+      - Generic Registration: di/registration.md
+      - Autofac: di/autofac.md
+      - DependencyInjection: di/dependencyInjection.md
+      - Ninject: di/ninject.md
+      - SimpleInjector: di/simpleInjector.md
+      - Unity: di/unity.md
 
-- Database Deployment:
-    - Usage: db/database.md
-    - Sql Server: db/sqlServer.md
-    - PostgreSQL: db/postgreSQL.md
-    - MySql: db/mySql.md
-    - Sqlite: db/sqlite.md
-    - MongoDB: db/mongoDB.md
+  - Database Deployment:
+      - Usage: db/database.md
+      - Sql Server: db/sqlServer.md
+      - PostgreSQL: db/postgreSQL.md
+      - MySql: db/mySql.md
+      - Sqlite: db/sqlite.md
+      - MongoDB: db/mongoDB.md
+
+markdown_extensions:
+  - tables
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
