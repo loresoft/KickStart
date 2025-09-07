@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Autofac;
-using FluentAssertions;
+
 using KickStart.Services;
+
 using Test.Core;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace KickStart.Autofac.Tests
 {

@@ -1,5 +1,5 @@
-using System;
 using Ninject.Modules;
+
 using Test.Core;
 
 namespace KickStart.Ninject.Tests

@@ -1,4 +1,5 @@
-﻿using Test.Core;
+using Test.Core;
+
 using Unity;
 
 namespace KickStart.Unity.Tests

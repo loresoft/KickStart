@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
 using MongoDB.Bson.Serialization;
+
 using Test.Core;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace KickStart.MongoDB.Tests
 {

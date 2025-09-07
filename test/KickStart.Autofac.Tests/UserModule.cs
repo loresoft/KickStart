@@ -1,5 +1,5 @@
-﻿using System;
 using Autofac;
+
 using Test.Core;
 
 namespace KickStart.Autofac.Tests

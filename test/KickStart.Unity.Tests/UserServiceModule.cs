@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
 using KickStart.Services;
+
 using Test.Core;
 
 namespace KickStart.Unity.Tests

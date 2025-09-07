@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
 using KickStart.StartupTask;
+
 using Test.Core;
 
 namespace KickStart.SimpleInjector.Tests

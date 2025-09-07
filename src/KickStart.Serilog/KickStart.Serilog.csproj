@@ -1,15 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>KickStart Extension for Serilog</Description>
-    <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\KickStart\KickStart.csproj" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Serilog" Version="4.0.1" />
+    <PackageReference Include="Serilog" />
   </ItemGroup>
-
 </Project>

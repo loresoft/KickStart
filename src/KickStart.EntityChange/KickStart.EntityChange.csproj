@@ -1,15 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>KickStart Extension for EntityChange library</Description>
-    <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\KickStart\KickStart.csproj" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="EntityChange" Version="5.3.1" />
+    <PackageReference Include="EntityChange" />
   </ItemGroup>
-
 </Project>

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
 using KickStart.Services;
-using KickStart.StartupTask;
+
 using SimpleInjector;
+
 using Test.Core;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace KickStart.SimpleInjector.Tests
 {

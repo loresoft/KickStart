@@ -1,5 +1,5 @@
-﻿using System;
 using AutoMapper;
+
 using Test.Core;
 
 namespace KickStart.AutoMapper.Tests

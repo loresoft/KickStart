@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using KickStart.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+
 using Test.Core;
 
 namespace KickStart.DependencyInjection.Tests

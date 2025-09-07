@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+
 using Test.Core;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace KickStart.DependencyInjection.Tests
 {

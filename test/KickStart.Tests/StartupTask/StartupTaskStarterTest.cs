@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
 using Test.Core.Startup;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace KickStart.Tests.StartupTask
 {

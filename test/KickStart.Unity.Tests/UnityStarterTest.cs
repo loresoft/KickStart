@@ -1,9 +1,8 @@
-﻿using FluentAssertions;
 using KickStart.Services;
+
 using Test.Core;
+
 using Unity;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace KickStart.Unity.Tests
 {

@@ -1,5 +1,3 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using KickStart.StartupTask;
 
 namespace KickStart.Tests.StartupTask

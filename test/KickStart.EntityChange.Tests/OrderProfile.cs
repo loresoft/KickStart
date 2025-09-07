@@ -1,7 +1,5 @@
-using System;
-using System.Globalization;
-
 using EntityChange;
+
 using Test.Core;
 
 namespace KickStart.EntityChange.Tests

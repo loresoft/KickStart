@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
+
 using EntityChange;
-using FluentAssertions;
+
 using Test.Core;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace KickStart.EntityChange.Tests
 {

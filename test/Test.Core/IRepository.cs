@@ -1,5 +1,3 @@
-﻿using System;
-
 namespace Test.Core
 {
     public interface IRepository<TEntity> : IReadOnlyRepository<TEntity>

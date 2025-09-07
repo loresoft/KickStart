@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq;
 using System.Reflection;
-using FluentAssertions;
+
 using Test.Core;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace KickStart.Tests
 {

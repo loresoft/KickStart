@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FluentAssertions;
 using KickStart.Services;
+
 using Test.Core;
-using Xunit;
 
 namespace KickStart.Tests.Services
 {

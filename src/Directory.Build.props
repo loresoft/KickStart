@@ -1,5 +1,4 @@
 <Project>
-
   <PropertyGroup Label="Package">
     <Description>Application start-up helper to initialize things like an IoC container, register mapping information or run a task.</Description>
     <Copyright>Copyright © $([System.DateTime]::Now.ToString(yyyy)) LoreSoft</Copyright>
@@ -38,8 +37,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AssemblyMetadata.Generators" Version="2.0.0" PrivateAssets="All" />
-    <PackageReference Include="MinVer" Version="5.0.0" PrivateAssets="All" />
+    <PackageReference Include="AssemblyMetadata.Generators" PrivateAssets="All" />
+    <PackageReference Include="MinVer" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,5 +53,4 @@
       <Visible>false</Visible>
     </None>
   </ItemGroup>
-
 </Project>

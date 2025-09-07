@@ -3,13 +3,10 @@
     <Description>KickStart Extension for NLog</Description>
     <TargetFrameworks>net472;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\KickStart\KickStart.csproj" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="NLog" Version="5.3.2" />
+    <PackageReference Include="NLog" />
   </ItemGroup>
-
 </Project>

@@ -1,7 +1,4 @@
-﻿using System;
-using FluentAssertions;
 using Test.Core;
-using Xunit;
 
 namespace KickStart.Tests
 {
