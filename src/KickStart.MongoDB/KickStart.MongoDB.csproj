@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>KickStart Extension for MongoDB</Description>
+  <Description>Provides MongoDB integration for KickStart, enabling efficient database connectivity and startup configuration for .NET applications.</Description>
     <TargetFrameworks>net472;netstandard2.1;net8.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>

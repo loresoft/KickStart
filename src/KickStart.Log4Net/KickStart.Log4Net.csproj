@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>KickStart Extension for log4net</Description>
+  <Description>Provides log4net integration for KickStart, enabling flexible logging and startup configuration for .NET applications.</Description>
     <TargetFrameworks>net472;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>

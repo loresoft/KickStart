@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>KickStart Extension for AutoMapper</Description>
+  <Description>Provides AutoMapper integration for KickStart, enabling streamlined object mapping and startup configuration for .NET applications.</Description>
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 

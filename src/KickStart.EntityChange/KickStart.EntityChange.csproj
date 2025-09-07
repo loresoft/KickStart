@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>KickStart Extension for EntityChange library</Description>
+  <Description>Provides EntityChange integration for KickStart, enabling efficient entity change tracking and startup configuration for .NET applications.</Description>
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>

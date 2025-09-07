@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>KickStart Extension for Unity</Description>
+  <Description>Provides Unity integration for KickStart, enabling streamlined dependency injection and startup configuration for .NET applications.</Description>
     <TargetFrameworks>net472;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>

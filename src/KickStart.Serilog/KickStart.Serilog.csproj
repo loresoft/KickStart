@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>KickStart Extension for Serilog</Description>
+  <Description>Provides Serilog integration for KickStart, enabling flexible logging and startup configuration for .NET applications.</Description>
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
