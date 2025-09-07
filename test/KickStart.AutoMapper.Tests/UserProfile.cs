@@ -2,14 +2,13 @@ using AutoMapper;
 
 using Test.Core;
 
-namespace KickStart.AutoMapper.Tests
+namespace KickStart.AutoMapper.Tests;
+
+public class UserProfile : Profile
 {
-    public class UserProfile : Profile
+    public UserProfile()
     {
-        public UserProfile()
-        {
-            CreateMap<User, Employee>();
-            CreateMap<Employee, User>();
-        }
+        CreateMap<User, Employee>();
+        CreateMap<Employee, User>();
     }
 }

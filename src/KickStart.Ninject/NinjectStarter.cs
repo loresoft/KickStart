@@ -1,48 +1,45 @@
-﻿using System;
-using System.Linq;
 using Ninject;
 using Ninject.Modules;
 
-namespace KickStart.Ninject
+namespace KickStart.Ninject;
+
+/// <summary>
+/// Ninject KickStart extention
+/// </summary>
+/// <seealso cref="KickStart.IKickStarter" />
+public class NinjectStarter : IKickStarter
 {
+    private readonly NinjectOptions _options;
+
     /// <summary>
-    /// Ninject KickStart extention
+    /// Initializes a new instance of the <see cref="NinjectStarter"/> class.
     /// </summary>
-    /// <seealso cref="KickStart.IKickStarter" />
-    public class NinjectStarter : IKickStarter
+    /// <param name="options">The options.</param>
+    public NinjectStarter(NinjectOptions options)
     {
-        private readonly NinjectOptions _options;
+        _options = options;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NinjectStarter"/> class.
-        /// </summary>
-        /// <param name="options">The options.</param>
-        public NinjectStarter(NinjectOptions options)
+    /// <summary>
+    /// Runs the application KickStart extension with specified <paramref name="context" />.
+    /// </summary>
+    /// <param name="context">The KickStart <see cref="T:KickStart.Context" /> containing assemblies to scan.</param>
+    public void Run(Context context)
+    {
+        var modules = context.GetInstancesAssignableFrom<INinjectModule>().ToArray();
+
+        foreach (var module in modules)
         {
-            _options = options;
+            context.WriteLog("Register Ninject Module: {0}", module);
         }
 
-        /// <summary>
-        /// Runs the application KickStart extension with specified <paramref name="context" />.
-        /// </summary>
-        /// <param name="context">The KickStart <see cref="T:KickStart.Context" /> containing assemblies to scan.</param>
-        public void Run(Context context)
-        {
-            var modules = context.GetInstancesAssignableFrom<INinjectModule>().ToArray();
+        context.WriteLog("Create Ninject Kernel...");
 
-            foreach (var module in modules)
-            {
-                context.WriteLog("Register Ninject Module: {0}", module);
-            }
+        var settings = _options.Settings ?? new NinjectSettings();
+        var kernel = new StandardKernel(settings, modules);
 
-            context.WriteLog("Create Ninject Kernel...");
+        _options.InitializeKernel?.Invoke(kernel);
 
-            var settings = _options.Settings ?? new NinjectSettings();
-            var kernel = new StandardKernel(settings, modules);
-
-            _options.InitializeKernel?.Invoke(kernel);
-
-            context.SetServiceProvider(kernel);
-        }
+        context.SetServiceProvider(kernel);
     }
 }

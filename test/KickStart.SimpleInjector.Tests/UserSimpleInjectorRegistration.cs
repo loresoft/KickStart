@@ -2,14 +2,13 @@ using SimpleInjector;
 
 using Test.Core;
 
-namespace KickStart.SimpleInjector.Tests
+namespace KickStart.SimpleInjector.Tests;
+
+public class UserSimpleInjectorRegistration : ISimpleInjectorRegistration
 {
-    public class UserSimpleInjectorRegistration : ISimpleInjectorRegistration
+    public void Register(Container container, IDictionary<string, object> data)
     {
-        public void Register(Container container, IDictionary<string, object> data)
-        {
-            container.Register<IUserRepository, UserRepository>();
-            container.Register<InjectorStartTask>();
-        }
+        container.Register<IUserRepository, UserRepository>();
+        container.Register<InjectorStartTask>();
     }
 }

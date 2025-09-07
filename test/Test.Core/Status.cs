@@ -1,8 +1,7 @@
-namespace Test.Core
+namespace Test.Core;
+
+public enum Status
 {
-    public enum Status
-    {
-        New,
-        Verified
-    }
+    New,
+    Verified
 }

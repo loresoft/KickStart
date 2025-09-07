@@ -1,12 +1,11 @@
 using KickStart.StartupTask;
 
-namespace Test.Core.Startup
+namespace Test.Core.Startup;
+
+public class TestStartup : StartupTaskBase
 {
-    public class TestStartup : StartupTaskBase
+    public override void Run(IDictionary<string, object> data)
     {
-        public override void Run(IDictionary<string, object> data)
-        {
-            Console.WriteLine("Run Test Startup Test");
-        }
+        Console.WriteLine("Run Test Startup Test");
     }
 }

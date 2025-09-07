@@ -1,0 +1,39 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/build/">
+    <File Path=".github/workflows/dotnet.yml" />
+    <File Path="coverlet.runsettings" />
+    <File Path="Directory.Packages.props" />
+    <File Path="README.md" />
+    <File Path="src/Directory.Build.props" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <File Path="test/Directory.Build.props" />
+    <Project Path="test/KickStart.Autofac.Tests/KickStart.Autofac.Tests.csproj" />
+    <Project Path="test/KickStart.AutoMapper.Tests/KickStart.AutoMapper.Tests.csproj" />
+    <Project Path="test/KickStart.DependencyInjection.Tests/KickStart.DependencyInjection.Tests.csproj" />
+    <Project Path="test/KickStart.EntityChange.Tests/KickStart.EntityChange.Tests.csproj" />
+    <Project Path="test/KickStart.MongoDB.Tests/KickStart.MongoDB.Tests.csproj" />
+    <Project Path="test/KickStart.Ninject.Tests/KickStart.Ninject.Tests.csproj" />
+    <Project Path="test/KickStart.SimpleInjector.Tests/KickStart.SimpleInjector.Tests.csproj" />
+    <Project Path="test/KickStart.Tests/KickStart.Tests.csproj" />
+    <Project Path="test/KickStart.Unity.Tests/KickStart.Unity.Tests.csproj" />
+    <Project Path="test/Test.Core/Test.Core.csproj" />
+  </Folder>
+  <Project Path="src/KickStart.Autofac/KickStart.Autofac.csproj" />
+  <Project Path="src/KickStart.AutoMapper/KickStart.AutoMapper.csproj" />
+  <Project Path="src/KickStart.DependencyInjection/KickStart.DependencyInjection.csproj" />
+  <Project Path="src/KickStart.EntityChange/KickStart.EntityChange.csproj" />
+  <Project Path="src/KickStart.Log4Net/KickStart.Log4Net.csproj" />
+  <Project Path="src/KickStart.MongoDB/KickStart.MongoDB.csproj" />
+  <Project Path="src/KickStart.Ninject/KickStart.Ninject.csproj" />
+  <Project Path="src/KickStart.NLog/KickStart.NLog.csproj" />
+  <Project Path="src/KickStart.Serilog/KickStart.Serilog.csproj" />
+  <Project Path="src/KickStart.SimpleInjector/KickStart.SimpleInjector.csproj" />
+  <Project Path="src/KickStart.Unity/KickStart.Unity.csproj" />
+  <Project Path="src/KickStart/KickStart.csproj" />
+</Solution>

@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+namespace KickStart.StartupTask;
 
-namespace KickStart.StartupTask
+/// <summary>
+/// Startup tasks options class
+/// </summary>
+public class StartupTaskOptions
 {
     /// <summary>
-    /// Startup tasks options class
+    /// Gets the startup actions.
     /// </summary>
-    public class StartupTaskOptions
-    {
-        /// <summary>
-        /// Gets the startup actions.
-        /// </summary>
-        /// <value>
-        /// The startup actions.
-        /// </value>
-        public IList<Action<IServiceProvider, IDictionary<string, object>>> Actions { get; } = new List<Action<IServiceProvider, IDictionary<string, object>>>();
-    }
+    /// <value>
+    /// The startup actions.
+    /// </value>
+    public IList<Action<IServiceProvider, IDictionary<string, object>>> Actions { get; } = new List<Action<IServiceProvider, IDictionary<string, object>>>();
 }

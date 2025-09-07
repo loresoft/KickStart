@@ -1,50 +1,48 @@
-﻿using System;
 using KickStart.SimpleInjector;
 
 // ReSharper disable once CheckNamespace
-namespace KickStart
+namespace KickStart;
+
+/// <summary>
+/// KickStart Extension for SimpleInjector.
+/// </summary>
+public static class SimpleInjectorExtensions
 {
     /// <summary>
-    /// KickStart Extension for SimpleInjector.
+    /// Use the KickStart extension to configure SimpleInjector.
     /// </summary>
-    public static class SimpleInjectorExtensions
+    /// <param name="configurationBuilder">The configuration builder.</param>
+    /// <returns>
+    /// A fluent <see langword="interface"/> to configure KickStart.
+    /// </returns>
+    public static IConfigurationBuilder UseSimpleInjector(this IConfigurationBuilder configurationBuilder)
     {
-        /// <summary>
-        /// Use the KickStart extension to configure SimpleInjector.
-        /// </summary>
-        /// <param name="configurationBuilder">The configuration builder.</param>
-        /// <returns>
-        /// A fluent <see langword="interface"/> to configure KickStart.
-        /// </returns>
-        public static IConfigurationBuilder UseSimpleInjector(this IConfigurationBuilder configurationBuilder)
+        return UseSimpleInjector(configurationBuilder, null);
+    }
+
+    /// <summary>
+    /// Use the KickStart extension to configure SimpleInjector.
+    /// </summary>
+    /// <param name="configurationBuilder">The configuration builder.</param>
+    /// <param name="configure">The <see langword="delegate"/> to configure SimpleInjector options.</param>
+    /// <returns>
+    /// A fluent <see langword="interface"/> to configure KickStart.
+    /// </returns>
+    public static IConfigurationBuilder UseSimpleInjector(this IConfigurationBuilder configurationBuilder, Action<ISimpleInjectorBuilder> configure)
+    {
+        var options = new SimpleInjectorOptions();
+        var starter = new SimpleInjectorStarter(options);
+
+        if (configure != null)
         {
-            return UseSimpleInjector(configurationBuilder, null);
+            var builder = new SimpleInjectorBuilder(options);
+            configure(builder);
         }
 
-        /// <summary>
-        /// Use the KickStart extension to configure SimpleInjector.
-        /// </summary>
-        /// <param name="configurationBuilder">The configuration builder.</param>
-        /// <param name="configure">The <see langword="delegate"/> to configure SimpleInjector options.</param>
-        /// <returns>
-        /// A fluent <see langword="interface"/> to configure KickStart.
-        /// </returns>
-        public static IConfigurationBuilder UseSimpleInjector(this IConfigurationBuilder configurationBuilder, Action<ISimpleInjectorBuilder> configure)
-        {
-            var options = new SimpleInjectorOptions();
-            var starter = new SimpleInjectorStarter(options);
+        configurationBuilder.ExcludeAssemblyFor<SimpleInjectorStarter>();
+        configurationBuilder.ExcludeAssemblyFor<global::SimpleInjector.Container>();
+        configurationBuilder.Use(starter);
 
-            if (configure != null)
-            {
-                var builder = new SimpleInjectorBuilder(options);
-                configure(builder);
-            }
-
-            configurationBuilder.ExcludeAssemblyFor<SimpleInjectorStarter>();
-            configurationBuilder.ExcludeAssemblyFor<global::SimpleInjector.Container>();
-            configurationBuilder.Use(starter);
-
-            return configurationBuilder;
-        }
+        return configurationBuilder;
     }
 }

@@ -1,31 +1,30 @@
 using KickStart.Services;
 
-namespace Test.Core
+namespace Test.Core;
+
+public class UserServiceModule : IServiceModule
 {
-    public class UserServiceModule : IServiceModule
+    public void Register(IServiceRegistration services, IDictionary<string, object> data)
     {
-        public void Register(IServiceRegistration services, IDictionary<string, object> data)
-        {
-            services.RegisterSingleton<IConnection, SampleConnection>();
-            services.RegisterTransient<IUserService, UserService>(c => new UserService(c.GetService<IConnection>()));
+        services.RegisterSingleton<IConnection, SampleConnection>();
+        services.RegisterTransient<IUserService, UserService>(c => new UserService(c.GetService<IConnection>()));
 
 
-            services.RegisterSingleton(r => r
-                .Types(t => t.AssignableTo(typeof(IReadOnlyRepository<>)))
-                .As(s => s.Self().ImplementedInterfaces())
-            );
+        services.RegisterSingleton(r => r
+            .Types(t => t.AssignableTo(typeof(IReadOnlyRepository<>)))
+            .As(s => s.Self().ImplementedInterfaces())
+        );
 
-            services.RegisterSingleton(r => r
-                .Types(t => t.AssignableTo<IService>())
-                .As(s => s.Self().ImplementedInterfaces())
-            );
+        services.RegisterSingleton(r => r
+            .Types(t => t.AssignableTo<IService>())
+            .As(s => s.Self().ImplementedInterfaces())
+        );
 
-            services.RegisterSingleton(r => r
-                .Types(t => t.AssignableTo<IVehicle>())
-                .As(s => s.Self().ImplementedInterfaces())
-            );
-
-        }
+        services.RegisterSingleton(r => r
+            .Types(t => t.AssignableTo<IVehicle>())
+            .As(s => s.Self().ImplementedInterfaces())
+        );
 
     }
+
 }

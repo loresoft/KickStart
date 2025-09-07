@@ -1,6 +1,5 @@
-namespace Test.Core
+namespace Test.Core;
+
+public class SampleWorker
 {
-    public class SampleWorker
-    {
-    }
 }

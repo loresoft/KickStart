@@ -1,35 +1,32 @@
-﻿using System;
 using Unity;
 
-namespace KickStart.Unity
+namespace KickStart.Unity;
+
+/// <summary>
+/// Unity adaptor for <see cref="IServiceProvider"/>
+/// </summary>
+public class UnityServiceProvider : IServiceProvider
 {
+    private readonly IUnityContainer _container;
+
     /// <summary>
-    /// Unity adaptor for <see cref="IServiceProvider"/>
+    /// Initializes a new instance of the <see cref="UnityServiceProvider"/> class.
     /// </summary>
-    public class UnityServiceProvider : IServiceProvider
+    /// <param name="container">The container.</param>
+    public UnityServiceProvider(IUnityContainer container)
     {
-        private readonly IUnityContainer _container;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UnityServiceProvider"/> class.
-        /// </summary>
-        /// <param name="container">The container.</param>
-        public UnityServiceProvider(IUnityContainer container)
-        {
-            _container = container;
-        }
-
-        /// <summary>
-        /// Gets the service object of the specified type
-        /// </summary>
-        /// <param name="serviceType">An object that specifies the type of service object to get.</param>
-        /// <returns>
-        /// A service object of type serviceType.-or- null if there is no service object of type serviceType.
-        /// </returns>
-        public object GetService(Type serviceType)
-        {
-            return _container.Resolve(serviceType);
-        }
+        _container = container;
     }
 
+    /// <summary>
+    /// Gets the service object of the specified type
+    /// </summary>
+    /// <param name="serviceType">An object that specifies the type of service object to get.</param>
+    /// <returns>
+    /// A service object of type serviceType.-or- null if there is no service object of type serviceType.
+    /// </returns>
+    public object GetService(Type serviceType)
+    {
+        return _container.Resolve(serviceType);
+    }
 }

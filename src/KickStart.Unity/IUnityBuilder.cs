@@ -1,20 +1,18 @@
-﻿using System;
 using Unity;
 
-namespace KickStart.Unity
+namespace KickStart.Unity;
+
+
+/// <summary>
+/// Unity builder interface
+/// </summary>
+public interface IUnityBuilder
 {
-
     /// <summary>
-    /// Unity builder interface
+    /// Sets the initialize container <see langword="delegate"/>.
     /// </summary>
-    public interface IUnityBuilder
-    {
-        /// <summary>
-        /// Sets the initialize container <see langword="delegate"/>.
-        /// </summary>
-        /// <param name="initializer">The initializer the container.</param>
-        /// <returns></returns>
-        IUnityBuilder Container(Action<IUnityContainer> initializer);
+    /// <param name="initializer">The initializer the container.</param>
+    /// <returns></returns>
+    IUnityBuilder Container(Action<IUnityContainer> initializer);
 
-    }
 }

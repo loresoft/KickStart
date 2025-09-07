@@ -1,10 +1,9 @@
 using System.Linq.Expressions;
 
-namespace Test.Core
+namespace Test.Core;
+
+public interface IReadOnlyRepository<TEntity>
 {
-    public interface IReadOnlyRepository<TEntity>
-    {
-        TEntity Get(Expression<Func<TEntity, bool>> filter);
-        ICollection<TEntity> GetAll();
-    }
+    TEntity Get(Expression<Func<TEntity, bool>> filter);
+    ICollection<TEntity> GetAll();
 }

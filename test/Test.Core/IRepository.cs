@@ -1,11 +1,10 @@
-namespace Test.Core
+namespace Test.Core;
+
+public interface IRepository<TEntity> : IReadOnlyRepository<TEntity>
 {
-    public interface IRepository<TEntity> : IReadOnlyRepository<TEntity>
-    {
-        TEntity Add(TEntity entity);
+    TEntity Add(TEntity entity);
 
-        bool Update(TEntity entity);
+    bool Update(TEntity entity);
 
-        bool Delete(TEntity entity);
-    }
+    bool Delete(TEntity entity);
 }

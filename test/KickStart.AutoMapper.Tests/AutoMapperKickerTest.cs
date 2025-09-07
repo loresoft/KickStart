@@ -2,80 +2,79 @@ using AutoMapper;
 
 using Test.Core;
 
-namespace KickStart.AutoMapper.Tests
+namespace KickStart.AutoMapper.Tests;
+
+
+public class AutoMapperKickerTest
 {
+    private readonly ITestOutputHelper _output;
 
-    public class AutoMapperKickerTest
+    public AutoMapperKickerTest(ITestOutputHelper output)
     {
-        private readonly ITestOutputHelper _output;
+        _output = output;
+    }
 
-        public AutoMapperKickerTest(ITestOutputHelper output)
+    [Fact]
+    public void ConfigureBasic()
+    {
+        Kick.Start(config => config
+            .LogTo(_output.WriteLine)
+            .IncludeAssemblyFor<UserProfile>()
+            .UseAutoMapper()
+        );
+
+        Kick.Data.TryGetValue(AutoMapperStarter.AutoMapperConfiguration, out var value);
+        
+        var configuration = value as IConfigurationProvider;
+        configuration.Should().NotBeNull();
+
+        var employee = new Employee
         {
-            _output = output;
-        }
+            FirstName = "Test",
+            LastName = "User",
+            EmailAddress = "test.user@email.com",
+            SysVersion = BitConverter.GetBytes(8)
+        };
 
-        [Fact]
-        public void ConfigureBasic()
+        var mapper = configuration.CreateMapper();
+        mapper.Should().NotBeNull();
+
+        var user = mapper.Map<User>(employee);
+        user.Should().NotBeNull();
+        user.EmailAddress.Should().Be(employee.EmailAddress);
+        user.SysVersion.Should().NotBeNull();
+    }
+
+    [Fact]
+    public void ConfigureFull()
+    {
+        Kick.Start(config => config
+            .LogTo(_output.WriteLine)
+            .IncludeAssemblyFor<UserProfile>()
+            .UseAutoMapper(c => c
+                .Validate()
+            )
+        );
+
+        Kick.Data.TryGetValue(AutoMapperStarter.AutoMapperConfiguration, out var value);
+
+        var configuration = value as IConfigurationProvider;
+        configuration.Should().NotBeNull();
+
+        var employee = new Employee
         {
-            Kick.Start(config => config
-                .LogTo(_output.WriteLine)
-                .IncludeAssemblyFor<UserProfile>()
-                .UseAutoMapper()
-            );
+            FirstName = "Test",
+            LastName = "User",
+            EmailAddress = "test.user@email.com",
+            SysVersion = BitConverter.GetBytes(8)
+        };
 
-            Kick.Data.TryGetValue(AutoMapperStarter.AutoMapperConfiguration, out var value);
-            
-            var configuration = value as IConfigurationProvider;
-            configuration.Should().NotBeNull();
+        var mapper = configuration.CreateMapper();
+        mapper.Should().NotBeNull();
 
-            var employee = new Employee
-            {
-                FirstName = "Test",
-                LastName = "User",
-                EmailAddress = "test.user@email.com",
-                SysVersion = BitConverter.GetBytes(8)
-            };
+        var user = mapper.Map<User>(employee);
+        user.Should().NotBeNull();
+        user.EmailAddress.Should().Be(employee.EmailAddress);
 
-            var mapper = configuration.CreateMapper();
-            mapper.Should().NotBeNull();
-
-            var user = mapper.Map<User>(employee);
-            user.Should().NotBeNull();
-            user.EmailAddress.Should().Be(employee.EmailAddress);
-            user.SysVersion.Should().NotBeNull();
-        }
-
-        [Fact]
-        public void ConfigureFull()
-        {
-            Kick.Start(config => config
-                .LogTo(_output.WriteLine)
-                .IncludeAssemblyFor<UserProfile>()
-                .UseAutoMapper(c => c
-                    .Validate()
-                )
-            );
-
-            Kick.Data.TryGetValue(AutoMapperStarter.AutoMapperConfiguration, out var value);
-
-            var configuration = value as IConfigurationProvider;
-            configuration.Should().NotBeNull();
-
-            var employee = new Employee
-            {
-                FirstName = "Test",
-                LastName = "User",
-                EmailAddress = "test.user@email.com",
-                SysVersion = BitConverter.GetBytes(8)
-            };
-
-            var mapper = configuration.CreateMapper();
-            mapper.Should().NotBeNull();
-
-            var user = mapper.Map<User>(employee);
-            user.Should().NotBeNull();
-            user.EmailAddress.Should().Be(employee.EmailAddress);
-
-        }
     }
 }

@@ -1,13 +1,9 @@
-namespace Test.Core
-{
-    public interface IService { }
+namespace Test.Core;
 
-    public class Service1 : IService { }
+public interface IService { }
 
-    public class Service2 : IService { }
+public class Service1 : IService { }
 
-    public class Service3 : IService { }
+public class Service2 : IService { }
 
-
-
-}
+public class Service3 : IService { }

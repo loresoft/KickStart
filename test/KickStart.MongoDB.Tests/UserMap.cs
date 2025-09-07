@@ -5,19 +5,18 @@ using MongoDB.Bson.Serialization.Serializers;
 
 using Test.Core;
 
-namespace KickStart.MongoDB.Tests
+namespace KickStart.MongoDB.Tests;
+
+public class UserMap : BsonClassMap<User>
 {
-    public class UserMap : BsonClassMap<User>
+    public UserMap()
     {
-        public UserMap()
-        {
-            AutoMap();
+        AutoMap();
 
-            var idMember = GetMemberMap(p => p.Id)
-                .SetSerializer(new StringSerializer(BsonType.ObjectId))
-                .SetIdGenerator(StringObjectIdGenerator.Instance);
+        var idMember = GetMemberMap(p => p.Id)
+            .SetSerializer(new StringSerializer(BsonType.ObjectId))
+            .SetIdGenerator(StringObjectIdGenerator.Instance);
 
-            SetIdMember(idMember);
-        }
+        SetIdMember(idMember);
     }
 }

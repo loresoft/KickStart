@@ -1,15 +1,13 @@
-namespace Test.Core
-{
-    public interface IVehicle { }
+namespace Test.Core;
 
-    public interface ICar : IVehicle { }
+public interface IVehicle { }
 
-    public interface ITruck : IVehicle { }
+public interface ICar : IVehicle { }
 
-    public interface IVan : IVehicle { }
+public interface ITruck : IVehicle { }
 
-    public interface IMinivan : IVan { }
+public interface IVan : IVehicle { }
 
-    public class DeliveryVehicle : IMinivan, ICar, ITruck { }
+public interface IMinivan : IVan { }
 
-}
+public class DeliveryVehicle : IMinivan, ICar, ITruck { }

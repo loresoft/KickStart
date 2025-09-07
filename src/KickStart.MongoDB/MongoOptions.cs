@@ -1,12 +1,9 @@
-﻿using System;
+namespace KickStart.MongoDB;
 
-namespace KickStart.MongoDB
+/// <summary>
+/// KickStart MongoDB options class
+/// </summary>
+public class MongoOptions
 {
-    /// <summary>
-    /// KickStart MongoDB options class
-    /// </summary>
-    public class MongoOptions
-    {
-        // placeholder, no options yet
-    }
+    // placeholder, no options yet
 }

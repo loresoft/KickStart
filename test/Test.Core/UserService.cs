@@ -1,41 +1,40 @@
 using System.Linq.Expressions;
 
-namespace Test.Core
+namespace Test.Core;
+
+public class UserService : IUserService
 {
-    public class UserService : IUserService
+
+    public IConnection Connection { get; }
+
+    public UserService(IConnection connection)
     {
-
-        public IConnection Connection { get; }
-
-        public UserService(IConnection connection)
-        {
-            Connection = connection;
-        }
+        Connection = connection;
+    }
 
 
-        public User Add(User entity)
-        {
-            return null;
-        }
+    public User Add(User entity)
+    {
+        return null;
+    }
 
-        public bool Update(User entity)
-        {
-            return false;
-        }
+    public bool Update(User entity)
+    {
+        return false;
+    }
 
-        public bool Delete(User entity)
-        {
-            return false;
-        }
+    public bool Delete(User entity)
+    {
+        return false;
+    }
 
-        public User Get(Expression<Func<User, bool>> filter)
-        {
-            return null;
-        }
+    public User Get(Expression<Func<User, bool>> filter)
+    {
+        return null;
+    }
 
-        public ICollection<User> GetAll()
-        {
-            return null;
-        }
+    public ICollection<User> GetAll()
+    {
+        return null;
     }
 }

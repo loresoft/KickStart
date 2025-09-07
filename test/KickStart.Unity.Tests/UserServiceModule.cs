@@ -2,14 +2,13 @@ using KickStart.Services;
 
 using Test.Core;
 
-namespace KickStart.Unity.Tests
+namespace KickStart.Unity.Tests;
+
+public class UserServiceModule : IServiceModule
 {
-    public class UserServiceModule : IServiceModule
+    public void Register(IServiceRegistration services, IDictionary<string, object> data)
     {
-        public void Register(IServiceRegistration services, IDictionary<string, object> data)
-        {
-            services.RegisterSingleton<IConnection, SampleConnection>();
-            services.RegisterTransient<IUserService, UserService>();
-        }
+        services.RegisterSingleton<IConnection, SampleConnection>();
+        services.RegisterTransient<IUserService, UserService>();
     }
 }

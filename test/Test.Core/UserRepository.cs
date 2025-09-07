@@ -1,32 +1,31 @@
 using System.Linq.Expressions;
 
-namespace Test.Core
+namespace Test.Core;
+
+public class UserRepository : IUserRepository
 {
-    public class UserRepository : IUserRepository
+    public User Add(User entity)
     {
-        public User Add(User entity)
-        {
-            return null;
-        }
+        return null;
+    }
 
-        public bool Update(User entity)
-        {
-            return false;
-        }
+    public bool Update(User entity)
+    {
+        return false;
+    }
 
-        public bool Delete(User entity)
-        {
-            return false;
-        }
+    public bool Delete(User entity)
+    {
+        return false;
+    }
 
-        public User Get(Expression<Func<User, bool>> filter)
-        {
-            return null;
-        }
+    public User Get(Expression<Func<User, bool>> filter)
+    {
+        return null;
+    }
 
-        public ICollection<User> GetAll()
-        {
-            return null;
-        }
+    public ICollection<User> GetAll()
+    {
+        return null;
     }
 }

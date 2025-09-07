@@ -1,19 +1,17 @@
-﻿using System;
 using Serilog;
 
-namespace KickStart
+namespace KickStart;
+
+/// <summary>
+/// Options for Serilog
+/// </summary>
+public class SerilogOptions
 {
     /// <summary>
-    /// Options for Serilog
+    /// Gets or sets the <see langword="delegate"/> to call for additional configuration.
     /// </summary>
-    public class SerilogOptions
-    {
-        /// <summary>
-        /// Gets or sets the <see langword="delegate"/> to call for additional configuration.
-        /// </summary>
-        /// <value>
-        /// The <see langword="delegate"/> to call for additional configuration.
-        /// </value>
-        public Action<LoggerConfiguration> Configure { get; set; }
-    }
+    /// <value>
+    /// The <see langword="delegate"/> to call for additional configuration.
+    /// </value>
+    public Action<LoggerConfiguration> Configure { get; set; }
 }
