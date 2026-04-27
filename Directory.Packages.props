@@ -20,7 +20,7 @@
     <PackageVersion Include="Ninject" Version="3.3.6" />
     <PackageVersion Include="NLog" Version="6.1.2" />
     <PackageVersion Include="Serilog" Version="4.3.1" />
-    <PackageVersion Include="SimpleInjector" Version="5.5.0" />
+    <PackageVersion Include="SimpleInjector" Version="5.5.2" />
     <PackageVersion Include="Unity" Version="5.11.10" />
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
