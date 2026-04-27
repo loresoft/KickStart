@@ -15,7 +15,7 @@
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.8" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageVersion Include="MinVer" Version="6.0.0" />
+    <PackageVersion Include="MinVer" Version="7.0.0" />
     <PackageVersion Include="MongoDB.Driver" Version="3.4.3" />
     <PackageVersion Include="Ninject" Version="3.3.6" />
     <PackageVersion Include="NLog" Version="6.0.3" />
