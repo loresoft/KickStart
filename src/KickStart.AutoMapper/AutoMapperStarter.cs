@@ -1,6 +1,7 @@
 using AutoMapper;
 
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace KickStart.AutoMapper;
 
@@ -31,7 +32,9 @@ public class AutoMapperStarter : IKickStarter
     {
         var profiles = context.GetInstancesAssignableFrom<Profile>();
 
-        var loggerFactory = context.ServiceProvider.GetService(typeof(ILoggerFactory)) as ILoggerFactory;
+        var loggerFactory = context.ServiceProvider?.GetService(typeof(ILoggerFactory)) as ILoggerFactory
+            ?? NullLoggerFactory.Instance;
+
         var configuration = new MapperConfiguration(config =>
         {
             foreach (var profile in profiles)
