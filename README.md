@@ -13,9 +13,7 @@ Application start-up helper to initialize things like an IoC container, register
 | [KickStart.AutoMapper](https://www.nuget.org/packages/KickStart.AutoMapper/) |  [![KickStart.AutoMapper](https://img.shields.io/nuget/v/KickStart.AutoMapper.svg)](https://www.nuget.org/packages/KickStart.AutoMapper/) |
 | [KickStart.DependencyInjection](https://www.nuget.org/packages/KickStart.DependencyInjection/) |  [![KickStart.DependencyInjection](https://img.shields.io/nuget/v/KickStart.DependencyInjection.svg)](https://www.nuget.org/packages/KickStart.DependencyInjection/) |
 | [KickStart.MongoDB](https://www.nuget.org/packages/KickStart.MongoDB/) |  [![KickStart.MongoDB](https://img.shields.io/nuget/v/KickStart.MongoDB.svg)](https://www.nuget.org/packages/KickStart.MongoDB/) |
-| [KickStart.Ninject](https://www.nuget.org/packages/KickStart.Ninject/) |  [![KickStart.Ninject](https://img.shields.io/nuget/v/KickStart.Ninject.svg)](https://www.nuget.org/packages/KickStart.Ninject/) |
 | [KickStart.SimpleInjector](https://www.nuget.org/packages/KickStart.SimpleInjector/) |  [![KickStart.SimpleInjector](https://img.shields.io/nuget/v/KickStart.SimpleInjector.svg)](https://www.nuget.org/packages/KickStart.SimpleInjector/) |
-| [KickStart.Unity](https://www.nuget.org/packages/KickStart.Unity/) |  [![KickStart.Unity](https://img.shields.io/nuget/v/KickStart.Unity.svg)](https://www.nuget.org/packages/KickStart.Unity/) |
 
 ## Download
 
@@ -226,24 +224,6 @@ Kick.Start(c => c
 To install SimpleInjector extension, run the following command in the Package Manager Console
 
     PM> Install-Package KickStart.SimpleInjector
-
-### Unity
-
-The Unity extension allows registration of types to be resolved by running all instances of `IUnityRegistration`.  The extension also creates a default container and sets it to the `Kick.Container` singleton for access later.
-
-Basic usage
-
-```csharp
-Kick.Start(config => config
-    .IncludeAssemblyFor<UserRepository>() // where to look
-    .UseUnity () // initialize Unity
-);
-```
-
-To install Unity extension, run the following command in the Package Manager Console
-
-    PM> Install-Package KickStart.Unity
-
 
 ### xUnit
 

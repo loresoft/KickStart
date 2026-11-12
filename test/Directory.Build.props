@@ -6,12 +6,6 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <PropertyGroup Label="Debug">
-    <DebugType>embedded</DebugType>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>false</IncludeSymbols>
-  </PropertyGroup>
-
   <PropertyGroup Label="Options">
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -30,17 +24,6 @@
 
   <ItemGroup>
     <PackageReference Include="AssemblyMetadata.Generators" PrivateAssets="All" />
-    <PackageReference Include="AwesomeAssertions" />
     <PackageReference Include="MinVer" PrivateAssets="All" />
-    <PackageReference Include="coverlet.collector" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="xunit" />
-    <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Using Include="AwesomeAssertions" />
-    <Using Include="Xunit" />
-    <Using Include="Xunit.Abstractions" />
   </ItemGroup>
 </Project>
